@@ -2,6 +2,7 @@ from typing import List, Optional
 
 from GraphML.GraphMLElement import GraphMLElement
 from GraphML.graph.common import Desc
+from GraphML.graph.common.NMTOKEN import NMTOKEN
 from GraphML.graph.elements.data.Data import Data
 
 
@@ -23,9 +24,31 @@ class Port(GraphMLElement):
             desc (Optional[Desc]): Objeto `Desc` opcional para describir el puerto.
         """
         super().__init__(desc=desc)
+        self.__port_name = None
         self.port_name = port_name
         self.data_elements: List[Data] = []
         self.sub_ports: List[Port] = []
+
+    @property
+    def port_name(self) -> str:
+        """
+        Obtiene el nombre del puerto.
+
+        Returns:
+            str: Nombre del puerto.
+        """
+        return self.__port_name
+
+    @NMTOKEN
+    @port_name.setter
+    def port_name(self, port_name: str) -> None:
+        """
+        Establece el nombre del puerto.
+
+        Args:
+            port_name (str): Nombre del puerto.
+        """
+        self.__port_name = port_name
 
     def add_data(self, data: Data):
         """

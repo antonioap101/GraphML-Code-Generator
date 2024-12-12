@@ -34,7 +34,7 @@ class XMLFormatter:
 
             formatted_lines.append("    " * max(indent_level, 0) + line)
 
-            if line.startswith("<") and not line.startswith("</"):
+            if line.startswith("<") and not (line.startswith("</") or line.endswith("/>") or line.startswith("<?")):
                 indent_level += 1
                 continue
 

@@ -10,7 +10,7 @@ class HyperEdge(GraphMLElement):
     Representa un elemento `<hyperedge>` en GraphML.
     """
 
-    def __init__(self, hyperedge_id: ID = ID.autogenerate(IDType.HYPEREDGE), desc: Desc = None):
+    def __init__(self, hyperedge_id: ID = None, desc: Desc = None):
         """
         Inicializa una hiper-arista.
 
@@ -19,7 +19,7 @@ class HyperEdge(GraphMLElement):
             desc (Optional[Desc]): Descripción opcional de la hiper-arista.
         """
         super().__init__(desc)
-        self.hyperedge_id = hyperedge_id
+        self.hyperedge_id = hyperedge_id if hyperedge_id else ID.autogenerate(IDType.HYPEREDGE)
 
     def to_xml(self) -> str:
         """

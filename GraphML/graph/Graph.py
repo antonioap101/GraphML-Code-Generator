@@ -17,7 +17,7 @@ class Graph(GraphMLElement):
 
     def __init__(
             self,
-            graph_id: ID = ID.autogenerate(IDType.GRAPH),
+            graph_id: ID = None,
             edge_default: str = "directed",
             desc: Desc = None,
     ):
@@ -30,7 +30,7 @@ class Graph(GraphMLElement):
             desc (Optional[Desc]): Descripción opcional para el grafo.
         """
         super().__init__(desc=desc)
-        self.graph_id = graph_id
+        self.graph_id = graph_id if graph_id else ID.autogenerate(IDType.GRAPH)
         self.edge_default = edge_default
         self.data_elements: List[Data] = []
         self.nodes: List[Node] = []

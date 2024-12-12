@@ -1,11 +1,11 @@
 from typing import List, Optional
 
 from GraphML.GraphMLElement import GraphMLElement
-from GraphML.graph.common import Desc
+from GraphML.graph.common.Desc import Desc
 from GraphML.graph.common.ID import ID, IDType
 from GraphML.graph.elements.data.Data import Data
-from GraphML.graph.elements.port.Port import Port
 from GraphML.graph.elements.external.Locator import Locator
+from GraphML.graph.elements.port.Port import Port
 
 
 class Node(GraphMLElement):
@@ -17,7 +17,7 @@ class Node(GraphMLElement):
 
     def __init__(
             self,
-            node_id: ID = ID.autogenerate(IDType.NODE),
+            node_id: ID = None,
             desc: Desc = None,
     ):
         """
@@ -29,7 +29,7 @@ class Node(GraphMLElement):
         """
         from GraphML.graph.Graph import Graph  # Evitar dependencia circular
         super().__init__(desc=desc)
-        self.node_id = node_id
+        self.node_id = node_id if node_id else ID.autogenerate(IDType.NODE)
         self.data_elements: List[Data] = []
         self.ports: List[Port] = []
         self.graph: Optional[Graph] = None
@@ -102,3 +102,14 @@ class Node(GraphMLElement):
                 f"{graph_or_locator_xml}" +
                 f"</node>"
         )
+
+
+if __name__ == "__main__":
+    print("-start-")
+    node1 = Node(desc=Desc(content="Nodo 1"))
+    node2 = Node(desc=Desc(content="Nodo 2"))
+    node3 = Node(desc=Desc(content="Nodo 3"))
+
+    print(node1.to_xml())
+    print(node2.to_xml())
+    print(node3.to_xml())

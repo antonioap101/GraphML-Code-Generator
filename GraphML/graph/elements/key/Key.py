@@ -23,7 +23,7 @@ class Key(GraphMLElement):
 
     def __init__(
             self,
-            key_id: ID = ID.autogenerate(IDType.KEY),
+            key_id: ID = None,
             for_type: ForType = ForType.ALL,
             desc: Desc = None,
             default_value: Optional[str] = None,
@@ -38,7 +38,7 @@ class Key(GraphMLElement):
             default_value (Optional[str]): Valor por defecto para esta clave.
         """
         super().__init__(desc)
-        self.key_id = key_id
+        self.key_id = key_id if key_id else ID.autogenerate(IDType.KEY)
         self.for_type = for_type
         self.default_value = default_value
 
@@ -52,7 +52,7 @@ class Key(GraphMLElement):
         desc_xml = f"<desc>{self.desc}</desc>" if self.desc else ""
         default_xml = f"<default>{self.default_value}</default>" if self.default_value else ""
 
-        attributes = f'id="{self.key_id}" for="{self.for_type}"'
+        attributes = f'id="{self.key_id}" for="{self.for_type.value}"'
 
         return (
                 f"<key {attributes}>" +

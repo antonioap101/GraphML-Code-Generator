@@ -41,11 +41,13 @@ class ID:
         Returns:
             ID: Instancia de ID generada automáticamente.
         """
+        print("ID.autogenerate: idcounters = ", ID.counters)
         if element_type not in ID.counters:
             raise ValueError(f"Tipo de elemento desconocido: {element_type}")
 
         ID.counters[element_type] += 1
-        return ID(f"{element_type.value}{ID.counters[element_type]}")
+        print("ID.autogenerate: idcounters[end] = ", ID.counters)
+        return ID(f"{element_type.value[0]}{ID.counters[element_type]}")
 
     def __str__(self) -> str:
         """

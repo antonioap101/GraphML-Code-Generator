@@ -7,6 +7,7 @@ from GraphML.graph.elements.data.Data import Data
 from GraphML.graph.elements.key.Key import Key
 
 
+# FIXME: Must make sure IDs are unique for each element that has an ID attribute
 class GraphML(GraphMLElement):
     """
     Representa el elemento raíz `<graphml>` en un archivo GraphML.
@@ -24,9 +25,11 @@ class GraphML(GraphMLElement):
             desc (Optional[Desc]): Descripción opcional para el archivo GraphML.
         """
         super().__init__(desc=desc)
-        self.graphs: List[Graph] = graphs or []
+        self.graphs: List[Graph] = []
         self.keys: List[Key] = []
         self.data_elements: List[Data] = []
+        if graphs:
+            self.add_graphs(graphs)
 
     def add_key(self, key: Key) -> "GraphML":
         """Añade un elemento `<key>`."""
@@ -38,6 +41,12 @@ class GraphML(GraphMLElement):
         self.graphs.append(graph)
         # Add all keys from the graph to the list of keys
         self.keys.extend(graph.keys)
+        return self
+
+    def add_graphs(self, graphs: List[Graph]) -> "GraphML":
+        """Añade varios elementos `<graph>`."""
+        for graph in graphs:
+            self.add_graph(graph)
         return self
 
     def add_data(self, data: Data) -> "GraphML":
@@ -59,7 +68,7 @@ class GraphML(GraphMLElement):
 
         return (
                 f"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                f"<graphml>" +
+                f'<graphml xmlns="http://graphml.graphdrawing.org/xmlns">' +
                 f"{desc_xml}" +
                 f"{keys_xml}" +
                 f"{data_xml}" +

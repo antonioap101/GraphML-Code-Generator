@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from old.node.node import Node
+from GraphML.graph.elements.node.Node import Node
 from old.utils.file_handler import FileHandler
 
 

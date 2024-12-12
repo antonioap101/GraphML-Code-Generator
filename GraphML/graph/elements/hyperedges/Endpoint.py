@@ -1,8 +1,16 @@
+from enum import Enum
 from typing import Optional
 
 from GraphML.GraphMLElement import GraphMLElement
 from GraphML.graph.common import Desc
 from GraphML.graph.common import ID
+from GraphML.graph.common.NMTOKEN import NMTOKEN
+
+
+class EndpointType(Enum):
+    IN = "in"
+    OUT = "out"
+    UNDIR = "undir"
 
 
 class Endpoint(GraphMLElement):
@@ -13,9 +21,9 @@ class Endpoint(GraphMLElement):
     def __init__(
             self,
             node_id: ID,
-            port: Optional[str] = None,
-            endpoint_type: str = "undir",
             desc: Optional[Desc] = None,
+            port: Optional[str] = None,
+            endpoint_type: EndpointType = EndpointType.UNDIR,
     ):
         """
         Inicializa un punto final.
@@ -28,8 +36,30 @@ class Endpoint(GraphMLElement):
         """
         super().__init__(desc)
         self.node_id = node_id
+        self.__port = None
         self.port = port
         self.endpoint_type = endpoint_type
+
+    @property
+    def port(self) -> Optional[str]:
+        """
+        Obtiene el puerto del punto final.
+
+        Returns:
+            Optional[str]: Puerto del punto final.
+        """
+        return self.__port
+
+    @NMTOKEN
+    @port.setter
+    def port(self, port: Optional[str]) -> None:
+        """
+        Establece el puerto del punto final.
+
+        Args:
+            port (Optional[str]): Puerto del punto final.
+        """
+        self.__port = port
 
     def to_xml(self) -> str:
         """
@@ -39,7 +69,7 @@ class Endpoint(GraphMLElement):
             str: Representación XML del punto final.
         """
         desc_xml = f"<desc>{self.desc}</desc>" if self.desc else ""
-        attributes = f'node="{self.node_id}" type="{self.endpoint_type}" '
+        attributes = f'node="{self.node_id}" type="{self.endpoint_type.value}" '
         if self.port:
             attributes += f'port="{self.port}" '
 
