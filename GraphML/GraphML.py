@@ -1,13 +1,13 @@
 from typing import List, Optional
 
-from GraphML.GraphMLContainer import GraphMLContainer
+from GraphML.GraphMLElement import GraphMLElement
 from GraphML.graph.Graph import Graph
 from GraphML.graph.common import Desc
-from GraphML.graph.elements.Data import Data
-from GraphML.graph.elements.Key import Key
+from GraphML.graph.elements.data.Data import Data
+from GraphML.graph.elements.key.Key import Key
 
 
-class GraphML(GraphMLContainer):
+class GraphML(GraphMLElement):
     """
     Representa el elemento raíz `<graphml>` en un archivo GraphML.
     """
@@ -15,7 +15,7 @@ class GraphML(GraphMLContainer):
     def __init__(
             self,
             graphs: List[Graph] = None,
-            desc: Optional[Desc] = None,
+            desc: Desc = None,
     ):
         """
         Inicializa el elemento raíz GraphML.
@@ -28,19 +28,22 @@ class GraphML(GraphMLContainer):
         self.keys: List[Key] = []
         self.data_elements: List[Data] = []
 
-    def add_key(self, key: Key):
+    def add_key(self, key: Key) -> "GraphML":
         """Añade un elemento `<key>`."""
         self.keys.append(key)
+        return self
 
-    def add_graph(self, graph: Graph):
+    def add_graph(self, graph: Graph) -> "GraphML":
         """Añade un elemento `<graph>`."""
         self.graphs.append(graph)
         # Add all keys from the graph to the list of keys
         self.keys.extend(graph.keys)
+        return self
 
-    def add_data(self, data: Data):
+    def add_data(self, data: Data) -> "GraphML":
         """Añade un elemento `<data>`."""
         self.data_elements.append(data)
+        return self
 
     def to_xml(self) -> str:
         """

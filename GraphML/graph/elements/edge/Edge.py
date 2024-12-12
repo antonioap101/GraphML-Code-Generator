@@ -3,8 +3,8 @@ from typing import Optional, List
 from GraphML.GraphMLElement import GraphMLElement
 from GraphML.graph.common import Desc
 from GraphML.graph.common.ID import ID, IDType
-from GraphML.graph.elements.Data import Data
-from GraphML.graph.elements.Port import Port
+from GraphML.graph.elements.data.Data import Data
+from GraphML.graph.elements.port.Port import Port
 
 
 class Edge(GraphMLElement):
@@ -26,10 +26,10 @@ class Edge(GraphMLElement):
             source: ID,
             target: ID,
             edge_id: ID = ID.autogenerate(IDType.EDGE),
-            source_port: Optional[Port] = None,
-            target_port: Optional[Port] = None,
+            source_port: Port = None,
+            target_port: Port = None,
             directed: Optional[bool] = None,
-            desc: Optional[Desc] = None,
+            desc: Desc = None,
             data_elements: List[Data] = [],
     ):
         """

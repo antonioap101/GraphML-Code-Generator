@@ -1,7 +1,7 @@
-from typing import Any, Optional
+from typing import Any
 
 from GraphML.GraphMLElement import GraphMLElement
-from GraphML.graph.elements.Key import Key
+from GraphML.graph.elements.key.Key import Key
 
 
 class Data(GraphMLElement):

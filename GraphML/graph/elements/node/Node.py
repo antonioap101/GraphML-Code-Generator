@@ -1,14 +1,14 @@
 from typing import List, Optional
 
-from GraphML.GraphMLContainer import GraphMLContainer
+from GraphML.GraphMLElement import GraphMLElement
 from GraphML.graph.common import Desc
 from GraphML.graph.common.ID import ID, IDType
-from GraphML.graph.elements.Data import Data
-from GraphML.graph.elements.Port import Port
+from GraphML.graph.elements.data.Data import Data
+from GraphML.graph.elements.port.Port import Port
 from GraphML.graph.elements.external.Locator import Locator
 
 
-class Node(GraphMLContainer):
+class Node(GraphMLElement):
     """
     Representa un elemento `<node>` dentro de un grafo en GraphML.
     <!ELEMENT node (desc?,(((data|port)*,graph?)|locator))>
@@ -18,7 +18,7 @@ class Node(GraphMLContainer):
     def __init__(
             self,
             node_id: ID = ID.autogenerate(IDType.NODE),
-            desc: Optional[Desc] = None,
+            desc: Desc = None,
     ):
         """
         Inicializa un nodo.

@@ -1,19 +1,19 @@
 from typing import List, Optional
 
-from GraphML.GraphMLContainer import GraphMLContainer
+from GraphML.GraphMLElement import GraphMLElement
 from GraphML.graph.common import Desc
-from GraphML.graph.elements.Data import Data
+from GraphML.graph.elements.data.Data import Data
 
 
-class Port(GraphMLContainer):
+class Port(GraphMLElement):
     """
     Representa un elemento `<port>` en GraphML.
     """
 
     def __init__(
-        self,
-        port_name: str,
-        desc: Optional[Desc] = None,
+            self,
+            port_name: str,
+            desc: Desc = None,
     ):
         """
         Inicializa un puerto.

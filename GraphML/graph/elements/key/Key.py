@@ -25,7 +25,7 @@ class Key(GraphMLElement):
             self,
             key_id: ID = ID.autogenerate(IDType.KEY),
             for_type: ForType = ForType.ALL,
-            desc: Optional[Desc] = None,
+            desc: Desc = None,
             default_value: Optional[str] = None,
     ):
         """

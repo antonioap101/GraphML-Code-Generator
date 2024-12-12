@@ -1,10 +1,10 @@
 from GraphML.GraphML import GraphML
 from GraphML.formatter.XMLFormatter import XMLFormatter
 from GraphML.graph.Graph import Graph
-from GraphML.graph.elements.Data import Data
-from GraphML.graph.elements.Edge import Edge
-from GraphML.graph.elements.Key import Key
-from GraphML.graph.elements.Node import Node
+from GraphML.graph.elements.data.Data import Data
+from GraphML.graph.elements.edge.Edge import Edge
+from GraphML.graph.elements.key.Key import Key
+from GraphML.graph.elements.node.Node import Node
 
 if __name__ == "__main__":
     graphml = GraphML()

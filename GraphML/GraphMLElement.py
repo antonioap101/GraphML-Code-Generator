@@ -1,6 +1,6 @@
 from typing import Optional
 
-from GraphML.graph.common import Desc
+from GraphML.graph.common.Desc import Desc
 
 
 class GraphMLElement:

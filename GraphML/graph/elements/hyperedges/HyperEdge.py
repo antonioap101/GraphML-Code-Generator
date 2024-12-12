@@ -1,15 +1,16 @@
 from typing import Optional
 
-from GraphML.GraphMLContainer import GraphMLContainer
+from GraphML.GraphMLElement import GraphMLElement
 from GraphML.graph.common import Desc
+from GraphML.graph.common.ID import ID, IDType
 
 
-class HyperEdge(GraphMLContainer):
+class HyperEdge(GraphMLElement):
     """
     Representa un elemento `<hyperedge>` en GraphML.
     """
 
-    def __init__(self, hyperedge_id: Optional[str] = None, desc: Optional[Desc] = None):
+    def __init__(self, hyperedge_id: ID = ID.autogenerate(IDType.HYPEREDGE), desc: Desc = None):
         """
         Inicializa una hiper-arista.
 

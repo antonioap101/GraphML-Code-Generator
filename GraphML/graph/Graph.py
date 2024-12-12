@@ -1,16 +1,16 @@
 from typing import List, Optional
 
-from GraphML.GraphMLContainer import GraphMLContainer
+from GraphML.GraphMLElement import GraphMLElement
 from GraphML.graph.common import Desc
 from GraphML.graph.common.ID import ID, IDType
-from GraphML.graph.elements import Data
-from GraphML.graph.elements.Edge import Edge
-from GraphML.graph.elements.Node import Node
+from GraphML.graph.elements.data import Data
+from GraphML.graph.elements.edge.Edge import Edge
+from GraphML.graph.elements.node.Node import Node
 from GraphML.graph.elements.external.Locator import Locator
 from GraphML.graph.elements.hyperedges.HyperEdge import HyperEdge
 
 
-class Graph(GraphMLContainer):
+class Graph(GraphMLElement):
     """
     Representa un elemento `<graph>` dentro de GraphML.
     """
@@ -19,7 +19,7 @@ class Graph(GraphMLContainer):
             self,
             graph_id: ID = ID.autogenerate(IDType.GRAPH),
             edge_default: str = "directed",
-            desc: Optional[Desc] = None,
+            desc: Desc = None,
     ):
         """
         Inicializa un grafo.
