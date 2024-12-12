@@ -1,8 +1,8 @@
 from typing import List, Optional
 
 from GraphML.GraphMLContainer import GraphMLContainer
-from GraphML.common.Desc import Desc
 from GraphML.graph.Graph import Graph
+from GraphML.graph.common import Desc
 from GraphML.graph.elements.Data import Data
 from GraphML.graph.elements.Key import Key
 
@@ -16,16 +16,14 @@ class GraphML(GraphMLContainer):
             self,
             graphs: List[Graph] = None,
             desc: Optional[Desc] = None,
-            extra_attrib: Optional[dict] = None,
     ):
         """
         Inicializa el elemento raíz GraphML.
 
         Args:
             desc (Optional[Desc]): Descripción opcional para el archivo GraphML.
-            extra_attrib (Optional[dict]): Atributos personalizados adicionales.
         """
-        super().__init__(desc=desc, extra_attrib=extra_attrib)
+        super().__init__(desc=desc)
         self.graphs: List[Graph] = graphs or []
         self.keys: List[Key] = []
         self.data_elements: List[Data] = []
@@ -52,14 +50,13 @@ class GraphML(GraphMLContainer):
             str: Representación XML del archivo GraphML.
         """
         desc_xml = self.desc.to_xml() if self.desc else ""
-        attributes = self.render_attributes()
         keys_xml = "".join(key.to_xml() for key in self.keys)
         graphs_xml = "".join(graph.to_xml() for graph in self.graphs)
         data_xml = "".join(data.to_xml() for data in self.data_elements)
 
         return (
                 f"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-                f"<graphml" + (f" {attributes}" if attributes else "") + ">" +
+                f"<graphml>" +
                 f"{desc_xml}" +
                 f"{keys_xml}" +
                 f"{data_xml}" +

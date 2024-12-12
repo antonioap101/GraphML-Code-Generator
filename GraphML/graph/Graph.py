@@ -1,8 +1,8 @@
 from typing import List, Optional
 
 from GraphML.GraphMLContainer import GraphMLContainer
-from GraphML.common.Desc import Desc
-from GraphML.common.ID import ID, IDType
+from GraphML.graph.common import Desc
+from GraphML.graph.common.ID import ID, IDType
 from GraphML.graph.elements import Data
 from GraphML.graph.elements.Edge import Edge
 from GraphML.graph.elements.Node import Node
@@ -20,7 +20,6 @@ class Graph(GraphMLContainer):
             graph_id: ID = ID.autogenerate(IDType.GRAPH),
             edge_default: str = "directed",
             desc: Optional[Desc] = None,
-            extra_attrib: Optional[dict] = None,
     ):
         """
         Inicializa un grafo.
@@ -29,9 +28,8 @@ class Graph(GraphMLContainer):
             graph_id (str): Identificador único para el grafo.
             edge_default (str): Indica si las aristas son dirigidas o no (por defecto, "directed").
             desc (Optional[Desc]): Descripción opcional para el grafo.
-            extra_attrib (Optional[dict]): Atributos personalizados adicionales.
         """
-        super().__init__(desc=desc, extra_attrib=extra_attrib)
+        super().__init__(desc=desc)
         self.graph_id = graph_id
         self.edge_default = edge_default
         self.data_elements: List[Data] = []
@@ -81,8 +79,7 @@ class Graph(GraphMLContainer):
             str: Representación XML del grafo.
         """
         desc_xml = self.desc.to_xml() if self.desc else ""
-        extra_attrib = self.render_attributes()
-        attributes = f'id="{self.graph_id}" edgedefault="{self.edge_default}"' + (f" {extra_attrib}" if extra_attrib else "")
+        attributes = f'id="{self.graph_id}" edgedefault="{self.edge_default}"'
         data_xml = "".join(data.to_xml() for data in self.data_elements)
         nodes_xml = "".join(node.to_xml() for node in self.nodes)
         edges_xml = "".join(edge.to_xml() for edge in self.edges)

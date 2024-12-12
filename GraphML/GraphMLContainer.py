@@ -1,7 +1,7 @@
 from typing import Optional, List
 
 from GraphML.GraphMLElement import GraphMLElement
-from GraphML.common.Desc import Desc
+from GraphML.graph.common import Desc
 
 
 class GraphMLContainer(GraphMLElement):
@@ -9,15 +9,14 @@ class GraphMLContainer(GraphMLElement):
     Clase base para elementos que pueden contener otros elementos en GraphML.
     """
 
-    def __init__(self, desc: Optional[Desc] = None, extra_attrib: Optional[dict] = None, children: Optional[List[GraphMLElement]] = None):
+    def __init__(self, desc: Optional[Desc] = None, children: Optional[List[GraphMLElement]] = None):
         """
         Inicializa un contenedor GraphML.
 
         Args:
             desc (Optional[Desc]): Descripción opcional para el elemento.
-            extra_attrib (Optional[dict]): Atributos personalizados adicionales.
         """
-        super().__init__(desc, extra_attrib)
+        super().__init__(desc)
         self.children: List[GraphMLElement] = children or []
 
     def add_child(self, child: GraphMLElement):

@@ -2,8 +2,8 @@ from enum import Enum
 from typing import Optional
 
 from GraphML.GraphMLElement import GraphMLElement
-from GraphML.common.Desc import Desc
-from GraphML.common.ID import ID, IDType
+from GraphML.graph.common import Desc
+from GraphML.graph.common.ID import ID, IDType
 
 
 class ForType(Enum):
@@ -27,7 +27,6 @@ class Key(GraphMLElement):
             for_type: ForType = ForType.ALL,
             desc: Optional[Desc] = None,
             default_value: Optional[str] = None,
-            extra_attrib: Optional[dict] = None,
     ):
         """
         Inicializa un elemento de clave.
@@ -37,9 +36,8 @@ class Key(GraphMLElement):
             for_type (str): Dominio de definición de la clave (por defecto, "all").
             desc (Optional[Desc]): Descripción opcional de la clave.
             default_value (Optional[str]): Valor por defecto para esta clave.
-            extra_attrib (Optional[dict]): Atributos personalizados adicionales.
         """
-        super().__init__(desc, extra_attrib)
+        super().__init__(desc)
         self.key_id = key_id
         self.for_type = for_type
         self.default_value = default_value
@@ -54,9 +52,7 @@ class Key(GraphMLElement):
         desc_xml = f"<desc>{self.desc}</desc>" if self.desc else ""
         default_xml = f"<default>{self.default_value}</default>" if self.default_value else ""
 
-        extra_attributes = self.render_attributes()
         attributes = f'id="{self.key_id}" for="{self.for_type}"'
-        attributes += f" {extra_attributes}" if extra_attributes else ""
 
         return (
                 f"<key {attributes}>" +

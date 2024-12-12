@@ -1,8 +1,8 @@
 from typing import Optional
 
 from GraphML.GraphMLElement import GraphMLElement
-from GraphML.common.Desc import Desc
-from GraphML.common.ID import ID
+from GraphML.graph.common import Desc
+from GraphML.graph.common import ID
 
 
 class Endpoint(GraphMLElement):
@@ -11,12 +11,11 @@ class Endpoint(GraphMLElement):
     """
 
     def __init__(
-        self,
-        node_id: ID,
-        port: Optional[str] = None,
-        endpoint_type: str = "undir",
-        desc: Optional[Desc] = None,
-        extra_attrib: Optional[dict] = None,
+            self,
+            node_id: ID,
+            port: Optional[str] = None,
+            endpoint_type: str = "undir",
+            desc: Optional[Desc] = None,
     ):
         """
         Inicializa un punto final.
@@ -26,9 +25,8 @@ class Endpoint(GraphMLElement):
             port (Optional[str]): Puerto del nodo al que está conectado.
             endpoint_type (str): Tipo de conexión ("in", "out", "undir").
             desc (Optional[Desc]): Descripción opcional del punto final.
-            extra_attrib (Optional[dict]): Atributos personalizados adicionales.
         """
-        super().__init__(desc, extra_attrib)
+        super().__init__(desc)
         self.node_id = node_id
         self.port = port
         self.endpoint_type = endpoint_type
@@ -44,6 +42,5 @@ class Endpoint(GraphMLElement):
         attributes = f'node="{self.node_id}" type="{self.endpoint_type}" '
         if self.port:
             attributes += f'port="{self.port}" '
-        attributes += self.render_attributes()
 
         return f"<endpoint {attributes}>{desc_xml}</endpoint>"

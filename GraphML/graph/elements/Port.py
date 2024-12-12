@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from GraphML.GraphMLContainer import GraphMLContainer
-from GraphML.common.Desc import Desc
+from GraphML.graph.common import Desc
 from GraphML.graph.elements.Data import Data
 
 
@@ -14,7 +14,6 @@ class Port(GraphMLContainer):
         self,
         port_name: str,
         desc: Optional[Desc] = None,
-        extra_attrib: Optional[dict] = None,
     ):
         """
         Inicializa un puerto.
@@ -22,9 +21,8 @@ class Port(GraphMLContainer):
         Args:
             port_name (str): Nombre único del puerto dentro del nodo.
             desc (Optional[Desc]): Objeto `Desc` opcional para describir el puerto.
-            extra_attrib (Optional[dict]): Atributos personalizados adicionales.
         """
-        super().__init__(desc=desc, extra_attrib=extra_attrib)
+        super().__init__(desc=desc)
         self.port_name = port_name
         self.data_elements: List[Data] = []
         self.sub_ports: List[Port] = []
@@ -55,7 +53,7 @@ class Port(GraphMLContainer):
             str: Representación XML del puerto.
         """
         desc_xml = self.desc.to_xml() if self.desc else ""
-        attributes = f'name="{self.port_name}" {self.render_attributes()}'
+        attributes = f'name="{self.port_name}"'
 
         # Renderizar datos y sub-puertos
         data_xml = "".join(data.to_xml() for data in self.data_elements)

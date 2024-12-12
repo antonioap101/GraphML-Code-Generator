@@ -1,8 +1,8 @@
 from typing import List, Optional
 
 from GraphML.GraphMLContainer import GraphMLContainer
-from GraphML.common.Desc import Desc
-from GraphML.common.ID import ID, IDType
+from GraphML.graph.common import Desc
+from GraphML.graph.common.ID import ID, IDType
 from GraphML.graph.elements.Data import Data
 from GraphML.graph.elements.Port import Port
 from GraphML.graph.elements.external.Locator import Locator
@@ -19,7 +19,6 @@ class Node(GraphMLContainer):
             self,
             node_id: ID = ID.autogenerate(IDType.NODE),
             desc: Optional[Desc] = None,
-            extra_attrib: Optional[dict] = None,
     ):
         """
         Inicializa un nodo.
@@ -27,10 +26,9 @@ class Node(GraphMLContainer):
         Args:
             node_id (ID): Identificador único para el nodo.
             desc (Optional[Desc]): Objeto `Desc` opcional para describir el nodo.
-            extra_attrib (Optional[dict]): Atributos personalizados adicionales.
         """
         from GraphML.graph.Graph import Graph  # Evitar dependencia circular
-        super().__init__(desc=desc, extra_attrib=extra_attrib)
+        super().__init__(desc=desc)
         self.node_id = node_id
         self.data_elements: List[Data] = []
         self.ports: List[Port] = []
@@ -89,8 +87,7 @@ class Node(GraphMLContainer):
             str: Representación XML del nodo.
         """
         desc_xml = self.desc.to_xml() if self.desc else ""
-        extra_attrib = self.render_attributes()
-        attributes = f'id="{self.node_id}"' + (f" {extra_attrib}" if extra_attrib else "")
+        attributes = f'id="{self.node_id}"'
 
         # Renderizar elementos contenidos
         data_xml = "".join(data.to_xml() for data in self.data_elements)

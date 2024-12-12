@@ -1,6 +1,12 @@
 class Desc:
     """
     Representa un elemento `<desc>` en GraphML.
+
+    <!ELEMENT desc (#PCDATA)>
+    desc elements should contain meta information useful for human readers of a graphml document.
+    For example, they may contain a specification of the level of sophistication of the contained graph.
+    Another example would be a brief description of the data associated with a particular key.
+    Attributes: None
     """
 
     def __init__(self, content: str):
