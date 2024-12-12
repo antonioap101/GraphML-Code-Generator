@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml>
+    <key id="key1" for="ForType.ALL">
+    </key>
+    <key id="key1" for="ForType.ALL">
+    </key>
+    <graph id="graph1" edgedefault="directed">
+        <node id="node1">
+            <data key="key1">
+                value
+            </data>
+        </node>
+        <node id="node1">
+            <data key="key1">
+                value2
+            </data>
+        </node>
+        <edge id="edge1" source="node1" target="node1">
+        </edge>
+    </graph>
+</graphml>
