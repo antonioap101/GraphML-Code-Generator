@@ -10,10 +10,7 @@
     },
     {
       "src": "api/**/*",
-      "use": "@vercel/python",
-      "config": {
-        "installCommand": "pip install -r api/requirements.txt"
-      }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
