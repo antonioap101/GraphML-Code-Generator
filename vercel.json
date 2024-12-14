@@ -3,21 +3,27 @@
   "builds": [
     {
       "src": "frontend/package.json",
-      "use": "@vercel/static-build"
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
     },
     {
-      "src": "api/app.py",
-      "use": "@vercel/python"
+      "src": "api/**/*",
+      "use": "@vercel/python",
+      "config": {
+        "installCommand": "pip install -r api/requirements.txt"
+      }
     }
   ],
   "routes": [
     {
-      "src": "/convert(/.*)?",
+      "src": "/convert/(.*)?",
       "dest": "api/app.py"
     },
     {
       "src": "/(.*)",
-      "dest": "frontend/dist/$1"
+      "dest": "frontend/$1"
     }
   ]
 }
