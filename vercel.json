@@ -12,7 +12,7 @@
       "src": "api/**/*",
       "use": "@vercel/python",
       "config": {
-        "installCommand": "pip install -r api/requirements.txt"
+        "installCommand": "pip install -r api/requirements.txt --verbose"
       }
     }
   ],
