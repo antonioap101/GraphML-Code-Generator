@@ -3,20 +3,17 @@
   "builds": [
     {
       "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "frontend/dist"
-      }
+      "use": "@vercel/static-build"
     },
     {
-      "src": "api/main.py",
+      "src": "api/app.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
-      "src": "/convert/.*",
-      "dest": "api/main.py"
+      "src": "/convert(/.*)?",
+      "dest": "api/app.py"
     },
     {
       "src": "/(.*)",
