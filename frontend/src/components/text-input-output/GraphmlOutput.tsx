@@ -1,5 +1,6 @@
 import React from 'react';
-import ActionButton from "../fileUploadButton/actionButton.tsx";
+import ActionButton from "../actionButton/actionButton.tsx";
+
 
 interface GraphmlOutputProps {
     graphmlOutput: string;

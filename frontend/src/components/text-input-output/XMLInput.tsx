@@ -1,6 +1,6 @@
 import React from "react";
-import ActionButton from "../fileUploadButton/actionButton.tsx";
 import "./input-output-styles.css"
+import ActionButton from "../actionButton/actionButton.tsx";
 
 interface XmlInputProps {
     xmlContent: string;

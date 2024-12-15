@@ -1,6 +1,6 @@
 import React from "react";
 import { FaUpload, FaDownload } from "react-icons/fa"; // Importa los iconos necesarios
-import "./ActionButton.css";
+import "./actionButton.css";
 
 interface ActionButtonProps {
     action: "upload" | "download"; // Define el tipo de acción
