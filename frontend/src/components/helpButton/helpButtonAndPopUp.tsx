@@ -1,7 +1,7 @@
 // src/components/HelpButton.tsx
 import React, { useState } from 'react';
 import { FaQuestionCircle } from 'react-icons/fa';
-import './HelpButton.css';
+import './helpButton.css';
 
 const HelpButton: React.FC = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
