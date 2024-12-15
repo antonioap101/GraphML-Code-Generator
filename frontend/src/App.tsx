@@ -39,6 +39,7 @@ const App: React.FC = () => {
     return (
         <div className="app-container">
             <h1>Generador de Código GraphML</h1>
+            <AuthorLink/>
             <div style={{
                 zIndex: 1000
             }}>
