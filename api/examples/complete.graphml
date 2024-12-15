@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns">
-    <key id="attributes" for="node" attr.name="attributes" attr.type="string"/>
     <key id="text" for="node" attr.name="text" attr.type="string"/>
+    <key id="attributes" for="node" attr.name="attributes" attr.type="string"/>
     <graph id="g1" edgedefault="directed">
         <node id="n1">
             <desc>root</desc>
@@ -26,10 +26,10 @@
             <desc>node2</desc>
             <data key="attributes">{'attribute5': 'value5'}</data>
         </node>
-        <edge id="e1" source="n1" target="n2">aaaaa</edge>
-        <edge id="e2" source="n2" target="n3">aaaaa</edge>
-        <edge id="e3" source="n3" target="n4">aaaaa</edge>
-        <edge id="e4" source="n3" target="n5">aaaaa</edge>
-        <edge id="e5" source="n1" target="n6">aaaaa</edge>
+        <edge id="e1" source="n1" target="n2"/>
+        <edge id="e2" source="n2" target="n3"/>
+        <edge id="e3" source="n3" target="n4"/>
+        <edge id="e4" source="n3" target="n5"/>
+        <edge id="e5" source="n1" target="n6"/>
     </graph>
 </graphml>

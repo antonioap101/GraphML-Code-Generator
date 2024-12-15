@@ -1,9 +1,19 @@
-from api.src.GraphMLGenerator.GraphML import GraphML
-from api.src.GraphMLGenerator.GraphML.formatter.XMLFormatter import XMLFormatter
-from api.src.GraphMLGenerator.parser.json.json_parser import JSONParser
-from api.src.GraphMLGenerator.parser.xml.xml_parser import XMLParser
-from api.src.GraphMLGenerator.utils.file import File
+from typing import List, Optional
 
+from api.src.GraphMLGenerator.GraphML import GraphML
+from api.src.GraphMLGenerator.GraphML.GraphML import GraphML
+from api.src.GraphMLGenerator.GraphML.formatter.XMLFormatter import XMLFormatter
+from api.src.GraphMLGenerator.GraphML.graph.Graph import Graph
+from api.src.GraphMLGenerator.GraphML.graph.common.Desc import Desc
+from api.src.GraphMLGenerator.GraphML.graph.common.ID import ID
+from api.src.GraphMLGenerator.GraphML.graph.elements.data.Data import Data
+from api.src.GraphMLGenerator.GraphML.graph.elements.edge.Edge import Edge
+from api.src.GraphMLGenerator.GraphML.graph.elements.key.Key import Key
+from api.src.GraphMLGenerator.GraphML.graph.elements.node.Node import Node
+from api.src.GraphMLGenerator.parser.json_parser.json_parser import JSONParser
+from api.src.GraphMLGenerator.parser.xml_parser.xml_parser import XMLParser
+from api.src.GraphMLGenerator.tokens.Token import Token
+from api.src.GraphMLGenerator.utils.file import File
 from api.src.GraphMLGenerator.utils.file_handler import FileHandler
 
 
@@ -13,44 +23,77 @@ class GraphMLGenerator:
     Permite recibir contenido XML o JSON y convertirlo a GraphML, además de exportarlo como fichero.
     """
 
+    class TokenScanner:
+        """
+        Clase interna para procesar tokens y construir un objeto Graph.
+        """
+
+        @staticmethod
+        def scan(tokens: List[Token], parent_node: Optional[Node] = None, graph: Optional[Graph] = None) -> Graph:
+            """
+            Convierte una lista de tokens en un objeto Graph.
+
+            Args:
+                tokens (List[Token]): Lista de tokens generados por un parser.
+                parent_node (Optional[Node]): Nodo padre al que se conectarán los nodos actuales.
+                graph (Optional[Graph]): Grafo al que se añadirán los nodos y aristas.
+
+            Returns:
+                Graph: Grafo construido a partir de los tokens.
+            """
+            if graph is None:
+                graph = Graph()
+
+            for token in tokens:
+                # Crear un nodo para el token actual
+                current_node = Node(desc=Desc(content=token.tag))
+
+                if token.attrib:
+                    current_node.add_data(Data(key=Key.for_node(ID("attributes")), pcdata=token.attrib))
+                if token.text:
+                    current_node.add_data(Data(key=Key.for_node(ID("text")), pcdata=token.text))
+                if token.tail:
+                    current_node.add_data(Data(key=Key.for_node(ID("tail")), pcdata=token.tail))
+
+                graph.add_node(current_node)
+
+                # Si hay un nodo padre, crear una arista entre el padre y el nodo actual
+                if parent_node:
+                    edge = Edge(source=parent_node.node_id, target=current_node.node_id)
+                    graph.add_edge(edge)
+
+                # Procesar los hijos recursivamente
+                if token.children:
+                    GraphMLGenerator.TokenScanner.scan(token.children, parent_node=current_node, graph=graph)
+
+            return graph
+
     parser_map = {
         "xml": XMLParser,
         "json": JSONParser
     }
 
     @staticmethod
-    def from_xml(content: str) -> GraphML:
+    def from_tokens(tokens: List[Token]) -> GraphML:
         """
-        Convierte contenido XML a un objeto GraphML.
+        Convierte un flujo de tokens en un objeto GraphML.
 
         Args:
-            content (str): Contenido del archivo XML como cadena.
+            tokens (List[Token]): Lista de tokens generados por un parser.
 
         Returns:
-            GraphML: Objeto GraphML generado a partir del contenido.
+            GraphML: Objeto GraphML generado a partir de los tokens.
         """
-        return XMLParser.parse(content)
-
-    @staticmethod
-    def from_json(content: str) -> GraphML:
-        """
-        Convierte contenido JSON a un objeto GraphML.
-
-        Args:
-            content (str): Contenido del archivo JSON como cadena.
-
-        Returns:
-            GraphML: Objeto GraphML generado a partir del contenido.
-        """
-        JSONParser.parse(content)
+        graph = GraphMLGenerator.TokenScanner.scan(tokens)
+        return GraphML(graphs=[graph])
 
     @staticmethod
     def from_file(filepath: str) -> GraphML:
         """
-        Lee contenido de un archivo XML y lo convierte a un objeto GraphML.
+        Lee contenido de un archivo y lo convierte a un objeto GraphML.
 
         Args:
-            filepath (str): Ruta del archivo XML.
+            filepath (str): Ruta del archivo.
 
         Returns:
             GraphML: Objeto GraphML generado a partir del archivo.
@@ -58,8 +101,27 @@ class GraphMLGenerator:
         file: File = FileHandler.read_file(filepath)
         parser = GraphMLGenerator.parser_map.get(file.extension)
         if parser is None:
-            raise ValueError(f"No parser found for file extension '{file.extension}'")
-        return parser.parse(file.content)
+            raise ValueError(f"No se encontró un parser para la extensión '{file.extension}'")
+        tokens = parser.parse(file.content)
+        return GraphMLGenerator.from_tokens(tokens)
+
+    @staticmethod
+    def from_string(content: str, format: str) -> GraphML:
+        """
+        Convierte contenido en una cadena a un objeto GraphML.
+
+        Args:
+            content (str): Contenido en formato XML o JSON.
+            format (str): Formato del contenido ("xml_parser" o "json_parser").
+
+        Returns:
+            GraphML: Objeto GraphML generado a partir del contenido.
+        """
+        parser = GraphMLGenerator.parser_map.get(format)
+        if parser is None:
+            raise ValueError(f"No se encontró un parser para el formato '{format}'")
+        tokens = parser.parse(content)
+        return GraphMLGenerator.from_tokens(tokens)
 
     @staticmethod
     def to_file(graphml: GraphML, output_filepath: str, format_output: bool = True) -> None:
@@ -90,3 +152,9 @@ class GraphMLGenerator:
         """
         xml_content = graphml.to_xml()
         return XMLFormatter.format(xml_content) if format_output else xml_content
+
+
+if __name__ == "__main__":
+    graphml = GraphMLGenerator.from_file("api/examples/example.xml")
+
+    print(graphml.to_xml())

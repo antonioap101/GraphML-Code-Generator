@@ -4,20 +4,50 @@ from api.src.GraphMLGenerator.GraphMLGenerator import GraphMLGenerator
 
 
 class TestGraphMLGenerator(unittest.TestCase):
-    def test_generate_simple_graph(self):
-        data = {
-            "node1": {},
-            "node2": {}
-        }
-        result = GraphMLGenerator.generate(data)
-        self.assertIn('<node id="n0"><data key="label">node1</data></node>', result)
-        self.assertIn('<node id="n1"><data key="label">node2</data></node>', result)
-        self.assertTrue(result.startswith('<?xml version="1.0" encoding="UTF-8"?>'))
-        self.assertTrue(result.endswith('</graphml>'))
 
-    def test_generate_empty_graph(self):
-        data = {}
-        result = GraphMLGenerator.generate(data)
-        self.assertNotIn('<node', result)  # No debe haber nodos
-        self.assertTrue(result.startswith('<?xml version="1.0" encoding="UTF-8"?>'))
-        self.assertTrue(result.endswith('</graphml>'))
+    def test_valid_xml_basic(self):
+        """Prueba con un XML básico y válido."""
+        xml_content = """
+        <root>
+            <node id="1">
+                <child>Hello, World!</child>
+            </node>
+        </root>
+        """
+        graphml = GraphMLGenerator.from_string(xml_content, "xml")
+        graphml_string = GraphMLGenerator.to_string(graphml)
+        self.assertIn("<node id=", graphml_string)
+        self.assertIn("Hello, World!", graphml_string)
+
+    def test_valid_xml_with_attributes(self):
+        """Prueba con un XML más complejo con múltiples nodos y atributos."""
+        xml_content = """
+        <root>
+            <node id="1" type="start">
+                <child id="2">Start Node</child>
+            </node>
+            <node id="3" type="end">
+                <child id="4">End Node</child>
+            </node>
+        </root>
+        """
+        graphml = GraphMLGenerator.from_string(xml_content, "xml")
+        graphml_string = GraphMLGenerator.to_string(graphml)
+        print("GraphML string:", graphml_string)
+        self.assertIn("\'type\': \'start\'", graphml_string)
+        self.assertIn("<node id=\"n4\"", graphml_string)
+
+    def test_invalid_xml_malformed(self):
+        """Prueba con un XML malformado."""
+        xml_content = """
+        <root>
+            <node id="1">
+                <child>Hello, World!
+            </node>
+        """
+        with self.assertRaises(Exception):
+            GraphMLGenerator.from_string(xml_content, "xml")
+
+
+if __name__ == "__main__":
+    unittest.main()

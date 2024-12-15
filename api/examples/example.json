@@ -1,23 +1,35 @@
 {
-  "root": {
-    "node1": {
-      "attribute1": "value1",
-      "attribute2": "value2",
+  "tag": "root",
+  "attrib": {
+    "attribute1": "value1",
+    "attribute2": "value2"
+  },
+  "text": "Root text",
+  "tail": null,
+  "children": [
+    {
+      "tag": "child1",
+      "attrib": {
+        "childAttr": "childValue"
+      },
+      "text": "Child 1 text",
+      "tail": null,
+      "children": []
+    },
+    {
+      "tag": "child2",
+      "attrib": {},
+      "text": "Child 2 text",
+      "tail": null,
       "children": [
         {
-          "subnode1": {
-            "attribute3": "value3"
-          }
-        },
-        {
-          "subnode2": {
-            "attribute4": "value4"
-          }
+          "tag": "grandchild",
+          "attrib": {},
+          "text": "Grandchild text",
+          "tail": null,
+          "children": []
         }
       ]
-    },
-    "node2": {
-      "attribute5": "value5"
     }
-  }
+  ]
 }

@@ -8,7 +8,7 @@ class File:
         Args:
             name (str): Name of the file without extension.
             content (str): Content of the file.
-            extension (str): Extension of the file (e.g., .txt, .json).
+            extension (str): Extension of the file (e.g., .txt, .json_parser).
         """
         self.name = name
         self.content = content

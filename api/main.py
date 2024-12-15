@@ -18,7 +18,7 @@ if __name__ == "__main__":
     print(f"Directorio actual: {current_dir}")
     # Convertir la cadena XML a un objeto GraphML
     # graphml = GraphMLGenerator.from_xml(xml_content)
-    graphml = GraphMLGenerator.from_file(current_dir + "/examples/example.xml")
+    graphml = GraphMLGenerator.from_file(current_dir + "/examples/example.xml_parser")
 
     # Obtener el XML generado como texto
     graphml_string = GraphMLGenerator.to_string(graphml=graphml, format_output=False)

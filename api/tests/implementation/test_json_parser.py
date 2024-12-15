@@ -1,81 +1,53 @@
 import unittest
-from pathlib import Path
 
-from api.src.GraphMLGenerator.parser.json.json_parser import JSONParser
+from api.src.GraphMLGenerator.parser.json_parser.json_parser import JSONParser
 
 
 class TestJSONParser(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        # Descubrir la raíz del proyecto dinámicamente
-        cls.project_root = Path(__file__).resolve().parent.parent.parent
-        cls.examples_dir = f"{cls.project_root}/examples"
 
-    def test_parse_valid_json(self):
-        content = '{"root": {"child": {"key": "value"}}}'
-        result = JSONParser.parse(content)
-        expected = {
-            "root": {
-                "child": {
-                    "key": "value"
-                }
-            }
-        }
-        self.assertEqual(result, expected)
-
-    def test_parse_invalid_json(self):
-        content = '{"root": {"child": {"key": "value"}'  # Falta un cierre
-        with self.assertRaises(ValueError):
-            JSONParser.parse(content)
-
-    # Parses from the file examples/example.json
-    """
-     "root": {
-    "node1": {
-      "attribute1": "value1",
-      "attribute2": "value2",
-      "children": [
+    def test_valid_json(self):
+        content = """
         {
-          "subnode1": {
-            "attribute3": "value3"
-          }
-        },
-        {
-          "subnode2": {
-            "attribute4": "value4"
-          }
-        }
-      ]
-    },
-    "node2": {
-      "attribute5": "value5"
-    }
-  }
-    """
-
-    def test_parse_json_file(self):
-        content = JSONParser.parse_from_file(f"{self.examples_dir}/example.json")
-        expected = {
-            "root": {
-                "node1": {
-                    "attribute1": "value1",
-                    "attribute2": "value2",
-                    "children": [
-                        {
-                            "subnode1": {
-                                "attribute3": "value3"
-                            }
-                        },
-                        {
-                            "subnode2": {
-                                "attribute4": "value4"
-                            }
-                        }
-                    ]
-                },
-                "node2": {
-                    "attribute5": "value5"
-                }
+          "tag": "graph",
+          "attrib": { "type": "directed" },
+          "text": "Graph content",
+          "tail": null,
+          "children": [
+            {
+              "tag": "node",
+              "attrib": { "id": "n1" },
+              "text": "Node 1",
+              "tail": null,
+              "children": []
+            },
+            {
+              "tag": "node",
+              "attrib": { "id": "n2" },
+              "text": "Node 2",
+              "tail": null,
+              "children": []
             }
+          ]
         }
-        self.assertEqual(content, expected)
+        """
+        tokens = JSONParser.parse(content)
+        self.assertEqual(len(tokens), 1)
+        self.assertEqual(tokens[0].tag, "graph")
+        self.assertEqual(tokens[0].children[0].tag, "node")
+        self.assertEqual(tokens[0].children[0].attrib["id"], "n1")
+
+    def test_invalid_json(self):
+        invalid_content = """
+        {
+          "tag": "graph",
+          "attrib": { "type": "directed" },
+          "text": "Graph content",
+          "children": [
+            {
+              "tag": "node",
+              "attrib": "invalid"
+            }
+          ]
+        """
+        with self.assertRaises(ValueError) as context:
+            JSONParser.parse(invalid_content)

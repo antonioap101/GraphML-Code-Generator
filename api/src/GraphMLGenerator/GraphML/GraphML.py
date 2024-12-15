@@ -68,7 +68,7 @@ class GraphML(GraphMLElement):
         data_xml = "".join(data.to_xml() for data in self.data_elements)
 
         return (
-                f"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                f"<?xml_parser version=\"1.0\" encoding=\"UTF-8\"?>" +
                 f'<graphml xmlns="http://graphml.graphdrawing.org/xmlns">' +
                 f"{desc_xml}" +
                 f"{keys_xml}" +
