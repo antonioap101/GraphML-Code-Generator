@@ -27,4 +27,4 @@ class Locator(GraphMLElement):
                       f'xlink:href="{self.href}" '
                       f'xlink:type="simple"')
 
-        return f"<locator {attributes}></locator>"
+        return f"<locator {attributes}/>"

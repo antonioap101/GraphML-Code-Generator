@@ -1,6 +1,6 @@
 import unittest
 
-from src.generator.graphml_generator import GraphMLGenerator
+from api.src.GraphMLGenerator.GraphMLGenerator import GraphMLGenerator
 
 
 class TestGraphMLGenerator(unittest.TestCase):
@@ -21,7 +21,3 @@ class TestGraphMLGenerator(unittest.TestCase):
         self.assertNotIn('<node', result)  # No debe haber nodos
         self.assertTrue(result.startswith('<?xml version="1.0" encoding="UTF-8"?>'))
         self.assertTrue(result.endswith('</graphml>'))
-
-
-if __name__ == "__main__":
-    unittest.main()

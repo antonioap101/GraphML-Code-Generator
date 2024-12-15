@@ -16,5 +16,5 @@ class Parser(ABC):
     @classmethod
     def parse_from_file(cls, filepath: str) -> Node:
         """Lee un archivo y lo parsea utilizando el método `parse`."""
-        content = FileHandler.read_file(filepath)
-        return cls.parse(content)
+        file = FileHandler.read_file(filepath)
+        return cls.parse(file.content)

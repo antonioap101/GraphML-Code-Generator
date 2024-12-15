@@ -138,4 +138,6 @@ class Edge(GraphMLElement):
         data_xml = "".join(data.to_xml() for data in self.data_elements)
         subgraph_xml = self.subgraph.to_xml() if self.subgraph else ""
 
-        return f"<edge {attributes}>{desc_xml}{data_xml}{subgraph_xml}</edge>"
+        # return f"<edge {attributes}>{desc_xml}{data_xml}{subgraph_xml}</edge>"
+        return f"<edge {attributes}" + (">" if desc_xml or data_xml or subgraph_xml else "/>") + (
+            f"{desc_xml}{data_xml}{subgraph_xml}" + f"</edge>" if desc_xml or data_xml or subgraph_xml else "")

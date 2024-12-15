@@ -39,10 +39,3 @@ class XMLFormatter:
                 continue
 
         return "\n".join(formatted_lines)
-
-
-# Ejemplo de uso
-if __name__ == "__main__":
-    raw_xml = """<?xml version="1.0" encoding="UTF-8"?><root><child attribute="value">Text</child><child>Another</child></root>"""
-    formatted_xml = XMLFormatter.format(raw_xml)
-    print(formatted_xml)

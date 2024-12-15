@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Set
 
 from api.src.GraphMLGenerator.GraphML.GraphMLElement import GraphMLElement
 from api.src.GraphMLGenerator.GraphML.graph.Graph import Graph
@@ -26,21 +26,22 @@ class GraphML(GraphMLElement):
         """
         super().__init__(desc=desc)
         self.graphs: List[Graph] = []
-        self.keys: List[Key] = []
+        self.keys: Set[Key] = set()  # Usamos un conjunto para las claves
         self.data_elements: List[Data] = []
         if graphs:
             self.add_graphs(graphs)
 
     def add_key(self, key: Key) -> "GraphML":
-        """Añade un elemento `<key>`."""
-        self.keys.append(key)
+        """Añade un elemento `<key>` solo si su ID es único."""
+        self.keys.add(key)
         return self
 
     def add_graph(self, graph: Graph) -> "GraphML":
         """Añade un elemento `<graph>`."""
         self.graphs.append(graph)
-        # Add all keys from the graph to the list of keys
-        self.keys.extend(graph.keys)
+        # Añade todas las claves del gráfico, verificando unicidad
+        for key in graph.keys:
+            self.add_key(key)
         return self
 
     def add_graphs(self, graphs: List[Graph]) -> "GraphML":

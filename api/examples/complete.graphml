@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+    <key id="attributes" for="node" attr.name="attributes" attr.type="string"/>
+    <key id="text" for="node" attr.name="text" attr.type="string"/>
+    <graph id="g1" edgedefault="directed">
+        <node id="n1">
+            <desc>root</desc>
+        </node>
+        <node id="n2">
+            <desc>node1</desc>
+            <data key="attributes">{'attribute1': 'value1', 'attribute2': 'value2'}</data>
+        </node>
+        <node id="n3">
+            <desc>children</desc>
+        </node>
+        <node id="n4">
+            <desc>subnode1</desc>
+            <data key="attributes">{'attribute3': 'value3'}</data>
+            <data key="text">ABC</data>
+        </node>
+        <node id="n5">
+            <desc>subnode2</desc>
+            <data key="attributes">{'attribute4': 'value4'}</data>
+        </node>
+        <node id="n6">
+            <desc>node2</desc>
+            <data key="attributes">{'attribute5': 'value5'}</data>
+        </node>
+        <edge id="e1" source="n1" target="n2">aaaaa</edge>
+        <edge id="e2" source="n2" target="n3">aaaaa</edge>
+        <edge id="e3" source="n3" target="n4">aaaaa</edge>
+        <edge id="e4" source="n3" target="n5">aaaaa</edge>
+        <edge id="e5" source="n1" target="n6">aaaaa</edge>
+    </graph>
+</graphml>

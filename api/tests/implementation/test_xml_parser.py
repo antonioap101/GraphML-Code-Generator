@@ -34,7 +34,6 @@ class TestXMLParser(unittest.TestCase):
         with self.assertRaises(ValueError):
             XMLParser.parse(content)
 
-
     def test_parse_xml_file(self):
         content = XMLParser.parse_from_file(f"{self.examples_dir}/example.xml")
         expected = {
@@ -72,7 +71,3 @@ class TestXMLParser(unittest.TestCase):
             }
         }
         self.assertEqual(content, expected)
-
-
-if __name__ == '__main__':
-    unittest.main()

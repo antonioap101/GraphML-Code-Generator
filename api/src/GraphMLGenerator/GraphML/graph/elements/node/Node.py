@@ -103,13 +103,3 @@ class Node(GraphMLElement):
                 f"</node>"
         )
 
-
-if __name__ == "__main__":
-    print("-start-")
-    node1 = Node(desc=Desc(content="Nodo 1"))
-    node2 = Node(desc=Desc(content="Nodo 2"))
-    node3 = Node(desc=Desc(content="Nodo 3"))
-
-    print(node1.to_xml())
-    print(node2.to_xml())
-    print(node3.to_xml())

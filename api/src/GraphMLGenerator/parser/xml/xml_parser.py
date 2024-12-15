@@ -1,10 +1,12 @@
 import xml.etree.ElementTree as ET
 
 from api.src.GraphMLGenerator.GraphML.GraphML import GraphML
-from api.src.GraphMLGenerator.GraphML.formatter.XMLFormatter import XMLFormatter
 from api.src.GraphMLGenerator.GraphML.graph.Graph import Graph
 from api.src.GraphMLGenerator.GraphML.graph.common.Desc import Desc
+from api.src.GraphMLGenerator.GraphML.graph.common.ID import ID
+from api.src.GraphMLGenerator.GraphML.graph.elements.data.Data import Data
 from api.src.GraphMLGenerator.GraphML.graph.elements.edge.Edge import Edge
+from api.src.GraphMLGenerator.GraphML.graph.elements.key.Key import Key
 from api.src.GraphMLGenerator.GraphML.graph.elements.node.Node import Node
 from api.src.GraphMLGenerator.parser.parser import Parser
 
@@ -48,11 +50,20 @@ class XMLParser(Parser):
         Returns:
             Graph: Grafo construido a partir del XML.
         """
+        tag, attrib, text, tail = element.tag, element.attrib, element.text.strip() if element.text else "", element.tail.strip() if element.tail else ""
+
         if graph is None:
             graph = Graph()
 
         # Crear un nodo para el elemento actual
         current_node = Node(desc=Desc(content=element.tag))
+        if attrib:
+            current_node.add_data(Data(key=Key.for_node(ID("attributes")), pcdata=attrib))
+        if text:
+            current_node.add_data(Data(key=Key.for_node(ID("text")), pcdata=text))
+        if tail:
+            current_node.add_data(Data(key=Key.for_node(ID("tail")), pcdata=tail))
+
         graph.add_node(current_node)
 
         # Si hay un nodo padre, crear una arista entre el padre y el nodo actual
@@ -65,10 +76,3 @@ class XMLParser(Parser):
             XMLParser._elements_to_graph(child, parent_node=current_node, graph=graph)
 
         return graph
-
-
-if __name__ == "__main__":
-    # Pasar argumentos de prueba si es necesario
-
-    graphml = XMLParser.parse_from_file("../../examples/example.xml")
-    print(XMLFormatter.format(graphml.to_xml()))

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+    <key id="label" for="node" attr.name="label" attr.type="string"/>
     <graph id="G" edgedefault="directed">
         <node id="n0">
+            <desc>description</desc>
             <data key="label">test</data>
         </node>
         <node id="n1">

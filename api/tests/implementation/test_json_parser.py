@@ -1,7 +1,7 @@
 import unittest
 from pathlib import Path
 
-from api.src.GraphMLGenerator.parser import JSONParser
+from api.src.GraphMLGenerator.parser.json.json_parser import JSONParser
 
 
 class TestJSONParser(unittest.TestCase):
@@ -79,7 +79,3 @@ class TestJSONParser(unittest.TestCase):
             }
         }
         self.assertEqual(content, expected)
-
-
-if __name__ == "__main__":
-    unittest.main()
