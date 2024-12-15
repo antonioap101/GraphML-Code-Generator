@@ -7,6 +7,7 @@ import HelpButton from "./components/helpButton/helpButtonAndPopUp.tsx";
 import GraphmlOutput from "./components/text-input-output/GraphmlOutput.tsx";
 import XmlInput from "./components/text-input-output/XMLInput.tsx";
 import {FaCode} from "react-icons/fa";
+import AuthorLink from "./components/authorLink/AuthorLink.tsx";
 
 
 const App: React.FC = () => {
@@ -38,6 +39,7 @@ const App: React.FC = () => {
     return (
         <div className="app-container">
             <h1>Generador de Código GraphML</h1>
+            <AuthorLink/>
             <div style={{
                 zIndex: 1000, position: 'fixed', top: 20, right: 20, display: 'flex', gap: '10px'
             }}>
