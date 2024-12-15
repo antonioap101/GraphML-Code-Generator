@@ -1,47 +1,33 @@
-import React, { useState } from 'react';
+// src/App.tsx
+import React from 'react';
 import '@/App.css';
+import {useConvert} from "./hooks/useXMLToGraphml.ts";
+import ThemeToggleButton from "./components/themeToggleButton/ThemeToggleButton.tsx";
+import HelpButton from "./components/helpButton/helpButtonAndPopUp.tsx";
+import GraphmlOutput from "./components/text-input-output/GraphmlOutput.tsx";
+import XmlInput from "./components/text-input-output/XMLInput.tsx";
+import {FaCode} from "react-icons/fa";
+
 
 const App: React.FC = () => {
-    const [xmlContent, setXmlContent] = useState('');
-    const [graphmlOutput, setGraphmlOutput] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    const [xmlContent, setXmlContent] = React.useState('');
+    const {loading, error, graphmlOutput, convert} = useConvert();
 
-    const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files[0]) {
-            const fileReader = new FileReader();
-            fileReader.onload = (e) => {
-                setXmlContent(e.target?.result as string);
-            };
-            fileReader.readAsText(event.target.files[0]);
-        }
+    const handleFileUpload = (file: File) => {
+        console.log("file", file)
+        const fileReader = new FileReader();
+        fileReader.onload = (e) => {
+            setXmlContent(e.target?.result as string);
+        };
+        fileReader.readAsText(file);
     };
 
-    const handleConvert = async () => {
-        setLoading(true);
-        setError('');
-        try {
-            const response = await fetch('/convert/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ xml_content: xmlContent }),
-            });
-            const data = await response.json();
-            if (response.ok) {
-                setGraphmlOutput(data.graphml);
-            } else {
-                setError(data.detail || 'Error al convertir el archivo.');
-            }
-        } catch (error) {
-            setError("Error de conexión con el servidor.");
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
+    const handleConvert = () => {
+        convert(xmlContent);
     };
 
     const handleDownload = () => {
-        const blob = new Blob([graphmlOutput], { type: 'application/xml' });
+        const blob = new Blob([graphmlOutput], {type: 'application/xml'});
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
@@ -51,24 +37,37 @@ const App: React.FC = () => {
 
     return (
         <div className="app-container">
-            <h1>Convertidor XML a GraphML</h1>
-            <div className="form-container">
-                <textarea
-                    value={xmlContent}
-                    onChange={(e) => setXmlContent(e.target.value)}
-                    placeholder="Escribe o pega aquí el contenido XML..."
-                />
-                <input type="file" accept=".xml" onChange={handleFileUpload} />
-                <button onClick={handleConvert} disabled={loading || !xmlContent}>
-                    {loading ? 'Convirtiendo...' : 'Convertir'}
-                </button>
-                {error && <p className="error">{error}</p>}
+            <h1>Generador de Código GraphML</h1>
+            <div style={{
+                zIndex: 1000, position: 'fixed', top: 20, right: 20, display: 'flex', gap: '10px'
+            }}>
+                <ThemeToggleButton/>
+                <HelpButton/>
             </div>
-            <div className="output-container">
-                <textarea value={graphmlOutput} readOnly placeholder="El resultado en GraphML aparecerá aquí..." />
-                <button onClick={handleDownload} disabled={!graphmlOutput}>
-                    Descargar como .graphml
-                </button>
+            <div className="form-container">
+                <XmlInput
+                    xmlContent={xmlContent}
+                    onXmlChange={setXmlContent}
+                    onFileUpload={handleFileUpload}
+                />
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '20px'
+                }}>
+                    <button onClick={handleConvert} disabled={loading || !xmlContent}>
+                        <FaCode size={20}/>
+                        {loading ? 'Generando...' : 'Generar'}
+                    </button>
+                    {error && <p className="error">{error}</p>}
+
+                </div>
+                <GraphmlOutput
+                    graphmlOutput={graphmlOutput}
+                    onDownload={handleDownload}
+                />
             </div>
         </div>
     );
