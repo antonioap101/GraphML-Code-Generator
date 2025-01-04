@@ -1,0 +1,51 @@
+{
+  "table": {
+    "name": "users",
+    "fields": [
+      {
+        "name": "id",
+        "type": "INT",
+        "primaryKey": true,
+        "autoIncrement": true,
+        "nullable": false
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR(100)",
+        "nullable": false,
+        "validations": {
+          "minLength": 3,
+          "maxLength": 100
+        }
+      },
+      {
+        "name": "email",
+        "type": "VARCHAR(100)",
+        "nullable": false,
+        "unique": true,
+        "validations": {
+          "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+        }
+      },
+      {
+        "name": "age",
+        "type": "INT",
+        "nullable": true,
+        "validations": {
+          "min": 0,
+          "max": 150
+        }
+      }
+    ]
+  },
+  "language": "java",
+  "dbms": "mysql",
+  "customCode": {
+    "validations": [
+      {
+        "field": "email",
+        "code": "// Custom validation for email domain\nif (!email.endsWith(\"@example.com\")) {\n    throw new IllegalArgumentException(\"Email must be from example.com\");\n}"
+      }
+    ]
+  }
+}
