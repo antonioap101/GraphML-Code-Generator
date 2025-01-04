@@ -2,7 +2,8 @@ from api.crud.src.generator.SQL.SQL_generator import SQLGenerator
 from api.crud.src.parsing.components.FieldModel import FieldModel
 from api.crud.src.parsing.components.TableModel import TableModel
 from api.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
-from api.crud.src.parsing.constants.types.type_mapper import SQL_TYPE_MAPPING, TypeEnum
+from api.crud.src.parsing.constants.types.factory.type_mapper_factory import TypeMapperFactory
+from api.crud.src.parsing.constants.types.type_mapper import TypeEnum
 
 
 class PostgreSQLGenerator(SQLGenerator):
@@ -16,7 +17,7 @@ class PostgreSQLGenerator(SQLGenerator):
         columns = []
         for field in self.table.fields:
             # Obtener el tipo específico para PostgreSQL
-            postgres_type = SQL_TYPE_MAPPING[field.type].postgresql
+            postgres_type = TypeMapperFactory.get_dbms_mapper(AllowedDBMS.postgresql).get_mapping(field.type)
             if "{length}" in postgres_type and hasattr(field, "length"):
                 postgres_type = postgres_type.format(length=field.length)
 

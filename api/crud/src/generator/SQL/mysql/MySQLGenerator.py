@@ -1,7 +1,7 @@
 from api.crud.src.generator.SQL.SQL_generator import SQLGenerator
 from api.crud.src.parsing.components.TableModel import TableModel
 from api.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
-from api.crud.src.parsing.constants.types.type_mapper import SQL_TYPE_MAPPING
+from api.crud.src.parsing.constants.types.factory.type_mapper_factory import TypeMapperFactory
 
 
 class MySQLGenerator(SQLGenerator):
@@ -15,7 +15,7 @@ class MySQLGenerator(SQLGenerator):
         columns = []
         for field in self.table.fields:
             # Obtener el tipo específico para MySQL
-            mysql_type = SQL_TYPE_MAPPING[field.type].mysql
+            mysql_type = TypeMapperFactory.get_dbms_mapper(AllowedDBMS.mysql).get_mapping(field.type)
             if "{length}" in mysql_type and hasattr(field, "length"):
                 mysql_type = mysql_type.format(length=field.length)
 
