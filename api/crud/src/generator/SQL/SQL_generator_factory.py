@@ -1,6 +1,6 @@
 from api.crud.src.generator.SQL.mysql.MySQLGenerator import MySQLGenerator
 from api.crud.src.generator.SQL.postgres.PostgreSQLGenerator import PostgreSQLGenerator
-from api.crud.src.parsing.components.TableModel import TableModel
+from api.crud.src.parsing.components.table_model import TableModel
 from api.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
 
 

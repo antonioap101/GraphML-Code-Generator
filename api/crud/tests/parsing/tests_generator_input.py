@@ -2,11 +2,11 @@ import unittest
 
 from pydantic import ValidationError
 
-from api.crud.src.parsing.CRUDGeneratorInput import CRUDGeneratorInput
+from api.crud.src.parsing.CRUDCodeGeneratorInput import CRUDCodeGeneratorInput
 from api.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
 from api.crud.src.parsing.constants.allowed_languages import AllowedLanguages
-from api.crud.src.parsing.components.FieldModel import FieldModel
-from api.crud.src.parsing.components.TableModel import TableModel
+from api.crud.src.parsing.components.field_model import FieldModel
+from api.crud.src.parsing.components.table_model import TableModel
 from api.crud.src.parsing.constants.types.type_mapper import TypeEnum
 
 
@@ -17,7 +17,7 @@ class TestGeneratorInput(unittest.TestCase):
         self.non_empty_table = TableModel(name="test_table2", fields=[FieldModel(name="test_field", type=TypeEnum.TEXT)])
 
     def test_valid_generator_input(self):
-        input_data = CRUDGeneratorInput(
+        input_data = CRUDCodeGeneratorInput(
             table=self.empty_table,
             language=AllowedLanguages.typescript,
             dbms=AllowedDBMS.mysql,
@@ -27,7 +27,7 @@ class TestGeneratorInput(unittest.TestCase):
         self.assertEqual(input_data.dbms, AllowedDBMS.mysql)
         self.assertEqual(input_data.customCode, {"key": "value"})
 
-        input_data = CRUDGeneratorInput(
+        input_data = CRUDCodeGeneratorInput(
             table=self.non_empty_table,
             language=AllowedLanguages.java,
             dbms=AllowedDBMS.sqlite,
@@ -39,7 +39,7 @@ class TestGeneratorInput(unittest.TestCase):
 
     def test_invalid_language(self):
         with self.assertRaises(ValidationError):
-            CRUDGeneratorInput(
+            CRUDCodeGeneratorInput(
                 table=self.empty_table,
                 language="invalid_language",
                 dbms=AllowedDBMS.mysql
@@ -47,14 +47,14 @@ class TestGeneratorInput(unittest.TestCase):
 
     def test_invalid_dbms(self):
         with self.assertRaises(ValidationError):
-            CRUDGeneratorInput(
+            CRUDCodeGeneratorInput(
                 table=self.empty_table,
                 language=AllowedLanguages.typescript,
                 dbms="invalid_dbms"
             )
 
     def test_optional_custom_code(self):
-        input_data = CRUDGeneratorInput(
+        input_data = CRUDCodeGeneratorInput(
             table=self.empty_table,
             language=AllowedLanguages.java,
             dbms=AllowedDBMS.postgresql

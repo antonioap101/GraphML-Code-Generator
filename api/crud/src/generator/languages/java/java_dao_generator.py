@@ -1,19 +1,18 @@
 from api.crud.src.generator.SQL.SQL_generator_factory import SQLGeneratorFactory
-from api.crud.src.parsing.components.TableModel import TableModel
+from api.crud.src.generator.languages.dao_generator import DaoGenerator
+from api.crud.src.parsing.components.table_model import TableModel
 from api.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
 from api.crud.src.parsing.constants.allowed_languages import AllowedLanguages
 from api.crud.src.parsing.constants.types.factory.type_mapper_factory import TypeMapperFactory
 
 
-class JavaDaoGenerator:
+class JavaDaoGenerator(DaoGenerator):
     """
     Generador de clases DAO en Java basadas en los metadatos de la tabla y las consultas SQL generadas.
     """
 
     # Plantilla base para las clases DAO en Java
     TEMPLATE = """
-    package com.example.database;
-
     import java.sql.*;
 
     public class {ClassName}DAO {{
@@ -70,7 +69,6 @@ class JavaDaoGenerator:
         sql_generator = SQLGeneratorFactory.get(dbms, table)
 
         # Generar consultas SQL
-        create_query = sql_generator.generate_create_table()
         insert_query = sql_generator.generate_insert()
         select_query = sql_generator.generate_select()
         update_query = sql_generator.generate_update()

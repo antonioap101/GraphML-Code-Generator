@@ -1,7 +1,7 @@
 import unittest
 from api.crud.src.generator.SQL.mysql.MySQLGenerator import MySQLGenerator
-from api.crud.src.parsing.components.TableModel import TableModel
-from api.crud.src.parsing.components.FieldModel import FieldModel
+from api.crud.src.parsing.components.table_model import TableModel
+from api.crud.src.parsing.components.field_model import FieldModel
 from api.crud.src.parsing.constants.types.type_mapper import TypeEnum
 
 

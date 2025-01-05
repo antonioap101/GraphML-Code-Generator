@@ -1,7 +1,6 @@
 # Enum Types allowed for input fields for the table (generic, not python specific = INTEGER, STRING, BOOLEAN)
 from abc import ABC, abstractmethod
 from enum import Enum
-from typing import Dict
 
 
 class TypeEnum(str, Enum):
@@ -22,4 +21,3 @@ class TypeMapper(ABC):
     def validate(self):
         """Valida que todos los TypeEnum están mapeados."""
         pass
-

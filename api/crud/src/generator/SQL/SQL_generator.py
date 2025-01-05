@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from api.crud.src.parsing.components.TableModel import TableModel
+from api.crud.src.parsing.components.table_model import TableModel
 from api.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
 
 

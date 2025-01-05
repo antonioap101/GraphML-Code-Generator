@@ -2,7 +2,7 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-from api.crud.src.parsing.components.Validation import Validation
+from api.crud.src.parsing.components.validation import Validation
 from api.crud.src.parsing.constants.types.type_mapper import TypeEnum
 
 

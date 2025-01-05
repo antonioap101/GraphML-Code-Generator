@@ -1,5 +1,5 @@
 from api.crud.src.generator.SQL.SQL_generator import SQLGenerator
-from api.crud.src.parsing.components.TableModel import TableModel
+from api.crud.src.parsing.components.table_model import TableModel
 from api.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
 from api.crud.src.parsing.constants.types.factory.type_mapper_factory import TypeMapperFactory
 
