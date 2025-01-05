@@ -1,6 +1,6 @@
 import React from "react";
 import "./input-output-styles.css"
-import ActionButton from "../actionButton/actionButton.tsx";
+import UploadOrDownloadButton from "../uploadOrDownloadButton/uploadOrDownloadButton.tsx";
 
 interface XmlInputProps {
     xmlContent: string;
@@ -24,7 +24,7 @@ const XmlInput: React.FC<XmlInputProps> = ({xmlContent, onXmlChange, onFileUploa
                     placeholder="Escribe o pega aquí el contenido XML..."
                 />
                 <div className="upload-button">
-                    <ActionButton
+                    <UploadOrDownloadButton
                         action="upload"
                         onClick={() => document.getElementById("file-input")?.click()}
                         tooltip="Subir archivo XML"

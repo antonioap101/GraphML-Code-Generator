@@ -1,5 +1,5 @@
 import React from 'react';
-import ActionButton from "../actionButton/actionButton.tsx";
+import UploadOrDownloadButton from "../uploadOrDownloadButton/uploadOrDownloadButton.tsx";
 
 
 interface GraphmlOutputProps {
@@ -12,7 +12,7 @@ const GraphmlOutput: React.FC<GraphmlOutputProps> = ({graphmlOutput, onDownload}
         <div className="textarea-container">
             <textarea value={graphmlOutput} readOnly placeholder="El resultado en GraphML aparecerá aquí..."/>
             <div className="download-button">
-                <ActionButton action="download" onClick={onDownload} tooltip="Descargar como .graphml"/>
+                <UploadOrDownloadButton action="download" onClick={onDownload} tooltip="Descargar como .graphml"/>
             </div>
         </div>
     );

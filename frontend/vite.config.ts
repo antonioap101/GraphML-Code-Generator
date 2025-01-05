@@ -13,10 +13,18 @@ export default defineConfig({
     },
     server: {
         proxy: {
-            '/convert/': {
+            '/api': {
                 target: 'http://localhost:8000',
                 changeOrigin: true,
-            },
+                rewrite: (path) => {
+                    const rewrittenPath = path.replace(/^\/api/, '');
+                    console.log('Original path:', path);
+                    console.log('Rewritten path:', rewrittenPath);
+
+                    return rewrittenPath;
+                }
+
+            }
         },
     }
 });

@@ -1,14 +1,14 @@
 import React from "react";
 import { FaUpload, FaDownload } from "react-icons/fa"; // Importa los iconos necesarios
-import "./actionButton.css";
+import "./uploadOrDownloadButton.css";
 
-interface ActionButtonProps {
+interface UploadOrDownloadButtonProps {
     action: "upload" | "download"; // Define el tipo de acción
     onClick: () => void; // Manejador de clic
     tooltip?: string; // Opción para añadir un texto emergente
 }
 
-const ActionButton: React.FC<ActionButtonProps> = ({ action, onClick, tooltip }) => {
+const UploadOrDownloadButton: React.FC<UploadOrDownloadButtonProps> = ({ action, onClick, tooltip }) => {
     const renderIcon = () => {
         if (action === "upload") return <FaUpload className="action-icon" />;
         if (action === "download") return <FaDownload className="action-icon" />;
@@ -23,4 +23,4 @@ const ActionButton: React.FC<ActionButtonProps> = ({ action, onClick, tooltip })
     );
 };
 
-export default ActionButton;
+export default UploadOrDownloadButton;
