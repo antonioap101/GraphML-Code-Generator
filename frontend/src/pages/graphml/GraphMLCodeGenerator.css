@@ -1,0 +1,45 @@
+.form-container {
+    display: flex;
+    gap: 20px; /* Espacio entre los elementos */
+    align-items: center;
+    justify-content: center;
+    width: 90%; /* Asegura que ocupa la mayoría del espacio disponible */
+}
+
+.text-input {
+    flex: 1; /* Los inputs ocupan el mismo espacio disponible */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre el input y cualquier elemento adicional */
+}
+
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2rem; /* Ajusta el tamaño del título */
+        margin-bottom: 30px;
+    }
+
+    .form-container {
+        flex-direction: column; /* Cambia la disposición a columna para pantallas pequeñas */
+        gap: 15px; /* Reduce el espacio entre elementos */
+    }
+
+    .text-input {
+        width: 100%; /* Asegura que los inputs ocupan el ancho completo */
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem; /* Reduce aún más el tamaño del título */
+        margin-bottom: 10px; /* Reduce el margen inferior */
+    }
+
+    .form-container {
+        gap: 10px; /* Reduce el espacio entre los elementos */
+    }
+
+}

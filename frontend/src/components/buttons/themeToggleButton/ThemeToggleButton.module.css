@@ -1,0 +1,6 @@
+/* Estilo base del botón */
+.themeToggleButton {
+    composes: round-button from '@/styles/common.module.css';
+}
+
+

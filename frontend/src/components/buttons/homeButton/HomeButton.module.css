@@ -1,0 +1,6 @@
+.homeButton {
+    composes: round-button from '@/styles/common.module.css';
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}

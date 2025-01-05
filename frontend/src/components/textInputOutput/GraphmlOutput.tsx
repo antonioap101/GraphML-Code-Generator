@@ -1,5 +1,5 @@
 import React from 'react';
-import UploadOrDownloadButton from "../uploadOrDownloadButton/uploadOrDownloadButton.tsx";
+import UploadOrDownloadButton from "../buttons/uploadOrDownloadButton/uploadOrDownloadButton.tsx";
 
 
 interface GraphmlOutputProps {

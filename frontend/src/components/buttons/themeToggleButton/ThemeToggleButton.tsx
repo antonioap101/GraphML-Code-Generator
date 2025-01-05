@@ -1,8 +1,8 @@
 // src/components/ThemeToggleButton.tsx
 import React from 'react';
-import './ThemeToggleButton.css';
+import styles from './ThemeToggleButton.module.css';
 import { FaSun, FaMoon } from 'react-icons/fa';
-import {useTheme} from "../../theme/themeContext.tsx";
+import {useTheme} from "../../../styles/theme/themeContext.tsx";
 
 const ThemeToggleButton: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
@@ -10,7 +10,7 @@ const ThemeToggleButton: React.FC = () => {
     return (
         <button
             onClick={toggleTheme}
-            className="theme-toggle-button"
+            className={styles.themeToggleButton}
             aria-label="Toggle Theme"
         >
             {theme === 'light' ? <FaMoon size={24} /> : <FaSun size={24} />}

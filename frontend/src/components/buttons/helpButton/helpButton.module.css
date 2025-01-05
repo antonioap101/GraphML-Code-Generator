@@ -1,0 +1,31 @@
+/* Botón de ayuda */
+.helpButton {
+    composes: round-button from '@/styles/common.module.css';
+}
+
+/* Hover y activo */
+.helpButton:hover {
+    transform: scale(1.1);
+}
+
+.helpButton:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+

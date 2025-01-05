@@ -21,12 +21,14 @@ textarea {
 
 /* Botones personalizados */
 .upload-button {
+    background-color: transparent;
     position: absolute;
     bottom: 15px;
     left: 15px;
 }
 
 .download-button {
+    background-color: transparent;
     position: absolute;
     bottom: 15px;
     right: 15px;

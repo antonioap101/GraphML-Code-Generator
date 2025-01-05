@@ -1,6 +1,6 @@
 import React from "react";
 import "./input-output-styles.css"
-import UploadOrDownloadButton from "../uploadOrDownloadButton/uploadOrDownloadButton.tsx";
+import UploadOrDownloadButton from "../buttons/uploadOrDownloadButton/uploadOrDownloadButton.tsx";
 
 interface XmlInputProps {
     xmlContent: string;

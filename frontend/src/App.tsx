@@ -2,13 +2,14 @@
 import React from 'react';
 import '@/App.css';
 import AuthorLink from "./components/authorLink/AuthorLink.tsx";
-import ThemeToggleButton from "./components/themeToggleButton/ThemeToggleButton.tsx";
-import HelpButton from "./components/helpButton/helpButtonAndPopUp.tsx";
+import ThemeToggleButton from "./components/buttons/themeToggleButton/ThemeToggleButton.tsx";
+import HelpButton from "./components/buttons/helpButton/helpButtonAndPopUp.tsx";
 import {Route, Routes} from 'react-router-dom';
 import GraphMLCodeGenerator from "./pages/graphml/GraphMLCodeGenerator.tsx";
 import HomePage from "./pages/homePage/HomePage.tsx";
 import NotFoundPage from "./pages/notFound/NotFoundPage.tsx";
-import HomeButton from "./components/homeButton/HomeButton.tsx";
+import HomeButton from "./components/buttons/homeButton/HomeButton.tsx";
+import CRUDCodeGenerator from "./pages/crud/CRUDCodeGenerator.tsx";
 
 const App: React.FC = () => {
     return (
@@ -28,7 +29,7 @@ const App: React.FC = () => {
             <Routes>
                 <Route path="/" element={<HomePage/>}/>
                 <Route path="/graphml-code-generator" element={<GraphMLCodeGenerator/>}/>
-                {/*<Route path="/crud-code-generator" element={<CRUDCodeGeneratorPage />} />*/}
+                <Route path="/crud-code-generator" element={<CRUDCodeGenerator />} />
                 <Route path="*" element={<NotFoundPage/>}/>
             </Routes>
 

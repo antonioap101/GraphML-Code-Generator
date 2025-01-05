@@ -1,10 +1,10 @@
 // src/App.tsx
 import React from 'react';
-import '@/App.css';
+import './GraphMLCodeGenerator.css';
 import {useConvert} from "../../hooks/useXMLToGraphml.ts";
 import GraphmlOutput from "../../components/textInputOutput/GraphmlOutput.tsx";
 import XmlInput from "../../components/textInputOutput/XMLInput.tsx";
-import {FaCode} from "react-icons/fa";
+import GenerateButton from "../../components/buttons/generateButton/GenerateButton.tsx";
 
 
 const GraphMLCodeGenerator: React.FC = () => {
@@ -49,10 +49,11 @@ const GraphMLCodeGenerator: React.FC = () => {
                     alignItems: 'center',
                     gap: '20px'
                 }}>
-                    <button onClick={handleConvert} disabled={loading || !xmlContent}>
-                        <FaCode size={20}/>
-                        {loading ? 'Generando...' : 'Generar'}
-                    </button>
+                    <GenerateButton
+                        onClick={handleConvert}
+                        disabled={loading || !xmlContent}
+                        loading={loading}
+                    />
                     {error && <p className="error">{error}</p>}
 
                 </div>
