@@ -75,7 +75,7 @@ const TableRow: React.FC<TableRowProps> = ({field, index, onFieldChange, onRemov
             {/* Mostrar el popup si está abierto */}
             {isExtraSettingsPopUpOpen && (
                 <ExtraSettingsPopup
-                    validations={field.validations}
+                    field={field}
                     setValidations={(validations) => onFieldChange(index, "validations", validations)}
                     onClose={() => setIsExtraSettingsPopUpOpen(false)}
                 />
