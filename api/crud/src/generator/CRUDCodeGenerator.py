@@ -35,11 +35,11 @@ class CRUDCodeGenerator:
 
         # Combinar todas las partes en un único string de salida
         complete_code = f"""
-        // Database Connection Code
-        {db_connection_code}
+// Database Connection Code
+{db_connection_code}
 
-        // DAO Code
-        {dao_code}
-        """
+// DAO Code
+{dao_code}
+    """
 
         return complete_code.strip()

@@ -1,6 +1,8 @@
 import {DropDownOption} from "../components/dropDown/DropDownComponent.tsx";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faDatabase} from "@fortawesome/free-solid-svg-icons";
+import MySQLIcon from "@/assets/icons/devicon_mysql.svg";
+import PostgreSQLIcon from "@/assets/icons/devicon_postgresql.svg";
+import SQLiteIcon from "@/assets/icons/devicon_sqlite.svg";
+import OracleIcon from "@/assets/icons/devicon_oracle.svg";
 
 
 export enum AllowedDBMS {
@@ -10,8 +12,16 @@ export enum AllowedDBMS {
     Oracle = "Oracle"
 }
 
+// Mapeo de íconos para DBMS
+const dbmsIcons = {
+    [AllowedDBMS.MySQL]: MySQLIcon,
+    [AllowedDBMS.PostgreSQL]: PostgreSQLIcon,
+    [AllowedDBMS.SQLite]: SQLiteIcon,
+    [AllowedDBMS.Oracle]: OracleIcon,
+};
+
 export const dbmsOptions: DropDownOption[] = Object.values(AllowedDBMS).map((dbms) => ({
-    value: dbms,
-    label: dbms.toLowerCase(),
-    icon: <FontAwesomeIcon icon={faDatabase} />,
+    value: dbms.toLowerCase(),
+    label: dbms,
+    icon: <img src={dbmsIcons[dbms]} alt={`${dbms} icon`} style={{width: 24, height: 24}}/>,
 }));

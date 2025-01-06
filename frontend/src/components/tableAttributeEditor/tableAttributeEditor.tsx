@@ -1,23 +1,17 @@
-import React, {useState} from "react";
-import "./TableAttributeEditor.css";
+import React from "react";
+import "./tableAttributeEditor.css";
 import {TypeEnum} from "../../constants/TypeEnum";
-import {FieldModel} from "../../constants/FieldModel.ts";
+import {FieldModel} from "../../constants/CRUDCodeGeneratorInput.ts";
 import TableRow from "./rows/TableRow.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 
-const initialField: FieldModel = {
-    name: "id",
-    type: TypeEnum.NUMBER,
-    primaryKey: true,
-    autoIncrement: true,
-    nullable: false,
-    unique: true,
-};
+interface TableAttributeEditorProps {
+    fields: FieldModel[];
+    setFields: (fields: FieldModel[]) => void;
+}
 
-const TableAttributeEditor: React.FC = () => {
-    const [fields, setFields] = useState<FieldModel[]>([initialField]);
-
+const TableAttributeEditor: React.FC<TableAttributeEditorProps> = ({ fields, setFields }) => {
     const handleFieldChange = <K extends keyof FieldModel>(
         index: number,
         key: K,
@@ -26,7 +20,7 @@ const TableAttributeEditor: React.FC = () => {
         const updatedFields = [...fields];
         updatedFields[index][key] = value;
 
-        // Validar clave primaria única
+        // Ensure only one primary key
         if (key === "primaryKey" && value) {
             updatedFields.forEach((field, i) => {
                 if (i !== index) field.primaryKey = false;
@@ -37,13 +31,13 @@ const TableAttributeEditor: React.FC = () => {
     };
 
     const addField = () => {
-        setFields([...fields, {name: "", type: TypeEnum.TEXT, nullable: true, unique: false}]);
+        setFields([...fields, { name: "", type: TypeEnum.TEXT, nullable: true, unique: false }]);
     };
 
     const removeField = (index: number) => {
         const updatedFields = fields.filter((_, i) => i !== index);
 
-        // Asegurar al menos un campo con clave primaria
+        // Ensure at least one primary key
         if (!updatedFields.some((field) => field.primaryKey)) {
             updatedFields[0].primaryKey = true;
         }

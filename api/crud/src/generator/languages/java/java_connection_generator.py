@@ -13,31 +13,31 @@ class JavaConnectionGenerator(ConnectionGenerator):
 
     # Plantilla base para la clase de conexión
     TEMPLATE = """
-    import java.sql.Connection;
-    import java.sql.DriverManager;
-    import java.sql.SQLException;
-    import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-    public class DatabaseConnection {{
-        private static final String URL = "{dbUrl}";
-        private static final String USER = "{dbUser}";
-        private static final String PASSWORD = "{dbPassword}";
+public class DatabaseConnection {{
+    private static final String URL = "{dbUrl}";
+    private static final String USER = "{dbUser}";
+    private static final String PASSWORD = "{dbPassword}";
 
-        public static Connection getConnection() throws SQLException {{
-            return DriverManager.getConnection(URL, USER, PASSWORD);
-        }}
+    public static Connection getConnection() throws SQLException {{
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }}
 
-        public static void ensureTableExists() {{
-            String createTableQuery = "{CreateTableQuery}";
-            try (Connection connection = getConnection();
-                 Statement statement = connection.createStatement()) {{
-                statement.execute(createTableQuery);
-            }} catch (SQLException e) {{
-                e.printStackTrace();
-                throw new RuntimeException("Error ensuring table exists", e);
-            }}
+    public static void ensureTableExists() {{
+        String createTableQuery = "{CreateTableQuery}";
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement()) {{
+             statement.execute(createTableQuery);
+        }} catch (SQLException e) {{
+            e.printStackTrace();
+            throw new RuntimeException("Error ensuring table exists", e);
         }}
     }}
+}}
     """
 
     @staticmethod

@@ -1,7 +1,7 @@
 // src/App.tsx
 import React from 'react';
 import './GraphMLCodeGenerator.css';
-import {useConvert} from "../../hooks/useXMLToGraphml.ts";
+import {useApi} from "../../hooks/useXMLToGraphml.tsx";
 import GraphmlOutput from "../../components/textInputOutput/GraphmlOutput.tsx";
 import XmlInput from "../../components/textInputOutput/XMLInput.tsx";
 import GenerateButton from "../../components/buttons/generateButton/GenerateButton.tsx";
@@ -9,7 +9,7 @@ import GenerateButton from "../../components/buttons/generateButton/GenerateButt
 
 const GraphMLCodeGenerator: React.FC = () => {
     const [xmlContent, setXmlContent] = React.useState('');
-    const {loading, error, graphmlOutput, convert} = useConvert();
+    const {loading, error, graphmlOutput, convertXmlToGraphml} = useApi();
 
     const handleFileUpload = (file: File) => {
         console.log("file", file)
@@ -21,7 +21,7 @@ const GraphMLCodeGenerator: React.FC = () => {
     };
 
     const handleConvert = () => {
-        convert(xmlContent);
+        convertXmlToGraphml(xmlContent);
     };
 
     const handleDownload = () => {

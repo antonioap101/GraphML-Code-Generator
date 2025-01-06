@@ -39,16 +39,16 @@ const AceIDEComponent: React.FC<AceIDEComponent> = ({code, setCode, language}) =
     return (
             <AceEditor
                 style={{
-                    height: '50vh',
+                    height: '100%',
                     width: '100%',
                 }}
                 readOnly={false}
                 placeholder='Start Coding'
                 mode={language}
-                theme={theme === 'light' ? 'clouds' : 'monokai'}
+                theme={theme === 'lightTheme' ? 'clouds' : 'monokai'}
                 name='basic-code-editor'
                 onChange={currentCode => setCode(currentCode)}
-                fontSize={18}
+                fontSize={"var(--font-size-medium1)"}
                 showPrintMargin={true}
                 showGutter={true}
                 highlightActiveLine={true}

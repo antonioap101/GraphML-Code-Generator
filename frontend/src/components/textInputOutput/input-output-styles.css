@@ -12,9 +12,7 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: none;
-    font-size: 14px;
-
-    /* Scroll personalizado */
+    font-size: var(--font-size-xlarge);
     scrollbar-width: thin; /* Para Firefox */
 }
 
@@ -41,7 +39,8 @@ textarea {
     }
 
     button {
-        font-size: 0.9rem; /* Reduce ligeramente el tamaño del texto */
+        font-size: var(--font-size-medium);
+
     }
 
 }
@@ -49,11 +48,11 @@ textarea {
 @media screen and (max-width: 480px) {
     textarea {
         height: 25vh; /* Ajusta la altura para pantallas más pequeñas */
-        font-size: 13px; /* Reduce el tamaño del texto */
+        font-size: var(--font-size-large); /* Ajusta el tamaño del texto */
     }
 
     button {
         padding: 8px 16px; /* Ajusta el padding del botón */
-        font-size: 0.8rem; /* Reduce el tamaño del texto */
+        font-size: var(--font-size-medium); /* Ajusta el tamaño del texto */
     }
 }

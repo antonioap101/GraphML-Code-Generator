@@ -58,5 +58,5 @@
 
 .dropdown-icon {
     margin-right: 10px;
-    font-size: 18px;
+    font-size: var(--font-size-large);
 }

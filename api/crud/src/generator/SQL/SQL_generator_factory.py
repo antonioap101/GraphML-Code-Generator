@@ -12,8 +12,12 @@ class SQLGeneratorFactory:
             return MySQLGenerator(table)
         elif dbms == AllowedDBMS.postgresql:
             return PostgreSQLGenerator(table)
+        elif dbms == AllowedDBMS.sqlite:
+            raise NotImplementedError("SQLite generator not implemented yet")
+        elif dbms == AllowedDBMS.oracle:
+            raise NotImplementedError("Oracle generator not implemented yet")
         else:
-            raise ValueError("Invalid DBMS")
+            raise ValueError("Invalid DBMS: " + dbms)
 
     @staticmethod
     def get_mysql_generator(table: TableModel) -> MySQLGenerator:

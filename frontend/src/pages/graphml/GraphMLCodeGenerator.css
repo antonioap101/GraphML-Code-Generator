@@ -17,7 +17,7 @@
 /* Responsive Design */
 @media screen and (max-width: 768px) {
     h1 {
-        font-size: 2rem; /* Ajusta el tamaño del título */
+        font-size: var(--font-size-large); /* Reduce el tamaño del título */
         margin-bottom: 30px;
     }
 
@@ -34,7 +34,7 @@
 
 @media screen and (max-width: 480px) {
     h1 {
-        font-size: 1.8rem; /* Reduce aún más el tamaño del título */
+        font-size: var(--font-size-xxxlarge);
         margin-bottom: 10px; /* Reduce el margen inferior */
     }
 

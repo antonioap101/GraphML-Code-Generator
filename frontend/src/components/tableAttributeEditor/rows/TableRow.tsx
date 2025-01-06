@@ -1,6 +1,6 @@
 import React from "react";
 import {TypeEnum} from "../../../constants/TypeEnum.ts";
-import {FieldModel} from "../../../constants/FieldModel.ts";
+import {FieldModel} from "../../../constants/CRUDCodeGeneratorInput.ts";
 import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
@@ -25,12 +25,12 @@ const TableRow: React.FC<TableRowProps> = ({field, index, isPrimaryKeyDisabled, 
             </div>
             <div className="table-cell">
                 <select
-                    value={field.type.toUpperCase()}
+                    value={field.type}
                     onChange={(e) => onFieldChange(index, "type", e.target.value as TypeEnum)}
                 >
                     {Object.values(TypeEnum).map((type) => (
                         <option key={type} value={type}>
-                            {type.toUpperCase()}
+                            {type}
                         </option>
                     ))}
                 </select>

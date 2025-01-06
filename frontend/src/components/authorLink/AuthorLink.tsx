@@ -5,7 +5,7 @@ import {FaUpRightFromSquare} from "react-icons/fa6";
 
 const AuthorLink: React.FC = () => {
     return (
-        <div style={{
+        <footer style={{
             position: 'fixed',
             bottom: 15,
             right: 15,
@@ -39,7 +39,7 @@ const AuthorLink: React.FC = () => {
                 <span>By Antonio Aparicio</span>
                 <FaUpRightFromSquare />
             </a>
-        </div>
+        </footer>
     );
 };
 

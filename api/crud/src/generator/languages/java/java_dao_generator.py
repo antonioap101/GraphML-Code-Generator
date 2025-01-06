@@ -13,51 +13,50 @@ class JavaDaoGenerator(DaoGenerator):
 
     # Plantilla base para las clases DAO en Java
     TEMPLATE = """
-    import java.sql.*;
+import java.sql.*;
 
-    public class {ClassName}DAO {{
-        private Connection connection;
-
-        public {ClassName}DAO(Connection connection) {{
-            this.connection = connection;
-        }}
-
-        // Create
-        public void create({FieldParameters}) throws SQLException {{
-            String sql = "{InsertQuery}";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {{
-                {SetInsertParameters}
-                statement.executeUpdate();
-            }}
-        }}
-
-        // Read
-        public ResultSet read(int id) throws SQLException {{
-            String sql = "{SelectQuery}";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, id);
-            return statement.executeQuery();
-        }}
-
-        // Update
-        public void update(int id, {FieldParameters}) throws SQLException {{
-            String sql = "{UpdateQuery}";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {{
-                {SetUpdateParameters}
-                statement.setInt({ParamIndex}, id);
-                statement.executeUpdate();
-            }}
-        }}
-
-        // Delete
-        public void delete(int id) throws SQLException {{
-            String sql = "{DeleteQuery}";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {{
-                statement.setInt(1, id);
-                statement.executeUpdate();
-            }}
+public class {ClassName}DAO {{
+    private Connection connection;
+    public {ClassName}DAO(Connection connection) {{
+        this.connection = connection;
+    }}
+    
+    // Create
+    public void create({FieldParameters}) throws SQLException {{
+        String sql = "{InsertQuery}";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {{
+            {SetInsertParameters}
+            statement.executeUpdate();
         }}
     }}
+    
+    // Read
+    public ResultSet read(int id) throws SQLException {{
+        String sql = "{SelectQuery}";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+        return statement.executeQuery();
+    }}
+    
+    // Update
+    public void update(int id, {FieldParameters}) throws SQLException {{
+        String sql = "{UpdateQuery}";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {{
+            {SetUpdateParameters}
+            statement.setInt({ParamIndex}, id);
+            statement.executeUpdate();
+        }}
+    }}
+                                
+    // Delete
+    public void delete(int id) throws SQLException {{
+        String sql = "{DeleteQuery}";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {{
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        }}
+    }}
+}}
     """
 
     @staticmethod

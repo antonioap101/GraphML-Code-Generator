@@ -1,7 +1,7 @@
 // src/context/ThemeContext.tsx
 import React, {createContext, ReactNode, useContext, useState} from 'react';
 
-type Theme = 'light' | 'dark';
+type Theme = 'lightTheme' | 'darkTheme';
 
 interface ThemeContextProps {
     theme: Theme;
@@ -11,15 +11,15 @@ interface ThemeContextProps {
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({children}) => {
-    const [theme, setTheme] = useState<Theme>('light');
+    const [theme, setTheme] = useState<Theme>('lightTheme');
 
     const toggleTheme = () => {
-        setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+        setTheme((prevTheme) => (prevTheme === 'lightTheme' ? 'darkTheme' : 'lightTheme'));
     };
 
     return (
         <ThemeContext.Provider value={{theme, toggleTheme}}>
-            <div className={`theme-${theme}`}>{children}</div>
+            <div className={`theme ${theme}`}>{children}</div>
         </ThemeContext.Provider>
     );
 };

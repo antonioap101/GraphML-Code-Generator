@@ -8,18 +8,18 @@
 }
 
 .not-found-container h1 {
-    font-size: 3rem;
+    font-size: var(--font-size-xxxlarge);
     margin-bottom: 20px;
 }
 
 .not-found-container p {
-    font-size: 1.5rem;
+    font-size: var(--font-size-xlarge);
     margin-bottom: 20px;
 }
 
 .not-found-container button {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: var(--font-size-large);
     cursor: pointer;
     border: none;
     border-radius: 5px;

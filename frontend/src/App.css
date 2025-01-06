@@ -1,5 +1,7 @@
-@import url('@/styles/ColorPalette.css');
+@import url('@/styles/theme/theme.css');
 @import url('@/styles/BaseStyles.css');
+
+
 
 .app-container {
     display: flex;

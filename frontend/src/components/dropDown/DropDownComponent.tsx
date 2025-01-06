@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "./DropDownComponent.css";
 
 
@@ -45,9 +45,22 @@ const DropdownComponent: React.FC<DropdownProps> = ({
     return (
         <div ref={dropdownRef} className="dropdown-container">
             <div className="dropdown-header" onClick={() => setIsOpen(!isOpen)}>
-                <span>{selectedOption ? selectedOption.label : placeholder}</span>
+                <span
+                    className="dropdown-selected"
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                    }}
+                >
+                {selectedOption?.icon && (
+                    <span className="dropdown-icon">{selectedOption.icon}</span>
+                )}
+                        <span>{selectedOption?.label || placeholder}</span>
+                </span>
                 <span className={`dropdown-arrow ${isOpen ? "open" : ""}`}>&#9662;</span>
             </div>
+
             {isOpen && (
                 <ul className="dropdown-list">
                     {options.map((option, index) => (

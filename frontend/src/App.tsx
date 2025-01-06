@@ -14,11 +14,9 @@ import CRUDCodeGenerator from "./pages/crud/CRUDCodeGenerator.tsx";
 const App: React.FC = () => {
     return (
         <div className="app-container">
-            <AuthorLink/>
-            <HomeButton/>
-            <div style={{
-                zIndex: 1000
-            }}>
+            <div style={{zIndex: 1000, backgroundColor: 'transparent'}}>
+                <AuthorLink/>
+                <HomeButton/>
             </div>
             <div style={{
                 zIndex: 1000, position: 'fixed', top: 20, right: 20, display: 'flex', gap: '10px'
@@ -29,7 +27,7 @@ const App: React.FC = () => {
             <Routes>
                 <Route path="/" element={<HomePage/>}/>
                 <Route path="/graphml-code-generator" element={<GraphMLCodeGenerator/>}/>
-                <Route path="/crud-code-generator" element={<CRUDCodeGenerator />} />
+                <Route path="/crud-code-generator" element={<CRUDCodeGenerator/>}/>
                 <Route path="*" element={<NotFoundPage/>}/>
             </Routes>
 

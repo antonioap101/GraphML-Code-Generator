@@ -1,0 +1,4 @@
+div[data-themed="true"]:not([class*="ace"]):not([class*="Overlay"]) {
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
