@@ -6,14 +6,23 @@ import GenerateButton from "../../components/buttons/generateButton/GenerateButt
 import AceIDEComponent from "../../components/aceIde/AceIDEComponent.tsx";
 import TableAttributeEditor from "../../components/tableAttributeEditor/tableAttributeEditor.tsx";
 import {TypeEnum} from "../../constants/TypeEnum";
-import {createCRUDCodeGeneratorInput, FieldModel} from "../../constants/CRUDCodeGeneratorInput.ts";
+import {
+    ConnectionParameters,
+    createCRUDCodeGeneratorInput,
+    FieldModel
+} from "../../constants/CRUDCodeGeneratorInput.ts";
 import styles from "./CRUDCodeGenerator.module.css";
 import {useApi} from "../../hooks/useXMLToGraphml.tsx";
+import CopyButton from "../../components/buttons/copyButton/CopyButton.tsx";
+import ConnectionParametersForm from "../../components/connectionParametersForm/ConnectionParametersForm.tsx";
 
 const CRUDCodeGenerator: React.FC = () => {
     const [code, setCode] = useState(languageExamples[AllowedLanguages.Java]);
     const [selectedLanguage, setSelectedLanguage] = useState<DropDownOption>(languageOptions[1]);
     const [selectedDBMS, setSelectedDBMS] = useState<DropDownOption>(dbmsOptions[0]);
+    const [connectionParams, setConnectionParams] = useState<ConnectionParameters | undefined>(undefined);
+
+
     const {loading, error, crudOutput, generateCrud} = useApi();
 
     const [fields, setFields] = useState<FieldModel[]>([
@@ -48,12 +57,13 @@ const CRUDCodeGenerator: React.FC = () => {
         try {
             console.log("Convert button clicked");
             console.log("Fields:", fields); // Access the rows from TableAttributeEditor here
+            console.log("Params:", connectionParams); // Access the rows from TableAttributeEditor here
 
             await generateCrud(createCRUDCodeGeneratorInput(
                 {name: "table", fields},
                 selectedLanguage.value as AllowedLanguages,
                 selectedDBMS.value as AllowedDBMS,
-                {host: "localhost", port: 3306, database_name: "database"}
+                (connectionParams !== undefined) ? connectionParams : {host: "", port: 0, database_name: ""},
             ));
         } catch (e) {
             console.error("Error generating CRUD code:", e);
@@ -81,12 +91,21 @@ const CRUDCodeGenerator: React.FC = () => {
                 <GenerateButton onClick={handleConvert} disabled={false} loading={loading} horizontal={true}/>
             </nav>
             <section className={styles.mainSection}>
-                <section className={styles.outputSection}>
-                    <h3>Output</h3>
-                    <TableAttributeEditor fields={fields} setFields={setFields}/>
+                <section className={styles.inputSection}>
+                    <section className={styles.tableSection}>
+                        <h3>Table Structure</h3>
+                        <TableAttributeEditor fields={fields} setFields={setFields}/>
+                    </section>
+                    <section className={styles.connectionParams}>
+                        <h3>Connection Parameters</h3>
+                        <ConnectionParametersForm parameters={connectionParams} setParameters={setConnectionParams}/>
+                    </section>
                 </section>
                 <aside className={styles.codeSection}>
-                    <h3>Code</h3>
+                    <header style={{display: "flex", justifyContent: "center"}}>
+                        <h3>Code</h3>
+                        <CopyButton content={code}/>
+                    </header>
                     {error && <p className={styles.error}>{error}</p>} {/* Mostrar error si existe */}
                     <AceIDEComponent code={code} setCode={setCode} language={selectedLanguage.value}/>
                 </aside>

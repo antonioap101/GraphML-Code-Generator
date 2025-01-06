@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    width: 100%; /* Ensure container takes full width */
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1; /* Ensure each field takes an equal amount of space */
+}
+
+.input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%; /* Ensure the input fills the available field space */
+}

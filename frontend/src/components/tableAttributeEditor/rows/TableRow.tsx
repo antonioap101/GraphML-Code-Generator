@@ -1,18 +1,18 @@
+// TableRow.tsx
 import React from "react";
-import {TypeEnum} from "../../../constants/TypeEnum.ts";
-import {FieldModel} from "../../../constants/CRUDCodeGeneratorInput.ts";
-import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { TypeEnum } from "../../../constants/TypeEnum.ts";
+import { FieldModel } from "../../../constants/CRUDCodeGeneratorInput.ts";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface TableRowProps {
     field: FieldModel;
     index: number;
-    isPrimaryKeyDisabled?: boolean;
     onFieldChange: (index: number, key: keyof FieldModel, value: FieldModel[keyof FieldModel]) => void;
-    onRemove?: () => void; // Opcional, solo para filas que pueden eliminarse
+    onRemove?: () => void; // Optional, only for rows that can be removed
 }
 
-const TableRow: React.FC<TableRowProps> = ({field, index, isPrimaryKeyDisabled, onFieldChange, onRemove}) => {
+const TableRow: React.FC<TableRowProps> = ({ field, index, onFieldChange, onRemove }) => {
     return (
         <div className="table-row">
             <div className="table-cell">
@@ -50,30 +50,14 @@ const TableRow: React.FC<TableRowProps> = ({field, index, isPrimaryKeyDisabled, 
                 />
             </div>
             <div className="table-cell">
-                <input
-                    type="checkbox"
-                    checked={field.autoIncrement}
-                    onChange={(e) => onFieldChange(index, "autoIncrement", e.target.checked)}
-                    disabled={!field.primaryKey}
-                />
-            </div>
-            <div className="table-cell">
-                <input
-                    type="checkbox"
-                    checked={field.primaryKey}
-                    onChange={(e) => onFieldChange(index, "primaryKey", e.target.checked)}
-                    disabled={isPrimaryKeyDisabled}
-                />
-            </div>
-
-            <div className="table-cell">
-                <button className={"field-button"}
+                <button
+                    className={"field-button"}
                     disabled={onRemove === undefined}
-                    onClick={onRemove}>
-                    <FontAwesomeIcon icon={faTrashAlt}/>
+                    onClick={onRemove}
+                >
+                    <FontAwesomeIcon icon={faTrashAlt} />
                 </button>
             </div>
-
         </div>
     );
 };
