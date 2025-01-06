@@ -1,6 +1,6 @@
 /* Botón de ayuda */
 .helpButton {
-    composes: round-button from '@/styles/common.module.css';
+    composes: round-button from '@/styles/customCommonStyles.module.css';
 }
 
 /* Hover y activo */

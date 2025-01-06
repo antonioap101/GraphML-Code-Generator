@@ -2,7 +2,7 @@ import React from "react";
 
 import "./GenerateButton.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCode} from "@fortawesome/free-solid-svg-icons";
+import {faPlay} from "@fortawesome/free-solid-svg-icons";
 
 interface GenerateButtonProps {
     onClick: () => void;
@@ -23,8 +23,8 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
             disabled={disabled}
             className={`generate-button ${horizontal ? "horizontal" : "vertical"}`}
         >
-            <FontAwesomeIcon icon={faCode} size="lg"/>
-            <span>{loading ? "Generando..." : "Generar"}</span>
+            <FontAwesomeIcon icon={faPlay} size="lg"/>
+            <span>{loading ? "Generating..." : "Generate"}</span>
         </button>
     );
 };

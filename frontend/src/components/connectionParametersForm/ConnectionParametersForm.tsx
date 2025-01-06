@@ -5,7 +5,7 @@ import { faDatabase, faPlug, faServer } from "@fortawesome/free-solid-svg-icons"
 import styles from "./ConnectionParametersForm.module.css";
 
 interface ConnectionParametersFormProps {
-    parameters?: ConnectionParameters;
+    parameters: ConnectionParameters;
     setParameters: (params: ConnectionParameters) => void;
 }
 
@@ -21,11 +21,12 @@ const ConnectionParametersForm: React.FC<ConnectionParametersFormProps> = ({ par
         <div className={styles.container}>
             {/* Host Field */}
             <div className={styles.field}>
-                <FontAwesomeIcon icon={faServer} />
+                <label className={styles.label}>
+                    <FontAwesomeIcon icon={faServer} /> Host
+                </label>
                 <input
                     type="text"
-                    placeholder="Host"
-                    value={parameters?.host || ""}
+                    value={parameters.host}
                     onChange={(e) => handleChange("host", e.target.value)}
                     className={styles.input}
                 />
@@ -33,11 +34,12 @@ const ConnectionParametersForm: React.FC<ConnectionParametersFormProps> = ({ par
 
             {/* Port Field */}
             <div className={styles.field}>
-                <FontAwesomeIcon icon={faPlug} />
+                <label className={styles.label}>
+                    <FontAwesomeIcon icon={faPlug} /> Port
+                </label>
                 <input
-                    type="number"
-                    placeholder="Port"
-                    value={parameters?.port || ""}
+                    type="text"
+                    value={parameters.port}
                     onChange={(e) => handleChange("port", parseInt(e.target.value, 10))}
                     className={styles.input}
                 />
@@ -45,11 +47,12 @@ const ConnectionParametersForm: React.FC<ConnectionParametersFormProps> = ({ par
 
             {/* Database Name Field */}
             <div className={styles.field}>
-                <FontAwesomeIcon icon={faDatabase} />
+                <label className={styles.label}>
+                    <FontAwesomeIcon icon={faDatabase} /> Database Name
+                </label>
                 <input
                     type="text"
-                    placeholder="Database Name"
-                    value={parameters?.database_name || ""}
+                    value={parameters.database_name}
                     onChange={(e) => handleChange("database_name", e.target.value)}
                     className={styles.input}
                 />

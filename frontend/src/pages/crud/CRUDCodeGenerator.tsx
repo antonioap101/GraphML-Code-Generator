@@ -5,23 +5,30 @@ import {AllowedLanguages, languageExamples, languageOptions} from "../../constan
 import GenerateButton from "../../components/buttons/generateButton/GenerateButton.tsx";
 import AceIDEComponent from "../../components/aceIde/AceIDEComponent.tsx";
 import TableAttributeEditor from "../../components/tableAttributeEditor/tableAttributeEditor.tsx";
-import {TypeEnum} from "../../constants/TypeEnum";
 import {
     ConnectionParameters,
     createCRUDCodeGeneratorInput,
-    FieldModel
+    FieldModel,
 } from "../../constants/CRUDCodeGeneratorInput.ts";
 import styles from "./CRUDCodeGenerator.module.css";
 import {useApi} from "../../hooks/useXMLToGraphml.tsx";
 import CopyButton from "../../components/buttons/copyButton/CopyButton.tsx";
-import ConnectionParametersForm from "../../components/connectionParametersForm/ConnectionParametersForm.tsx";
+
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCode, faSignal, faTable} from "@fortawesome/free-solid-svg-icons";
+import ConnectionParametersPopup from "../../components/popUps/conectionParametersPopup/ConnectionParametersPopUp.tsx";
+import {TypeEnum} from "../../constants/TypeEnum.ts";
 
 const CRUDCodeGenerator: React.FC = () => {
     const [code, setCode] = useState(languageExamples[AllowedLanguages.Java]);
     const [selectedLanguage, setSelectedLanguage] = useState<DropDownOption>(languageOptions[1]);
     const [selectedDBMS, setSelectedDBMS] = useState<DropDownOption>(dbmsOptions[0]);
-    const [connectionParams, setConnectionParams] = useState<ConnectionParameters | undefined>(undefined);
-
+    const [connectionParams, setConnectionParams] = useState<ConnectionParameters>({
+        host: "localhost",
+        port: 3000,
+        database_name: "default"
+    });
+    const [isPopupOpen, setIsPopupOpen] = useState(false); // Estado para manejar el popup
 
     const {loading, error, crudOutput, generateCrud} = useApi();
 
@@ -63,53 +70,78 @@ const CRUDCodeGenerator: React.FC = () => {
                 {name: "table", fields},
                 selectedLanguage.value as AllowedLanguages,
                 selectedDBMS.value as AllowedDBMS,
-                (connectionParams !== undefined) ? connectionParams : {host: "", port: 0, database_name: ""},
+                connectionParams
             ));
         } catch (e) {
             console.error("Error generating CRUD code:", e);
         }
     };
 
+
     return (
         <div className={styles.container}>
-            <header>
-                <h1>CRUD Code Generator</h1>
-            </header>
-            <nav className={styles.nav}>
-                <DropDownComponent
-                    selectedOption={selectedDBMS}
-                    options={dbmsOptions}
-                    onSelect={setSelectedDBMS}
-                    placeholder="Select DBMS"
-                />
-                <DropDownComponent
-                    selectedOption={selectedLanguage}
-                    options={languageOptions}
-                    onSelect={handleLanguageChange}
-                    placeholder="Select Language"
-                />
-                <GenerateButton onClick={handleConvert} disabled={false} loading={loading} horizontal={true}/>
-            </nav>
+
             <section className={styles.mainSection}>
-                <section className={styles.inputSection}>
-                    <section className={styles.tableSection}>
-                        <h3>Table Structure</h3>
-                        <TableAttributeEditor fields={fields} setFields={setFields}/>
-                    </section>
-                    <section className={styles.connectionParams}>
-                        <h3>Connection Parameters</h3>
-                        <ConnectionParametersForm parameters={connectionParams} setParameters={setConnectionParams}/>
-                    </section>
-                </section>
+                <aside className={styles.inputSection}>
+                    <header className={styles.codeHeader}>
+                        <a className={styles.codeLink}>
+                            <FontAwesomeIcon icon={faTable}/>
+                            <h2>Table Details</h2>
+                        </a>
+                        <GenerateButton onClick={handleConvert} disabled={false} loading={loading} horizontal={true}/>
+                    </header>
+                    <form className={styles.content}>
+                        <section>
+                            <nav className={styles.nav}>
+                                <div style={{display: "flex", gap: "10px"}}>
+                                    <DropDownComponent
+                                        selectedOption={selectedDBMS}
+                                        options={dbmsOptions}
+                                        onSelect={setSelectedDBMS}
+                                        placeholder="Select DBMS"
+                                    />
+                                    <DropDownComponent
+                                        selectedOption={selectedLanguage}
+                                        options={languageOptions}
+                                        onSelect={handleLanguageChange}
+                                        placeholder="Select Language"
+                                    />
+                                </div>
+                                <button
+                                    type="button" /* Avoid that the button submits the form */
+                                    className={styles.connectionButton} onClick={() => {
+                                    setIsPopupOpen(true)
+                                }}>
+                                    <FontAwesomeIcon icon={faSignal}/>
+                                </button>
+                            </nav>
+                        </section>
+                        <section className={styles.tableSection}>
+                            <TableAttributeEditor fields={fields} setFields={setFields}/>
+                        </section>
+                    </form>
+                </aside>
                 <aside className={styles.codeSection}>
-                    <header style={{display: "flex", justifyContent: "center"}}>
-                        <h3>Code</h3>
+                    <header className={styles.codeHeader}>
+                        <a className={styles.codeLink}>
+                            <FontAwesomeIcon icon={faCode}/>
+                            <h2>Code</h2>
+                        </a>
                         <CopyButton content={code}/>
                     </header>
-                    {error && <p className={styles.error}>{error}</p>} {/* Mostrar error si existe */}
+                    {error && <p className="error">{error}</p>}
                     <AceIDEComponent code={code} setCode={setCode} language={selectedLanguage.value}/>
                 </aside>
             </section>
+
+            {/* Popup para Connection Parameters */}
+            {isPopupOpen && (
+                <ConnectionParametersPopup
+                    parameters={connectionParams}
+                    setParameters={setConnectionParams}
+                    onClose={() => setIsPopupOpen(false)}
+                />
+            )}
         </div>
     );
 };

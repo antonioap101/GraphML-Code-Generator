@@ -35,7 +35,6 @@ const GraphMLCodeGenerator: React.FC = () => {
 
     return (
         <div className="app-container">
-            <h1>Generador de Código GraphML</h1>
             <div className="form-container">
                 <XmlInput
                     xmlContent={xmlContent}

@@ -1,5 +1,6 @@
 import {useLocation} from "react-router-dom";
 import styles from "./HelpPopUp.module.css";
+import sharedStyles from "../sharedPopUpStyles.module.css";
 
 const HelpPopUp = (props: { onClick: () => void }) => {
     const location = useLocation();
@@ -43,7 +44,7 @@ const HelpPopUp = (props: { onClick: () => void }) => {
     };
 
     return (
-        <div className={styles.popupOverlay} onClick={props.onClick}>
+        <div className={sharedStyles.overlay} onClick={props.onClick}>
             <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
                 <h2>{content.title}</h2>
                 <p>Sigue los pasos:</p>

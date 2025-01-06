@@ -1,18 +1,18 @@
 // TableAttributeEditor.tsx
 import React from "react";
-import "./tableAttributeEditor.css";
-import { TypeEnum } from "../../constants/TypeEnum";
-import { FieldModel } from "../../constants/CRUDCodeGeneratorInput.ts";
+import styles from "./tableAttributeEditor.module.css";
+import {TypeEnum} from "../../constants/TypeEnum";
+import {FieldModel} from "../../constants/CRUDCodeGeneratorInput.ts";
 import TableRow from "./rows/TableRow.tsx";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
 
 interface TableAttributeEditorProps {
     fields: FieldModel[];
     setFields: (fields: FieldModel[]) => void;
 }
 
-const TableAttributeEditor: React.FC<TableAttributeEditorProps> = ({ fields, setFields }) => {
+const TableAttributeEditor: React.FC<TableAttributeEditorProps> = ({fields, setFields}) => {
     const handleFieldChange = <K extends keyof FieldModel>(
         index: number,
         key: K,
@@ -26,7 +26,7 @@ const TableAttributeEditor: React.FC<TableAttributeEditorProps> = ({ fields, set
     const addField = () => {
         setFields([
             ...fields,
-            { name: "", type: TypeEnum.TEXT, nullable: true, unique: false, primaryKey: false, autoIncrement: false },
+            {name: "", type: TypeEnum.TEXT, nullable: true, unique: false, primaryKey: false, autoIncrement: false},
         ]);
     };
 
@@ -36,18 +36,18 @@ const TableAttributeEditor: React.FC<TableAttributeEditorProps> = ({ fields, set
     };
 
     return (
-        <div className="table-attribute-editor">
-            <div className="table-header">
-                <div className="table-cell">Nombre</div>
-                <div className="table-cell">Tipo</div>
-                <div className="table-cell">Nullable</div>
-                <div className="table-cell">Unique</div>
-                <div className="table-cell">
-                    <button className="field-button" onClick={addField}>
-                        <FontAwesomeIcon icon={faPlus} />
+        <div className={styles.tableAttributeEditor}>
+            <header className={styles.tableHeader}>
+                <div className={styles.tableCell}>Name</div>
+                <div className={styles.tableCell}>Type</div>
+                <div className={styles.tableCell}>Nullable</div>
+                <div className={styles.tableCell}>Unique</div>
+                <div className={styles.tableCell}>
+                    <button className={styles.fieldButton} onClick={addField}>
+                        <FontAwesomeIcon icon={faPlus}/>
                     </button>
                 </div>
-            </div>
+            </header>
             {fields.map((field, index) => (
                 <TableRow
                     key={index}

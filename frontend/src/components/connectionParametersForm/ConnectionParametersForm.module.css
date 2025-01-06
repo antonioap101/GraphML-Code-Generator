@@ -1,21 +1,41 @@
 .container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 15px;
-    width: 100%; /* Ensure container takes full width */
+    max-width: 400px;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    flex: 1;
+
 }
 
 .field {
     display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.label {
+    font-size: var(--font-size-small);
+    color: var(--color-text);
+    display: flex;
     align-items: center;
-    gap: 10px;
-    flex: 1; /* Ensure each field takes an equal amount of space */
+    gap: 8px;
 }
 
 .input {
-    flex: 1;
     padding: 8px;
-    border: 1px solid #ccc;
+    font-size: var(--font-size-medium);
+    border: 1px solid var(--color-border);
     border-radius: 5px;
-    width: 100%; /* Ensure the input fills the available field space */
+    background-color: var(--color-background-secondary);
+    color: var(--color-text);
+    outline: none;
+    transition: border-color 0.3s ease;
+    text-align: start;
+}
+
+.input:focus {
+    border-color: var(--color-primary);
 }

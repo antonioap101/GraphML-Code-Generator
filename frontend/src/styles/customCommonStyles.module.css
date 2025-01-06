@@ -1,7 +1,7 @@
 /* Botón de ayuda */
 .round-button {
     border: none;
-    border-radius: 50%;
+    border-radius: 10px;
     width: 40px;
     height: 40px;
     padding: 0;

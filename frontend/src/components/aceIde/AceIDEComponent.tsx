@@ -32,35 +32,36 @@ interface AceIDEComponent {
 
 const AceIDEComponent: React.FC<AceIDEComponent> = ({code, setCode, language}) => {
 
-    const { theme } = useTheme();
+    const {theme} = useTheme();
 
     console.log("AceIDEComponent -> language", language)
 
     return (
-            <AceEditor
-                style={{
-                    height: '100%',
-                    width: '100%',
-                }}
-                readOnly={false}
-                placeholder='Start Coding'
-                mode={language}
-                theme={theme === 'lightTheme' ? 'clouds' : 'monokai'}
-                name='basic-code-editor'
-                onChange={currentCode => setCode(currentCode)}
-                fontSize={"var(--font-size-medium1)"}
-                showPrintMargin={true}
-                showGutter={true}
-                highlightActiveLine={true}
-                value={code}
-                setOptions={{
-                    enableBasicAutocompletion: true,
-                    enableLiveAutocompletion: true,
-                    enableSnippets: true,
-                    showLineNumbers: true,
-                    tabSize: 4,
-                }}
-            />
+        <AceEditor
+            style={{
+                display: 'flex',
+                width: '100%',
+                flex: 1
+            }}
+            readOnly={false}
+            placeholder='Start Coding'
+            mode={language}
+            theme={theme === 'lightTheme' ? 'clouds' : 'monokai'}
+            name='basic-code-editor'
+            onChange={currentCode => setCode(currentCode)}
+            fontSize={"var(--font-size-medium1)"}
+            showPrintMargin={true}
+            showGutter={true}
+            highlightActiveLine={true}
+            value={code}
+            setOptions={{
+                enableBasicAutocompletion: true,
+                enableLiveAutocompletion: true,
+                enableSnippets: true,
+                showLineNumbers: true,
+                tabSize: 4,
+            }}
+        />
 
     );
 };

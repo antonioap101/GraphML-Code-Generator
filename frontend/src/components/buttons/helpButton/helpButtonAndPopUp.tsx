@@ -3,9 +3,10 @@ import React, {useState} from 'react';
 
 // import './helpButton.module.css';
 import styles from "./helpButton.module.css";
-import HelpPopUp from "../popUps/helpPopUp/HelpPopUp.tsx";
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
+import HelpPopUp from "../../popUps/helpPopUp/HelpPopUp.tsx";
 
 
 console.log("STYLES: ", styles);
@@ -28,7 +29,7 @@ const HelpButton: React.FC = () => {
             </button>
 
             {isPopupOpen && (
-                <HelpPopUp onClick={togglePopup} />
+                <HelpPopUp onClick={togglePopup}/>
             )}
         </>
     );

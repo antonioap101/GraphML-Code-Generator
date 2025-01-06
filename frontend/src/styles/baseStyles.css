@@ -28,9 +28,16 @@ h1 {
     font-weight: bold;
 }
 
-div:not([class*="ace"]):not([class*="Overlay"]) {
+div:not([class*="ace"]):not([class*="overlay"]) {
     background-color: var(--color-background);
     color: var(--color-text);
+}
+
+aside {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-color: var(--color-background-secondary);
 }
 
 
@@ -68,4 +75,16 @@ button:disabled {
     background-color: var(--color-border);
     color: var(--color-text);
     cursor: not-allowed;
+}
+
+header {
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px;
+    border-bottom: 1px solid var(--color-border);
 }
