@@ -77,7 +77,7 @@ public class {ClassName}DAO {{
         java_mapper = TypeMapperFactory.get_language_mapper(AllowedLanguages.java)
         # Generar parámetros y configuración de PreparedStatement
         field_parameters = ", ".join(
-            f"{sql_mapper.get_mapping(field.type)} {field.name}"
+            f"{java_mapper.get_mapping(field.type)} {field.name}"
             for field in table.fields if not field.autoIncrement
         )
         set_insert_parameters = "\n                ".join(
