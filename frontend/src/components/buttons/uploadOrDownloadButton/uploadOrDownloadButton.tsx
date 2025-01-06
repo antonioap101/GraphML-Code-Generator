@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./uploadOrDownloadButton.css";
+import styles from "./uploadOrDownloadButton.module.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload, faUpload} from "@fortawesome/free-solid-svg-icons";
 
@@ -12,12 +12,12 @@ interface UploadOrDownloadButtonProps {
 
 const UploadOrDownloadButton: React.FC<UploadOrDownloadButtonProps> = ({action, onClick, tooltip}) => {
     const renderIcon = () => {
-        if (action === "upload") return <FontAwesomeIcon icon={faUpload} className="action-icon"/>;
-        if (action === "download") return <FontAwesomeIcon icon={faDownload} className="action-icon"/>;
+        if (action === "upload") return <FontAwesomeIcon icon={faUpload} className={styles.actionIcon}/>
+        if (action === "download") return <FontAwesomeIcon icon={faDownload} className={styles.actionIcon}/>
     };
 
     return (
-        <button className={`action-label ${action}`} onClick={onClick} title={tooltip}>
+        <button className={`${styles.actionLabel} ${styles[action]}`} onClick={onClick} title={tooltip}>
             {renderIcon()}
         </button>
     );

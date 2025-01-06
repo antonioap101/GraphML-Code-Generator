@@ -1,5 +1,19 @@
 /* Colores base */
 :root {
+
+    --apple-50: #f1faeb;
+    --apple-100: #def4d3;
+    --apple-200: #bfeaac;
+    --apple-300: #97db7b;
+    --apple-400: #73c952;
+    --apple-500: #56b235;
+    --apple-600: #3f8a26;
+    --apple-700: #326a21;
+    --apple-800: #2b551f;
+    --apple-900: #26491e;
+    --apple-950: #11270c;
+
+
     --french-violet-dark: #333654;
     --french-violet: #7400b8ff;
     --french-violet2: #5d0090;
@@ -22,19 +36,21 @@
     --periwinkle: #bfd7ffff;
     --light-cyan: #e2fdffff;
 
-    /* CSS hex DARK */
-    --neon-blue-dark: #293177;
-    --cornflower-blue-dark: #2b49f8;
-    --jordy-blue-dark: #2e344a;
-    --periwinkle-dark: #3b424d;
-    --dark-cyan: #353b3b;
 
-    --color-primary: var(--french-violet);
-    --color-primary-dark: var(--french-violet2);
-    --color-primary-light: var(--slate-blue2);
+    /*--color-primary: var(--french-violet);*/
+    /*--color-primary-dark: var(--french-violet2);*/
+    /*--color-primary-light: var(--slate-blue2);*/
 
-    --color-onBackground-light: var(--slate-blue);
-    --color-onBackground-dark: var(--french-violet-dark);
+    /*--color-onBackground-light: var(--slate-blue);*/
+    /*--color-onBackground-dark: var(--french-violet-dark);*/
+
+    --color-primary: var(--apple-500);
+    --color-primary-dark: var(--apple-700);
+    --color-primary-light: var(--apple-300);
+
+    --color-onBackground-light: var(--apple-200);
+    --color-onBackground-dark: var(--apple-900);
+
     --color-secondary: var(--aero);
     --color-secondary-dark: var(--aero-dark);
 

@@ -10,20 +10,21 @@ const HelpPopUp = (props: { onClick: () => void }) => {
         "/crud-code-generator": {
             title: "Cómo utilizar el CRUD Code Generator",
             steps: [
-                "Selecciona el DBMS y el lenguaje de programación.",
-                "Agrega los atributos de la tabla en el generador.",
-                "Haz clic en 'Generar' para obtener el código.",
-                "Copia o descarga el resultado generado.",
+                "1. Agrega los atributos del modelo de datos a generar en la sección de esquema",
+                "2. Selecciona el DBMS y el lenguaje de programación en la sección de configuración.",
+                "3. Opcionalmente, ajusta los parámetros de conexión a la base de datos.",
+                "4. Haz clic en 'Generar' para obtener el código.",
+                "5. Copia el resultado generado.",
             ],
             example: "",
         },
         "/graphml-code-generator": {
             title: "Cómo utilizar el GraphML Code Generator",
             steps: [
-                "Escribe o pega el contenido XML en el área de texto.",
-                "Carga un archivo XML usando el botón de selección.",
-                "Haz clic en 'Convertir' para generar el GraphML.",
-                "Descarga el resultado como un archivo .graphml.",
+                "1. Escribe o pega el contenido XML en el área de texto.",
+                "2. Carga un archivo XML usando el botón de selección.",
+                "3. Haz clic en 'Convertir' para generar el GraphML.",
+                "4. Descarga el resultado como un archivo .graphml.",
             ],
             example: `<root>
   <node1 attribute1="value1" attribute2="value2">

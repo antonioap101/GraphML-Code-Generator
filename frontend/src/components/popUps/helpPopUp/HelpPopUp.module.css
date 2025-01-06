@@ -11,3 +11,42 @@
     animation: fadeIn 0.3s ease-in-out;
 }
 
+
+
+.popupContent h2 {
+    font-size: var(--font-size-large);
+    margin-bottom: 16px;
+    color: var(--color-primary);
+}
+
+.popupContent p {
+    margin-bottom: 8px;
+    font-size: var(--font-size-medium);
+    line-height: 1.5;
+}
+
+.popupContent ol {
+    margin-left: 20px;
+    margin-bottom: 16px;
+    font-size: var(--font-size-medium);
+}
+
+.popupContent pre {
+    background-color: var(--color-background-secondary);
+    padding: 16px;
+    border-radius: 8px;
+    font-size: var(--font-size-small);
+    color: var(--color-text);
+    overflow-x: auto;
+}
+
+.popupContent li {
+    margin-bottom: 8px;
+}
+
+.popupContent button {
+    margin-top: 16px;
+    text-align: center;
+}
+
+

@@ -1,0 +1,8 @@
+.actionLabel {
+    composes: round-button from '@/styles/customCommonStyles.module.css';
+}
+
+
+.actionIcon {
+    font-size: var(--font-size-xlarge);
+}

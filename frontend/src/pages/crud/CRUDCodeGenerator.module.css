@@ -17,14 +17,6 @@
     justify-content: center;
 }
 
-h2 {
-    font-size: var(--font-size-large);
-    font-weight: var(--font-weight-bold);
-}
-
-h3 {
-    font-weight: var(--font-weight-bold);
-}
 
 .inputSection,
 .codeSection {
@@ -35,7 +27,6 @@ h3 {
     flex-direction: column;
     padding: 0;
     overflow-x: auto;
-    box-shadow: 0 0 15px var(--color-border);
 }
 
 .inputSection {
@@ -89,10 +80,47 @@ h3 {
     transition: all 0.3s ease;
 }
 
+/* Set tabs all to the right */
+
 .connectionButton:hover {
     transform: scale(1.1);
     background-color: transparent;
 }
+
+.tabs {
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+/* Estilos para el botón de selección de sección */
+.sectionSelectionButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap:5px;
+    padding: 8px 16px;
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-light);
+    color: var(--color-primary);
+    border-radius: 0;
+    background-color: var(--color-background);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.sectionSelectionButton:hover {
+    background-color: transparent;
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.sectionSelectionButton.activeTab {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+    font-weight: var(--font-weight-bold);
+}
+
 
 @media (max-width: 1024px) {
     .mainSection {
