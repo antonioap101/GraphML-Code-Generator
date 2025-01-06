@@ -43,23 +43,25 @@ const AceIDEComponent: React.FC<AceIDEComponent> = ({code, setCode, language}) =
                 width: '100%',
                 flex: 1
             }}
-            readOnly={false}
             placeholder='Start Coding'
             mode={language}
             theme={theme === 'lightTheme' ? 'clouds' : 'monokai'}
             name='basic-code-editor'
             onChange={currentCode => setCode(currentCode)}
             fontSize={"var(--font-size-medium1)"}
-            showPrintMargin={true}
-            showGutter={true}
-            highlightActiveLine={true}
             value={code}
             setOptions={{
-                enableBasicAutocompletion: true,
-                enableLiveAutocompletion: true,
-                enableSnippets: true,
+                showPrintMargin: false,
+                showGutter: true,
+                highlightActiveLine: true,
+                enableBasicAutocompletion: false,
+                enableLiveAutocompletion: false,
+                enableSnippets: false,
                 showLineNumbers: true,
                 tabSize: 4,
+                showFoldWidgets: true,
+                displayIndentGuides: true,
+                readOnly: true,
             }}
         />
 

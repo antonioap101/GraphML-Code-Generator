@@ -57,6 +57,7 @@ const TableRow: React.FC<TableRowProps> = ({field, index, onFieldChange, onRemov
             <div className={styles.tableCell} style={{gap: 5}}>
                 {/* Ajustes adicionales */}
                 <button
+                    type={"button"}
                     className={styles.fieldButton}
                     disabled={index === 0} // Deshabilitar para la primera fila
                     onClick={() => setIsExtraSettingsPopUpOpen(true)}
