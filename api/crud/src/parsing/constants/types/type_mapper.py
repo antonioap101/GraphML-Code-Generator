@@ -18,6 +18,12 @@ class TypeMapper(ABC):
         pass
 
     @abstractmethod
+    def get_comment_indicator(self) -> str:
+        """Devuelve el indicador de comentario para el lenguaje específico."""
+        pass
+
+    @abstractmethod
     def validate(self):
         """Valida que todos los TypeEnum están mapeados."""
         pass
+

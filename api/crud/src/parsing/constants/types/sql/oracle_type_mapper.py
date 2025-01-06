@@ -21,3 +21,7 @@ class OracleTypeMapper(TypeMapper):
         for type_enum in TypeEnum:
             if type_enum not in self._mapping:
                 raise ValueError(f"TypeEnum {type_enum} is missing in SQLITE mapping")
+
+    def get_comment_indicator(self) -> str:
+        return "--"
+

@@ -4,6 +4,7 @@ from api.crud.src.generator.languages.connection_generator import ConnectionGene
 from api.crud.src.generator.languages.dao_generator import DaoGenerator
 from api.crud.src.generator.languages.factory.language_generator_factory import LanguageGeneratorFactory
 from api.crud.src.parsing.CRUDCodeGeneratorInput import CRUDCodeGeneratorInput
+from api.crud.src.parsing.constants.types.factory.type_mapper_factory import TypeMapperFactory
 
 
 class CRUDCodeGenerator:
@@ -33,12 +34,15 @@ class CRUDCodeGenerator:
         # Generar el código de la conexión a la base de datos
         db_connection_code = connection_generator.generate(input_data.dbms, input_data.table, input_data.connectionParams)
 
+        # Generar el indicador de comentario
+        comment_indicator = TypeMapperFactory.get_language_mapper(input_data.language).get_comment_indicator()
+
         # Combinar todas las partes en un único string de salida
         complete_code = f"""
-// Database Connection Code
+{comment_indicator} Database Connection Code
 {db_connection_code}
 
-// DAO Code
+{comment_indicator} DAO Code
 {dao_code}
     """
 

@@ -1,13 +1,17 @@
 from typing import Tuple
 
 from api.crud.src.generator.languages.connection_generator import ConnectionGenerator
+from api.crud.src.generator.languages.csharp.csharp_connection_generator import CSharpConnectionGenerator
+from api.crud.src.generator.languages.csharp.csharp_dao_generator import CSharpDaoGenerator
 from api.crud.src.generator.languages.dao_generator import DaoGenerator
 from api.crud.src.generator.languages.java.java_connection_generator import JavaConnectionGenerator
 from api.crud.src.generator.languages.java.java_dao_generator import JavaDaoGenerator
+from api.crud.src.generator.languages.python.python_connection_generator import PythonConnectionGenerator
+from api.crud.src.generator.languages.python.python_dao_generator import PythonDaoGenerator
+from api.crud.src.generator.languages.typescript.typescript_connection_generator import TypeScriptConnectionGenerator
+from api.crud.src.generator.languages.typescript.typescript_dao_generator import TypeScriptDaoGenerator
 from api.crud.src.parsing.constants.allowed_languages import AllowedLanguages
 
-
-# Importa aquí otros generadores (e.g., TypeScript, CSharp) según se implementen
 
 class LanguageGeneratorFactory:
     """
@@ -15,10 +19,10 @@ class LanguageGeneratorFactory:
     """
 
     _generators = {
-        AllowedLanguages.java: (JavaConnectionGenerator, JavaDaoGenerator)
-        # Añadir otros generadores aquí:
-        # AllowedLanguages.typescript: TypeScriptDaoGenerator,
-        # AllowedLanguages.csharp: CSharpDaoGenerator,
+        AllowedLanguages.java: (JavaConnectionGenerator, JavaDaoGenerator),
+        AllowedLanguages.csharp: (CSharpConnectionGenerator, CSharpDaoGenerator),
+        AllowedLanguages.typescript: (TypeScriptConnectionGenerator, TypeScriptDaoGenerator),
+        AllowedLanguages.python: (PythonConnectionGenerator, PythonDaoGenerator)
     }
 
     @staticmethod
@@ -36,5 +40,5 @@ class LanguageGeneratorFactory:
             ValueError: Si el lenguaje no está soportado.
         """
         if language not in LanguageGeneratorFactory._generators:
-            raise ValueError(f"Unsupported language: {language}")
+            raise ValueError(f"LanguageGeneratorFactory -> Unsupported language: {language}")
         return LanguageGeneratorFactory._generators[language]

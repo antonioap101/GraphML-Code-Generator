@@ -5,6 +5,8 @@ class ConnectionParameters(BaseModel):
     host: str = Field(..., min_length=1, max_length=255)
     port: int = Field(..., ge=1, le=65535)
     database_name: str = Field(..., min_length=1, max_length=255)
+    username: str = Field(min_length=1, max_length=255, default="username")
+    password: str = Field(min_length=1, max_length=255, default="password")
 
     @classmethod
     @validator('host')
@@ -14,6 +16,7 @@ class ConnectionParameters(BaseModel):
         return v
 
     @classmethod
+
     @validator('database_name')
     def validate_database_name(cls, v):
         if not v:

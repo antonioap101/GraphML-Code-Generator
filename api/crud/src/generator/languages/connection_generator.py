@@ -44,4 +44,4 @@ class ConnectionGenerator(ABC):
             url_generator = ConnectionGenerator._DB_URL_GENERATORS[dbms.value]
             return url_generator(connection_params)
         except KeyError:
-            raise ValueError(f"Unsupported DBMS: {dbms}")
+            raise ValueError(f"ConnectionGenerator -> Unsupported DBMS: {dbms}")

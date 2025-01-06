@@ -52,8 +52,8 @@ public class DatabaseConnection {{
         # Rellenar la plantilla
         java_code = JavaConnectionGenerator.TEMPLATE.format(
             dbUrl=JavaConnectionGenerator.generate_db_url(dbms, connection_params),
-            dbUser="username",
-            dbPassword="password",
+            dbUser=connection_params.username,
+            dbPassword=connection_params.password,
             CreateTableQuery=create_table_query
         )
 
@@ -74,8 +74,12 @@ if __name__ == '__main__':
     java_code = JavaConnectionGenerator.generate(
         dbms=AllowedDBMS.mysql,
         table_model=table,
-        db_url="jdbc:mysql://localhost:3306/mydatabase",
-        db_user="root",
-        db_password="password"
+        connection_params=ConnectionParameters(
+            host="localhost",
+            port=3306,
+            database_name="my_database",
+            username="root",
+            password="root"
+        )
     )
     print(java_code)
