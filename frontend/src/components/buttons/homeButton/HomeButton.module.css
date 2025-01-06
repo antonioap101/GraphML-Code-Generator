@@ -1,0 +1,3 @@
+.homeButton {
+    composes: round-button from '@/styles/customCommonStyles.module.css';
+}

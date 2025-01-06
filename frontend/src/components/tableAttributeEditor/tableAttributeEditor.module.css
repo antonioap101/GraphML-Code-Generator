@@ -1,0 +1,47 @@
+.tableAttributeEditor {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.tableHeader,
+.tableRow {
+    display: flex;
+    gap: 10px;
+    padding: 5px 10px;
+}
+
+header.tableHeader {
+    background-color: var(--color-header);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.tableHeader .tableCell {
+    background-color: transparent !important;
+    font-weight: bold;
+}
+
+.tableCell {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="text"],
+select {
+    width: 90%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+
+.fieldButton {
+    composes: round-button from '@/styles/customCommonStyles.module.css';
+    border-radius: 15px;
+}
+
+

@@ -1,11 +1,12 @@
 // src/components/AuthorLink.tsx
 import React from "react";
-import {FaUpRightFromSquare} from "react-icons/fa6";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUpRightFromSquare} from "@fortawesome/free-solid-svg-icons";
 
 
 const AuthorLink: React.FC = () => {
     return (
-        <div style={{
+        <footer style={{
             position: 'fixed',
             bottom: 15,
             right: 15,
@@ -37,9 +38,9 @@ const AuthorLink: React.FC = () => {
                 }}
             >
                 <span>By Antonio Aparicio</span>
-                <FaUpRightFromSquare />
+                <FontAwesomeIcon icon={faUpRightFromSquare}/>
             </a>
-        </div>
+        </footer>
     );
 };
 

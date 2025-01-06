@@ -1,0 +1,37 @@
+/* Estilo general de los checkboxes */
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    appearance: none; /* Elimina el estilo por defecto del checkbox */
+    border: 2px solid #ccc;
+    border-radius: 25%;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Estilo cuando el checkbox está marcado */
+input[type="checkbox"]:checked {
+    background-color: var(--color-primary, #007bff); /* Color de fondo cuando está seleccionado */
+    border-color: var(--color-primary, #007bff); /* Cambia el color del borde */
+}
+
+/* Tick personalizado dentro del checkbox */
+input[type="checkbox"]:checked::before {
+    content: ""; /* Contenido vacío para el tick */
+    position: absolute;
+    top: 3px;
+    left: 7px;
+    width: 5px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg); /* Forma del tick */
+}
+
+/* Foco en el checkbox */
+input[type="checkbox"]:focus {
+    outline: none;
+    border-color: var(--color-onBackground-light, #0056b3);
+}

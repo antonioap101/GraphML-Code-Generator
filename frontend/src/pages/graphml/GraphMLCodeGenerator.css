@@ -1,0 +1,44 @@
+.form-container {
+    display: flex;
+    padding: 20px;
+    gap: 20px; /* Espacio entre los elementos */
+    align-items: center;
+    justify-content: center;
+    flex:1;
+}
+
+.text-input {
+    flex: 1; /* Los inputs ocupan el mismo espacio disponible */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre el input y cualquier elemento adicional */
+}
+
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: var(--font-size-large); /* Reduce el tamaño del título */
+    }
+
+    .form-container {
+        flex-direction: column; /* Cambia la disposición a columna para pantallas pequeñas */
+        gap: 15px; /* Reduce el espacio entre elementos */
+    }
+
+    .text-input {
+        width: 100%; /* Asegura que los inputs ocupan el ancho completo */
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: var(--font-size-xxxlarge);
+    }
+
+    .form-container {
+        gap: 10px; /* Reduce el espacio entre los elementos */
+    }
+
+}

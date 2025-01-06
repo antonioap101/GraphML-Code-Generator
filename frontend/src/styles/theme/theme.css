@@ -1,0 +1,122 @@
+/* Colores base */
+:root {
+
+    --apple-50: #f1faeb;
+    --apple-100: #def4d3;
+    --apple-200: #bfeaac;
+    --apple-300: #97db7b;
+    --apple-400: #73c952;
+    --apple-500: #56b235;
+    --apple-600: #3f8a26;
+    --apple-700: #326a21;
+    --apple-800: #2b551f;
+    --apple-900: #26491e;
+    --apple-950: #11270c;
+
+
+    --french-violet-dark: #333654;
+    --french-violet: #7400b8ff;
+    --french-violet2: #5d0090;
+    --grape: #6930c3ff;
+    --slate-blue: #cccdfb;
+    --slate-blue2: #8a00d9;
+    --united-nations-blue: #5390d9ff;
+    --picton-blue: #4ea8deff;
+    --aero: #48bfe3ff;
+    --aero-dark: #0a9396;
+    --sky-blue: #56cfe1ff;
+    --tiffany-blue: #64dfdfff;
+    --turquoise: #72efddff;
+    --aquamarine: #80ffdbff;
+
+    /* CSS HEX */
+    --neon-blue: #5465ffff;
+    --cornflower-blue: #788bffff;
+    --jordy-blue: #9bb1ffff;
+    --periwinkle: #bfd7ffff;
+    --light-cyan: #e2fdffff;
+
+
+    /*--color-primary: var(--french-violet);*/
+    /*--color-primary-dark: var(--french-violet2);*/
+    /*--color-primary-light: var(--slate-blue2);*/
+
+    /*--color-onBackground-light: var(--slate-blue);*/
+    /*--color-onBackground-dark: var(--french-violet-dark);*/
+
+    --color-primary: var(--apple-500);
+    --color-primary-dark: var(--apple-700);
+    --color-primary-light: var(--apple-300);
+
+    --color-onBackground-light: var(--apple-200);
+    --color-onBackground-dark: var(--apple-900);
+
+    --color-secondary: var(--aero);
+    --color-secondary-dark: var(--aero-dark);
+
+    --color-success: #28a745; /* Verde éxito */
+    --color-danger: #dc3545; /* Rojo peligro */
+    --color-warning: #ffc107; /* Amarillo advertencia */
+    --color-info: #17a2b8; /* Azul información */
+
+    --color-text-light: #f9f9f9; /* Texto claro */
+    --color-text-dark: #333; /* Texto oscuro */
+
+    --color-background-light: #efefef; /* Fondo claro */
+    --color-background-dark: #2f2f2f; /* Fondo oscuro */
+
+    --color-header-light: #e8e8e8; /* Fondo header claro */
+    --color-header-dark: #515151; /* Fondo header oscuro */
+
+    --color-border-light: #ccc; /* Borde claro */
+    --color-border-dark: #444; /* Borde oscuro */
+
+    --color-input-light: #f9f9f9; /* Fondo input claro */
+    --color-input-dark: #222; /* Fondo input oscuro */
+
+    /* Font styles and sizes */
+    --font-size-small: 0.8rem;
+    --font-size-medium: 1rem;
+    --font-size-large: 1.2rem;
+    --font-size-xlarge: 1.4rem;
+    --font-size-xxlarge: 1.6rem;
+    --font-size-xxxlarge: 1.8rem;
+
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-bold: 700;
+    --font-weight-bolder: 900;
+
+
+}
+
+/*For all themes*/
+.theme {
+    flex: 1;
+}
+
+/* Tema claro */
+.lightTheme {
+    --color-background: var(--color-background-light);
+    --color-background-secondary: var(--color-onBackground-light);
+    --color-text: var(--color-text-dark);
+    --color-header: var(--color-header-light);
+    --color-border: var(--color-border-light);
+    --color-input: var(--color-input-light);
+    --color-button: var(--color-primary);
+    --color-button-text: var(--color-text-light);
+    --color-button-hover: var(--color-primary-light);
+}
+
+/* Tema oscuro */
+.darkTheme {
+    --color-background: var(--color-background-dark);
+    --color-background-secondary: var(--color-onBackground-dark);
+    --color-text: var(--color-text-light);
+    --color-header: var(--color-header-dark);
+    --color-border: var(--color-border-dark);
+    --color-input: var(--color-input-dark);
+    --color-button: var(--color-primary);
+    --color-button-text: var(--color-text-light);
+    --color-button-hover: var(--color-primary-dark);
+}
