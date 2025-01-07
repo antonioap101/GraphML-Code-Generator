@@ -1,30 +1,9 @@
-<div class="centered-container">
-    <img src="./assets/logo.png" alt="Logo" />
-    <h1>GraphML & CRUD Code Generator</h1>
+<div style="display: flex; align-items: center; gap: 10px;">
+    <img src="./assets/logo.png" alt="Logo" style="width: 50px; height: 50px;" />
+    <h1 style="margin: 0; padding-bottom: 10px; font-size: 2em; line-height: 1.5; display: flex; align-items: center;">
+        GraphML & CRUD Code Generator
+    </h1>
 </div>
-
-<style>
-
-.centered-container {
-    display: flex;
-    align-items: center;   
-    gap: 10px;
-}
-
-.centered-container img {
-    width: 50px;
-    height: 50px;
-}
-
-.centered-container h1 {
-    margin: 0;
-    padding-bottom: 10px;
-    font-size: 2em;
-    line-height: 1.5;
-    display: flex; 
-    align-items: center; 
-}
-</style>
 
 ## 🌐 Aplicaciones Deployadas
 
