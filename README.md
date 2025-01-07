@@ -1,9 +1,4 @@
-<div style="display: flex; align-items: center; gap: 10px;">
-    <img src="./assets/logo.png" alt="Logo" style="width: 50px; height: 50px;" />
-    <h1 style="margin: 0; padding-bottom: 10px; font-size: 2em; line-height: 1.5; display: flex; align-items: center;">
-        GraphML & CRUD Code Generator
-    </h1>
-</div>
+# <img src="./assets/logo.png" alt="Logo" width="30" height="30" /> GraphML & CRUD Code Generator
 
 ## 🌐 Aplicaciones Deployadas
 
