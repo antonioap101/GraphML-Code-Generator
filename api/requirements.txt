@@ -4,4 +4,3 @@ MarkupSafe==2.0.1
 python-multipart==0.0.8
 uvicorn==0.15.0
 werkzeug==2.0.3
-
