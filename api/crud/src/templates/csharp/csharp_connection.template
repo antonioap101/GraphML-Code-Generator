@@ -1,0 +1,29 @@
+using System;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
+
+public class DatabaseConnection
+{{
+    private const string ConnectionString = "Server={dbHost};Database={dbName};User Id={dbUser};Password={dbPassword};";
+
+    public static IDbConnection GetConnection()
+    {{
+        return new SqlConnection(ConnectionString);
+    }}
+
+    public static void EnsureTableExists()
+    {{
+        string createTableQuery = @\"{CreateTableQuery}\";
+
+        using (var connection = GetConnection())
+        {{
+            connection.Open();
+            using (var command = connection.CreateCommand())
+            {{
+                command.CommandText = createTableQuery;
+                command.ExecuteNonQuery();
+            }}
+        }}
+    }}
+}}

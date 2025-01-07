@@ -4,40 +4,13 @@ from api.crud.src.parsing.components.connection_parameters import ConnectionPara
 from api.crud.src.parsing.components.field_model import FieldModel
 from api.crud.src.parsing.components.table_model import TableModel
 from api.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
+from api.crud.src.parsing.constants.allowed_languages import AllowedLanguages
+from api.crud.src.templates.template_loader import TemplateType, TemplateLoader
 
 
 class JavaConnectionGenerator(ConnectionGenerator):
     """
     Generador de código para manejar la conexión a la base de datos y la creación de tablas.
-    """
-
-    # Plantilla base para la clase de conexión
-    TEMPLATE = """
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-public class DatabaseConnection {{
-    private static final String URL = "{dbUrl}";
-    private static final String USER = "{dbUser}";
-    private static final String PASSWORD = "{dbPassword}";
-
-    public static Connection getConnection() throws SQLException {{
-        return DriverManager.getConnection(URL, USER, PASSWORD);
-    }}
-
-    public static void ensureTableExists() {{
-        String createTableQuery = "{CreateTableQuery}";
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement()) {{
-             statement.execute(createTableQuery);
-        }} catch (SQLException e) {{
-            e.printStackTrace();
-            throw new RuntimeException("Error ensuring table exists", e);
-        }}
-    }}
-}}
     """
 
     @staticmethod
@@ -50,7 +23,7 @@ public class DatabaseConnection {{
         create_table_query = sql_generator.generate_create_table()
 
         # Rellenar la plantilla
-        java_code = JavaConnectionGenerator.TEMPLATE.format(
+        java_code = TemplateLoader.load_template(AllowedLanguages.java, TemplateType.CONNECTION).format(
             dbUrl=JavaConnectionGenerator.generate_db_url(dbms, connection_params),
             dbUser=connection_params.username,
             dbPassword=connection_params.password,

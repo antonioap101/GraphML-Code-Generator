@@ -4,39 +4,13 @@ from api.crud.src.parsing.components.connection_parameters import ConnectionPara
 from api.crud.src.parsing.components.field_model import FieldModel
 from api.crud.src.parsing.components.table_model import TableModel
 from api.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
+from api.crud.src.parsing.constants.allowed_languages import AllowedLanguages
+from api.crud.src.templates.template_loader import TemplateLoader, TemplateType
 
 
 class PythonConnectionGenerator(ConnectionGenerator):
     """
     Generates the Python code for handling database connections and table creation.
-    """
-    TEMPLATE = """
-import psycopg2
-from psycopg2 import sql
-from contextlib import contextmanager
-
-DB_CONFIG = {{
-    'host': '{dbHost}',
-    'port': {dbPort},
-    'database': '{dbName}',
-    'user': '{dbUser}',
-    'password': '{dbPassword}'
-}}
-
-@contextmanager
-def get_connection():
-    conn = psycopg2.connect(**DB_CONFIG)
-    try:
-        yield conn
-    finally:
-        conn.close()
-
-def ensure_table_exists():
-    create_table_query = \"\"\"{CreateTableQuery}\"\"\"
-    with get_connection() as conn:
-        with conn.cursor() as cursor:
-            cursor.execute(create_table_query)
-            conn.commit()
     """
 
     @staticmethod
@@ -44,7 +18,7 @@ def ensure_table_exists():
         sql_generator = SQLGeneratorFactory.get(dbms, table_model)
         create_table_query = sql_generator.generate_create_table()
 
-        python_code = PythonConnectionGenerator.TEMPLATE.format(
+        python_code = TemplateLoader.load_template(AllowedLanguages.python, TemplateType.CONNECTION).format(
             dbHost=connection_params.host,
             dbPort=connection_params.port,
             dbName=connection_params.database_name,

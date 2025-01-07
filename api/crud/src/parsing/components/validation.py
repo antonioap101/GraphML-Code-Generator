@@ -9,3 +9,4 @@ class Validation(BaseModel):
     pattern: Optional[str]
     min: Optional[int]
     max: Optional[int]
+    customCode: Optional[str]

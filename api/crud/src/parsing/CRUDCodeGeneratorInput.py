@@ -14,11 +14,3 @@ class CRUDCodeGeneratorInput(BaseModel):
     language: AllowedLanguages
     dbms: AllowedDBMS
     connectionParams: ConnectionParameters
-    customCode: Optional[dict] = None
-
-    @staticmethod  # With strings that convert to the corresponding enum types
-    def create(table: TableModel, language: str, dbms: str, custom_code: Optional[dict] = None):
-        return CRUDCodeGeneratorInput(table, AllowedLanguages(language), AllowedDBMS(dbms), custom_code)
-
-
-

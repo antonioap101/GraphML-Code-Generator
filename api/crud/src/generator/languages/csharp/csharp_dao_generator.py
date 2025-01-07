@@ -4,77 +4,12 @@ from api.crud.src.parsing.components.table_model import TableModel
 from api.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
 from api.crud.src.parsing.constants.allowed_languages import AllowedLanguages
 from api.crud.src.parsing.constants.types.factory.type_mapper_factory import TypeMapperFactory
+from api.crud.src.templates.template_loader import TemplateLoader, TemplateType
 
 
 class CSharpDaoGenerator(DaoGenerator):
     """
     Generates DAO classes in C# based on table metadata and SQL queries.
-    """
-
-    TEMPLATE = """
-using System;
-using System.Data;
-using System.Data.SqlClient;
-
-public class {ClassName}DAO
-{{
-    private readonly SqlConnection _connection;
-
-    public {ClassName}DAO(SqlConnection connection)
-    {{
-        _connection = connection;
-    }}
-
-    // Create
-    public void Create({FieldParameters})
-    {{
-        string sql = "{InsertQuery}";
-        using (SqlCommand command = new SqlCommand(sql, _connection))
-        {{
-            {SetInsertParameters}
-            command.ExecuteNonQuery();
-        }}
-    }}
-
-    // Read
-    public DataTable Read(int id)
-    {{
-        string sql = "{SelectQuery}";
-        using (SqlCommand command = new SqlCommand(sql, _connection))
-        {{
-            command.Parameters.AddWithValue("@id", id);
-            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-            {{
-                DataTable result = new DataTable();
-                adapter.Fill(result);
-                return result;
-            }}
-        }}
-    }}
-
-    // Update
-    public void Update(int id, {FieldParameters})
-    {{
-        string sql = "{UpdateQuery}";
-        using (SqlCommand command = new SqlCommand(sql, _connection))
-        {{
-            {SetUpdateParameters}
-            command.Parameters.AddWithValue("@id", id);
-            command.ExecuteNonQuery();
-        }}
-    }}
-
-    // Delete
-    public void Delete(int id)
-    {{
-        string sql = "{DeleteQuery}";
-        using (SqlCommand command = new SqlCommand(sql, _connection))
-        {{
-            command.Parameters.AddWithValue("@id", id);
-            command.ExecuteNonQuery();
-        }}
-    }}
-}}
     """
 
     @staticmethod
@@ -108,8 +43,10 @@ public class {ClassName}DAO
             for field in table.fields if not field.primaryKey
         )
 
+        template = TemplateLoader.load_template(AllowedLanguages.csharp, TemplateType.DAO)
+
         # Fill the template with the generated values
-        csharp_code = CSharpDaoGenerator.TEMPLATE.format(
+        csharp_code = template.format(
             ClassName=table.name.capitalize(),
             FieldParameters=field_parameters,
             InsertQuery=insert_query,

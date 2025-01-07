@@ -4,59 +4,12 @@ from api.crud.src.parsing.components.table_model import TableModel
 from api.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
 from api.crud.src.parsing.constants.allowed_languages import AllowedLanguages
 from api.crud.src.parsing.constants.types.factory.type_mapper_factory import TypeMapperFactory
+from api.crud.src.templates.template_loader import TemplateLoader, TemplateType
 
 
 class JavaDaoGenerator(DaoGenerator):
     """
     Generador de clases DAO en Java basadas en los metadatos de la tabla y las consultas SQL generadas.
-    """
-
-    # Plantilla base para las clases DAO en Java
-    TEMPLATE = """
-import java.sql.*;
-
-public class {ClassName}DAO {{
-    private Connection connection;
-    public {ClassName}DAO(Connection connection) {{
-        this.connection = connection;
-    }}
-    
-    // Create
-    public void create({FieldParameters}) throws SQLException {{
-        String sql = "{InsertQuery}";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {{
-            {SetInsertParameters}
-            statement.executeUpdate();
-        }}
-    }}
-    
-    // Read
-    public ResultSet read(int id) throws SQLException {{
-        String sql = "{SelectQuery}";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, id);
-        return statement.executeQuery();
-    }}
-    
-    // Update
-    public void update(int id, {FieldParameters}) throws SQLException {{
-        String sql = "{UpdateQuery}";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {{
-            {SetUpdateParameters}
-            statement.setInt({ParamIndex}, id);
-            statement.executeUpdate();
-        }}
-    }}
-                                
-    // Delete
-    public void delete(int id) throws SQLException {{
-        String sql = "{DeleteQuery}";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {{
-            statement.setInt(1, id);
-            statement.executeUpdate();
-        }}
-    }}
-}}
     """
 
     @staticmethod
@@ -90,7 +43,7 @@ public class {ClassName}DAO {{
         )
 
         # Rellenar la plantilla con los valores generados
-        java_code = JavaDaoGenerator.TEMPLATE.format(
+        java_code = TemplateLoader.load_template(AllowedLanguages.java, TemplateType.DAO).format(
             ClassName=table.name.capitalize(),
             FieldParameters=field_parameters,
             InsertQuery=insert_query,

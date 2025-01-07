@@ -1,0 +1,59 @@
+import {{ getConnection }} from './connection';
+import {{ PoolClient }} from 'pg';
+
+export class {ClassName}Dao {{
+  static async insert({paramName}: any): Promise<void> {{
+    const client: PoolClient = await getConnection();
+    const query = `{InsertQuery}`;
+    const values = [{InsertValues}];
+    try {{
+      await client.query(query, values);
+    }} catch (error) {{
+      console.error('Error inserting record:', error);
+      throw error;
+    }} finally {{
+      client.release();
+    }}
+  }}
+
+  static async selectById(id: number): Promise<any> {{
+    const client: PoolClient = await getConnection();
+    const query = `{SelectQuery}`;
+    try {{
+      const result = await client.query(query, [id]);
+      return result.rows[0];
+    }} catch (error) {{
+      console.error('Error selecting record:', error);
+      throw error;
+    }} finally {{
+      client.release();
+    }}
+  }}
+
+  static async updateById(id: number, {paramName}: any): Promise<void> {{
+    const client: PoolClient = await getConnection();
+    const query = `{UpdateQuery}`;
+    const values = [{UpdateValues}, id];
+    try {{
+      await client.query(query, values);
+    }} catch (error) {{
+      console.error('Error updating record:', error);
+      throw error;
+    }} finally {{
+      client.release();
+    }}
+  }}
+
+  static async deleteById(id: number): Promise<void> {{
+    const client: PoolClient = await getConnection();
+    const query = `{DeleteQuery}`;
+    try {{
+      await client.query(query, [id]);
+    }} catch (error) {{
+      console.error('Error deleting record:', error);
+      throw error;
+    }} finally {{
+      client.release();
+    }}
+  }}
+}}

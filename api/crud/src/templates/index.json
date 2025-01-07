@@ -1,0 +1,18 @@
+{
+  "java": {
+    "connection": "crud/src/templates/java/java_connection.template",
+    "dao": "crud/src/templates/java/java_dao.template"
+  },
+  "python": {
+    "connection": "crud/src/templates/python/python_connection.template",
+    "dao": "crud/src/templates/python/python_dao.template"
+  },
+  "csharp": {
+    "connection": "crud/src/templates/csharp/csharp_connection.template",
+    "dao": "crud/src/templates/csharp/csharp_dao.template"
+  },
+  "typescript": {
+    "connection": "crud/src/templates/typescript/typescript_connection.template",
+    "dao": "crud/src/templates/typescript/typescript_dao.template"
+  }
+}

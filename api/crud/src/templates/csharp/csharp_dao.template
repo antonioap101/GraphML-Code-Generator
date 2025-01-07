@@ -1,0 +1,63 @@
+using System;
+using System.Data;
+using System.Data.SqlClient;
+
+public class {ClassName}DAO
+{{
+    private readonly SqlConnection _connection;
+
+    public {ClassName}DAO(SqlConnection connection)
+    {{
+        _connection = connection;
+    }}
+
+    // Create
+    public void Create({FieldParameters})
+    {{
+        string sql = "{InsertQuery}";
+        using (SqlCommand command = new SqlCommand(sql, _connection))
+        {{
+            {SetInsertParameters}
+            command.ExecuteNonQuery();
+        }}
+    }}
+
+    // Read
+    public DataTable Read(int id)
+    {{
+        string sql = "{SelectQuery}";
+        using (SqlCommand command = new SqlCommand(sql, _connection))
+        {{
+            command.Parameters.AddWithValue("@id", id);
+            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+            {{
+                DataTable result = new DataTable();
+                adapter.Fill(result);
+                return result;
+            }}
+        }}
+    }}
+
+    // Update
+    public void Update(int id, {FieldParameters})
+    {{
+        string sql = "{UpdateQuery}";
+        using (SqlCommand command = new SqlCommand(sql, _connection))
+        {{
+            {SetUpdateParameters}
+            command.Parameters.AddWithValue("@id", id);
+            command.ExecuteNonQuery();
+        }}
+    }}
+
+    // Delete
+    public void Delete(int id)
+    {{
+        string sql = "{DeleteQuery}";
+        using (SqlCommand command = new SqlCommand(sql, _connection))
+        {{
+            command.Parameters.AddWithValue("@id", id);
+            command.ExecuteNonQuery();
+        }}
+    }}
+}}
