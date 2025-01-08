@@ -5,6 +5,9 @@ from pathlib import Path
 from api.crud.src.parsing.constants.allowed_languages import AllowedLanguages
 
 
+# Define el directorio base del archivo como constante
+TEMPLATES_DIR = Path(__file__).resolve().parent
+
 class TemplateType(Enum):
     DAO = "dao"
     CONNECTION = "connection"
@@ -12,7 +15,7 @@ class TemplateType(Enum):
 
 class TemplateLoader:
     class TemplateIndex:
-        templates_path = f"{Path.cwd()}/crud/src/templates"
+        templates_path = TEMPLATES_DIR
         _index = None
 
         @staticmethod
@@ -28,7 +31,7 @@ class TemplateLoader:
             """Gets the path of a template file from the index."""
             index = TemplateLoader.TemplateIndex.load_index()
             try:
-                return index[language.value][template_type.value]
+                return TEMPLATES_DIR / index[language.value][template_type.value]
             except KeyError as e:
                 raise ValueError(f"Template path for {language}.{template_type} not found") from e
 
