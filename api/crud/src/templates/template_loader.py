@@ -12,7 +12,7 @@ class TemplateType(Enum):
 
 class TemplateLoader:
     class TemplateIndex:
-        templates_path = f"{Path.cwd()}/crud/src/templates"
+        templates_path = Path(__file__)
         _index = None
 
         @staticmethod
