@@ -1,0 +1,3 @@
+if ({FieldName}.Length > {maxLength}) {{
+    throw new ArgumentException("{FieldName} must be less than {maxLength} characters long.");
+}}

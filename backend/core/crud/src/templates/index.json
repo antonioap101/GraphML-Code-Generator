@@ -1,0 +1,46 @@
+{
+  "java": {
+    "connection": "java/connection.java.template",
+    "dao": "java/dao.java.template",
+    "validations": {
+      "minValue": "java/validations/minValue.java.template",
+      "maxValue": "java/validations/maxValue.java.template",
+      "minLength": "java/validations/minLength.java.template",
+      "maxLength": "java/validations/maxLength.java.template",
+      "pattern": "java/validations/pattern.java.template"
+    }
+  },
+  "python": {
+    "connection": "python/connection.python.template",
+    "dao": "python/dao.python.template",
+    "validations": {
+      "minValue": "python/validations/minValue.python.template",
+      "maxValue": "python/validations/maxValue.python.template",
+      "minLength": "python/validations/minLength.python.template",
+      "maxLength": "python/validations/maxLength.python.template",
+      "pattern": "python/validations/pattern.python.template"
+    }
+  },
+  "csharp": {
+    "connection": "csharp/connection.csharp.template",
+    "dao": "csharp/dao.csharp.template",
+    "validations": {
+      "minValue": "csharp/validations/minValue.csharp.template",
+      "maxValue": "csharp/validations/maxValue.csharp.template",
+      "minLength": "csharp/validations/minLength.csharp.template",
+      "maxLength": "csharp/validations/maxLength.csharp.template",
+      "pattern": "csharp/validations/pattern.csharp.template"
+    }
+  },
+  "typescript": {
+    "connection": "typescript/connection.typescript.template",
+    "dao": "typescript/dao.typescript.template",
+    "validations": {
+      "minValue": "typescript/validations/minValue.typescript.template",
+      "maxValue": "typescript/validations/maxValue.typescript.template",
+      "minLength": "typescript/validations/minLength.typescript.template",
+      "maxLength": "typescript/validations/maxLength.typescript.template",
+      "pattern": "typescript/validations/pattern.typescript.template"
+    }
+  }
+}

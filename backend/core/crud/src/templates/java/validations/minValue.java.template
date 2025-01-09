@@ -1,0 +1,3 @@
+if ({FieldName} < {minValue}) {{
+    throw new IllegalArgumentException("{FieldName} must be greater than or equal to {minValue}");
+}}

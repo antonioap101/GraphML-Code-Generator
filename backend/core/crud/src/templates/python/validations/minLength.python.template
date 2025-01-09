@@ -1,0 +1,2 @@
+if len({FieldName}) < {minLength}:
+    raise ValueError(f"{FieldName} must be at least {minLength} characters long")

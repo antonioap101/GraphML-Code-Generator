@@ -1,4 +1,4 @@
-# <img src="./assets/logo.png" alt="Logo" width="30" height="30" /> GraphML & CRUD Code Generator
+# <img src="./readme-assets/logo.png" alt="Logo" width="30" height="30" /> GraphML & CRUD Code Generator
 
 ## 🌐 Aplicaciones Deployadas
 
@@ -70,7 +70,7 @@ estilizado utilizando Markdown:
 > **Página inicial de la aplicación**  
 > Una vista moderna y limpia que conecta las funcionalidades de los generadores.
 
-![Vista Principal](./assets/main-page.png)
+![Vista Principal](readme-assets/main-page.png)
 
 ---
 
@@ -81,10 +81,10 @@ estilizado utilizando Markdown:
 > **Transforma contenido XML a GraphML en un instante.**
 
 1️⃣ **Antes de la Conversión:**  
-![Inicial](./assets/graphml-generator-1.png)
+![Inicial](readme-assets/graphml-generator-1.png)
 
 2️⃣ **Después de la Conversión:**  
-![Final](./assets/graphml-generator-2.png)
+![Final](readme-assets/graphml-generator-2.png)
 
 ---
 
@@ -96,15 +96,15 @@ estilizado utilizando Markdown:
 
 1️⃣ **Selección de Base de Datos y Lenguaje:**
 > Personaliza tu configuración inicial para el CRUD.  
-![Crud Generator 1](./assets/crud-generator-1.png)
+![Crud Generator 1](readme-assets/crud-generator-1.png)
 
 2️⃣ **Estructura de la Tabla:**
 > Define los campos y sus propiedades para tu tabla.  
-![Crud Generator 2](./assets/crud-generator-2.png)
+![Crud Generator 2](readme-assets/crud-generator-2.png)
 
 3️⃣ **Código Generado:**
 > Obtén automáticamente el código para tu proyecto en el lenguaje seleccionado.  
-![Crud Generator 3](./assets/crud-generator-3.png)
+![Crud Generator 3](readme-assets/crud-generator-3.png)
 
 ---
 
@@ -140,7 +140,7 @@ npm run dev
 #### 3. Configuración del Backend
 
 ```bash
-cd ../api
+cd ../backend
 python -m venv venv
 source venv/bin/activate  # En Windows: venv\Scripts\activate
 pip install -r requirements.txt

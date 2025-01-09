@@ -1,0 +1,2 @@
+if len({FieldName}) > {maxLength}:
+    raise ValueError(f"{FieldName} must be less than {maxLength} characters")

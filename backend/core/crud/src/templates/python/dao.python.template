@@ -1,0 +1,33 @@
+class {ClassName}DAO:
+
+    def __init__(self, connection):
+        self.connection = connection
+
+    def create(self, {FieldParameters}):
+        {ValidationCode}
+        query = "{InsertQuery}"
+        with self.connection.cursor() as cursor:
+            parameters = [{SetInsertParameters}]
+            cursor.execute(query, parameters)
+            self.connection.commit()
+            return cursor.fetchone()[0]
+
+    def read(self, id):
+        query = "{SelectQuery}"
+        with self.connection.cursor() as cursor:
+            cursor.execute(query, (id,))
+            return cursor.fetchone()
+
+    def update(self, id, {FieldParameters}):
+        {ValidationCode}
+        query = "{UpdateQuery}"
+        with self.connection.cursor() as cursor:
+            parameters = [{SetUpdateParameters}, id]
+            cursor.execute(query, parameters)
+            self.connection.commit()
+
+    def delete(self, id):
+        query = "{DeleteQuery}"
+        with self.connection.cursor() as cursor:
+            cursor.execute(query, (id,))
+            self.connection.commit()
