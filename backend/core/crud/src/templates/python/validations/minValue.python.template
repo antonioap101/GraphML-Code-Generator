@@ -1,0 +1,2 @@
+if {FieldName} < {minValue}:
+    raise ValueError(f"{FieldName} must be greater than {minValue}")

@@ -1,0 +1,3 @@
+if ({FieldName}.length < {minLength}) {{
+    throw new Error("{FieldName} must be at least {minLength} characters long");
+}}

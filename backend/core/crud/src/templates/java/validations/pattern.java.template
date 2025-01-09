@@ -1,0 +1,3 @@
+if (!{FieldName}.matches("{pattern}")) {{
+    throw new IllegalArgumentException("{FieldName} must match the pattern {pattern}");
+}}

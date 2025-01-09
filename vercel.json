@@ -9,17 +9,17 @@
       }
     },
     {
-      "src": "api/app.py",
+      "src": "backend/app.py",
       "use": "@vercel/python",
       "config": {
-        "installCommand": "pip install -r api/requirements.txt --verbose"
+        "installCommand": "pip install -r backend/requirements.txt --verbose"
       }
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)?",
-      "dest": "api/app.py"
+      "dest": "backend/app.py"
     },
     {
       "src": "/(.*)",
