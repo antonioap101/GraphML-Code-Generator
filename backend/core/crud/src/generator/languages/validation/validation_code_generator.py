@@ -38,6 +38,10 @@ class ValidationCodeGenerator:
                     template.format(FieldName=field_model.name, **{validation_type.value: validation_value})
                 )
 
+                # Añadir customCode si está presente
+        if field_model.validations.customCode:
+            validation_code_parts.append(f"// Custom Code for {field_model.name}\n{field_model.validations.customCode}")
+
         return "\n".join(validation_code_parts)
 
     def forFields(self, fields: List[FieldModel]) -> str:
@@ -68,7 +72,9 @@ if __name__ == "__main__":
             type=TypeEnum.NUMBER,
             validations=Validations(
                 minValue=0,
-                maxValue=100
+                maxValue=100,
+                customCode="if (age < 18) {\n    throw new Error('Age must be at least 18');\n}"
+
             )
         )
     ]

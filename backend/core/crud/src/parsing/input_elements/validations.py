@@ -17,13 +17,12 @@ class ValidationsEnum(str, Enum):
 
 # Definir las validaciones permitidas por tipo con minValue y maxValue
 VALIDATIONS_BY_TYPE = {
-    TypeEnum.TEXT: {ValidationsEnum.minLength, ValidationsEnum.maxLength, ValidationsEnum.pattern},
-    TypeEnum.NUMBER: {ValidationsEnum.minValue, ValidationsEnum.maxValue},
-    TypeEnum.FLOAT: {ValidationsEnum.minValue, ValidationsEnum.maxValue},
-    TypeEnum.DOUBLE: {ValidationsEnum.minValue, ValidationsEnum.maxValue},
-    TypeEnum.BOOLEAN: set(),  # No admite validaciones adicionales
+    TypeEnum.TEXT: {ValidationsEnum.minLength, ValidationsEnum.maxLength, ValidationsEnum.pattern, ValidationsEnum.customCode},
+    TypeEnum.NUMBER: {ValidationsEnum.minValue, ValidationsEnum.maxValue, ValidationsEnum.customCode},
+    TypeEnum.FLOAT: {ValidationsEnum.minValue, ValidationsEnum.maxValue, ValidationsEnum.customCode},
+    TypeEnum.DOUBLE: {ValidationsEnum.minValue, ValidationsEnum.maxValue, ValidationsEnum.customCode},
+    TypeEnum.BOOLEAN: {ValidationsEnum.customCode},  # No admite validaciones adicionales
 }
-
 
 class Validations(BaseModel):
     minLength: Optional[int]

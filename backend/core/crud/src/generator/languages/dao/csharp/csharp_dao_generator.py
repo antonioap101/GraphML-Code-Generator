@@ -1,3 +1,4 @@
+from backend.core.crud.src.formatting.CodeFormatter import CodeFormatter
 from backend.core.crud.src.generator.SQL.SQL_generator import SQLGenerator
 from backend.core.crud.src.generator.languages.dao.dao_generator import DaoGenerator
 from backend.core.crud.src.generator.languages.validation.validation_code_generator import ValidationCodeGenerator
@@ -18,7 +19,6 @@ class CSharpDaoGenerator(DaoGenerator):
         """
         Generates the DAO class code for C# based on the table metadata and DBMS.
         """
-        # Generar código de validación
         # Generar código de validación
         validation_code = ValidationCodeGenerator.fromLanguage(AllowedLanguages.csharp).forFields(table_model.fields)
 
@@ -50,14 +50,16 @@ class CSharpDaoGenerator(DaoGenerator):
         # Load the DAO template
         dao_template = TemplateLoader.forLanguage(AllowedLanguages.csharp).getDao()
 
-        # Format the validation code indentation
-        formatted_validation_code = DaoGenerator.format_validation_code_indent(dao_template, validation_code)
+        # Determine the indentation level for ValidationCode
+        base_indent = dao_template.split("{ValidationCode}")[0].splitlines()[-1]
+        if validation_code and len(validation_code) > 0:
+            validation_code = CodeFormatter.format_code_with_indent(validation_code, base_indent)
 
         # Fill the template with the generated values
         csharp_code = dao_template.format(
             ClassName=table_model.name.capitalize(),
             FieldParameters=field_parameters,
-            ValidationCode=formatted_validation_code,
+            ValidationCode=validation_code,
             InsertQuery=insert_query,
             SelectQuery=select_query,
             UpdateQuery=update_query,

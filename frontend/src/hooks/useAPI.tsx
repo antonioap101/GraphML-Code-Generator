@@ -9,7 +9,7 @@ interface ApiContextType {
     graphmlOutput: string;
     crudOutput: string;
     loading: boolean;
-    error: string | null;
+    apiError: string | null;
 }
 
 // Crear el contexto
@@ -21,8 +21,6 @@ export const ApiProvider: React.FC<{ children: ReactNode }> = ({children}) => {
     const [error, setError] = useState<string | null>(null);
     const [graphmlOutput, setGraphmlOutput] = useState<string>("");
     const [crudOutput, setCrudOutput] = useState<string>("");
-
-
 
     const convertXmlToGraphml = async (xmlContent: string) => {
         setLoading(true);
@@ -44,7 +42,8 @@ export const ApiProvider: React.FC<{ children: ReactNode }> = ({children}) => {
             const result = await ApiService.generateCrud(crudInput);
             setCrudOutput(result.code); // Ajusta según la respuesta del backend
         } catch (err) {
-            setError((err as Error).message || "Unknown error occurred.");
+            console.error("API Error: " + (err as Error).message || "Unknown error occurred.");
+            setError("API Error Ocurred: See logs for more information.");
         } finally {
             setLoading(false);
         }
@@ -53,7 +52,7 @@ export const ApiProvider: React.FC<{ children: ReactNode }> = ({children}) => {
     return (
         <ApiContext.Provider
             value={{
-                convertXmlToGraphml, generateCrud, graphmlOutput, crudOutput, loading, error,
+                convertXmlToGraphml, generateCrud, graphmlOutput, crudOutput, loading, apiError: error,
             }}
         >
             {children}

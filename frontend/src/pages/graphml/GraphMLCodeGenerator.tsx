@@ -9,10 +9,9 @@ import GenerateButton from "../../components/buttons/generateButton/GenerateButt
 
 const GraphMLCodeGenerator: React.FC = () => {
     const [xmlContent, setXmlContent] = React.useState('');
-    const {loading, error, graphmlOutput, convertXmlToGraphml} = useApi();
+    const {loading, apiError, graphmlOutput, convertXmlToGraphml} = useApi();
 
     const handleFileUpload = (file: File) => {
-        console.log("file", file)
         const fileReader = new FileReader();
         fileReader.onload = (e) => {
             setXmlContent(e.target?.result as string);
@@ -53,7 +52,7 @@ const GraphMLCodeGenerator: React.FC = () => {
                         disabled={loading || !xmlContent}
                         loading={loading}
                     />
-                    {error && <p className="error">{error}</p>}
+                    {apiError && <p className="error">{apiError}</p>}
 
                 </div>
                 <GraphmlOutput

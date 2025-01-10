@@ -18,6 +18,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCode, faFont, faGear, faLayerGroup, faSignal, faTableList} from "@fortawesome/free-solid-svg-icons";
 import ConnectionParametersPopup from "../../components/popUps/conectionParametersPopup/ConnectionParametersPopUp.tsx";
 import {TypeEnum} from "../../constants/TypeEnum.ts";
+import {useError} from "../../hooks/useError.tsx";
 
 const CRUDCodeGenerator: React.FC = () => {
     const [code, setCode] = useState(languageExamples[AllowedLanguages.Java]);
@@ -32,8 +33,8 @@ const CRUDCodeGenerator: React.FC = () => {
     const [activeTab, setActiveTab] = useState("schema"); // Estado para controlar la pestaña activa
     const [tableName, setTableName] = useState(""); // Estado para el nombre de la tabla
 
-    const [localError, setLocalError] = useState<string | null>(null);
-    const {loading, error, crudOutput, generateCrud} = useApi();
+    const {errorMessage, setError, clearError} = useError();
+    const {loading, apiError, crudOutput, generateCrud} = useApi();
 
     const [fields, setFields] = useState<FieldModel[]>([
         {
@@ -48,9 +49,12 @@ const CRUDCodeGenerator: React.FC = () => {
 
 
     useEffect(() => {
-        if (!error || error === "") setLocalError(null);
-        if (error) setLocalError(localError + "\n" + error);
-    }, [error]);
+        if (!apiError || apiError === "") clearError();
+        if (apiError) {
+            const errMsg = (errorMessage ? errorMessage + "\n" : "") + apiError;
+            setError(errMsg);
+        }
+    }, [apiError]);
 
 
     useEffect(() => {
@@ -70,9 +74,6 @@ const CRUDCodeGenerator: React.FC = () => {
 
     const handleConvert = async () => {
         try {
-            console.log("Convert button clicked");
-            console.log("Fields:", fields);
-            console.log("Params:", connectionParams);
 
             if (!tableName || tableName.length === 0) {
                 throw new Error("Table name is required");
@@ -88,9 +89,11 @@ const CRUDCodeGenerator: React.FC = () => {
                 selectedDBMS.value as AllowedDBMS,
                 connectionParams
             ));
-        } catch (e: any) {
-            setLocalError(e.message);
-            console.error("Error generating CRUD code:", e);
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                setError(e.message);
+                console.error("Error generating CRUD code:", e);
+            }
         }
     };
 
@@ -139,7 +142,7 @@ const CRUDCodeGenerator: React.FC = () => {
                     <form className={styles.content}>
                         {activeTab === "schema" && (
                             <section className={styles.tableSection}>
-                                <TableAttributeEditor fields={fields} setFields={setFields}/>
+                                <TableAttributeEditor language={selectedLanguage.value} fields={fields} setFields={setFields}/>
                             </section>
                         )}
 
@@ -181,7 +184,6 @@ const CRUDCodeGenerator: React.FC = () => {
                         </a>
                         <CopyButton content={code}/>
                     </header>
-                    {localError && <p className="error">{localError}</p>}
                     <AceIDEComponent code={code} setCode={setCode} language={selectedLanguage.value}/>
                 </aside>
             </section>

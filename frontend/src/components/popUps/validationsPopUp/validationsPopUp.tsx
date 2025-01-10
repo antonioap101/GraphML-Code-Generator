@@ -1,19 +1,21 @@
-// src/input_elements/popUps/ExtraSettingsPopup.tsx
 import React from "react";
-import styles from "./ExtraSettingsPopup.module.css";
+import styles from "./validationsPopup.module.css";
 import sharedStyles from "../sharedPopUpStyles.module.css";
 import {FieldModel, Validation} from "../../../constants/CRUDCodeGeneratorInput";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRotateLeft, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {TypeEnum} from "../../../constants/TypeEnum.ts";
+import AceIDEComponent from "../../aceIde/AceIDEComponent.tsx";
 
-interface ExtraSettingsPopupProps {
+
+interface ValidationsPopupProps {
+    language: string;
     field: FieldModel;
     setValidations: (validations: Validation) => void;
     onClose: () => void;
 }
 
-const ExtraSettingsPopup: React.FC<ExtraSettingsPopupProps> = ({field, setValidations, onClose}) => {
+const ValidationsPopUp: React.FC<ValidationsPopupProps> = ({language, field, setValidations, onClose}) => {
     const {validations, type} = field;
 
     const handleChange = (key: keyof Validation, value: string | number | undefined) => {
@@ -34,21 +36,19 @@ const ExtraSettingsPopup: React.FC<ExtraSettingsPopupProps> = ({field, setValida
                             onClick={() => setValidations({})}
                             aria-label="Reset Validations"
                         >
-                            <FontAwesomeIcon icon={faArrowRotateLeft} size="sm" />
+                            <FontAwesomeIcon icon={faArrowRotateLeft} size="sm"/>
                         </button>
                         <button className={styles.closeButton} onClick={onClose} aria-label="Close">
-                            <FontAwesomeIcon icon={faTimes} />
+                            <FontAwesomeIcon icon={faTimes}/>
                         </button>
                     </div>
                 </header>
 
                 {type === TypeEnum.BOOLEAN ? (
-                    // If the type is BOOLEAN, show a message
                     <div className={styles.noSettings}>
                         <p>No extra settings available for the selected type.</p>
                     </div>
                 ) : (
-                    // If the type is not BOOLEAN, show validation inputs
                     <form className={styles.form}>
                         <label>
                             Pattern:
@@ -65,6 +65,7 @@ const ExtraSettingsPopup: React.FC<ExtraSettingsPopupProps> = ({field, setValida
                                     Min Length:
                                     <input
                                         type="number"
+                                        min={0}
                                         value={validations?.minLength || ""}
                                         onChange={(e) =>
                                             handleChange(
@@ -78,6 +79,7 @@ const ExtraSettingsPopup: React.FC<ExtraSettingsPopupProps> = ({field, setValida
                                     Max Length:
                                     <input
                                         type="number"
+                                        min={0}
                                         value={validations?.maxLength || ""}
                                         onChange={(e) =>
                                             handleChange(
@@ -120,6 +122,18 @@ const ExtraSettingsPopup: React.FC<ExtraSettingsPopupProps> = ({field, setValida
                                 </label>
                             </>
                         )}
+
+                        {/* AceIDE for custom code */}
+                        <div className={styles.customCodeSection}>
+                            <label>Custom Validation Code:</label>
+                            <AceIDEComponent
+                                code={validations?.customCode || ""}
+                                setCode={(newCode) => handleChange("customCode", newCode)}
+                                language={language}
+                                readonly={false}
+                                enableBasicAutocompletion={true}
+                            />
+                        </div>
                     </form>
                 )}
             </div>
@@ -127,4 +141,4 @@ const ExtraSettingsPopup: React.FC<ExtraSettingsPopupProps> = ({field, setValida
     );
 };
 
-export default ExtraSettingsPopup;
+export default ValidationsPopUp;

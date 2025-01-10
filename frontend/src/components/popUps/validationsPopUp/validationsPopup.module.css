@@ -4,12 +4,25 @@
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    width: 90%;
-    max-width: 400px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 15px;
     animation: popup-animation 0.3s ease-in-out;
+}
+
+.customCodeSection {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    height: 200px;
+}
+
+.customCodeSection label {
+    display: block;
+    margin-bottom: 0.5rem;
+
 }
 
 @keyframes popup-animation {

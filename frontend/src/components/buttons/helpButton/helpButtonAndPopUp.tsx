@@ -9,8 +9,6 @@ import {faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 import HelpPopUp from "../../popUps/helpPopUp/HelpPopUp.tsx";
 
 
-console.log("STYLES: ", styles);
-
 const HelpButton: React.FC = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 

@@ -27,14 +27,14 @@ interface AceIDEComponent {
     code: string;
     setCode: (code: string) => void;
     language: string;
+    readonly?: boolean;
+    enableBasicAutocompletion?: boolean;
 }
 
 
-const AceIDEComponent: React.FC<AceIDEComponent> = ({code, setCode, language}) => {
+const AceIDEComponent: React.FC<AceIDEComponent> = ({code, setCode, language, readonly=true, enableBasicAutocompletion: enableAutocompletion = false}) => {
 
     const {theme} = useTheme();
-
-    console.log("AceIDEComponent -> language", language)
 
     return (
         <AceEditor
@@ -54,14 +54,14 @@ const AceIDEComponent: React.FC<AceIDEComponent> = ({code, setCode, language}) =
                 showPrintMargin: false,
                 showGutter: true,
                 highlightActiveLine: true,
-                enableBasicAutocompletion: false,
-                enableLiveAutocompletion: false,
+                enableBasicAutocompletion: enableAutocompletion,
+                enableLiveAutocompletion: enableAutocompletion,
                 enableSnippets: false,
                 showLineNumbers: true,
                 tabSize: 4,
                 showFoldWidgets: true,
                 displayIndentGuides: true,
-                readOnly: true,
+                readOnly: readonly,
             }}
         />
 
