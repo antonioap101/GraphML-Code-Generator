@@ -72,7 +72,7 @@
 .connectionButton {
     display: inline-block;
     border-radius: 10px;
-    padding:10px;
+    padding: 10px;
     font-size: var(--font-size-xlarge);
     background-color: transparent;
     color: var(--color-primary);
@@ -89,8 +89,38 @@
 
 .tabs {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     border-bottom: 1px solid var(--color-border-light);
+}
+
+.tabTableName {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-border) !important;
+    gap: 10px;
+    padding: 0 10px;
+    border-bottom: 2px solid var(--color-text);
+
+}
+
+.tableNameInput {
+    flex: 1;
+    margin: 0;
+    padding: 8px 12px !important; /* Ajusta el espaciado interno */
+    border: none !important; /* Elimina todos los bordes */
+    border-radius: 0 !important;
+    text-align: left !important;
+    font-size: var(--font-size-medium);
+    color: var(--color-text);
+    background-color: transparent;
+}
+.tableNameInput::placeholder {
+    color: var(--color-text);
+}
+
+.tabButtons {
+    display: flex;
+    gap: 0;
 }
 
 /* Estilos para el botón de selección de sección */
@@ -98,7 +128,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap:5px;
+    gap: 5px;
     padding: 8px 16px;
     font-size: var(--font-size-medium);
     font-weight: var(--font-weight-light);

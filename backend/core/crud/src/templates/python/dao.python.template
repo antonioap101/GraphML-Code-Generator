@@ -1,5 +1,4 @@
 class {ClassName}DAO:
-
     def __init__(self, connection):
         self.connection = connection
 
@@ -10,7 +9,7 @@ class {ClassName}DAO:
             parameters = [{SetInsertParameters}]
             cursor.execute(query, parameters)
             self.connection.commit()
-            return cursor.fetchone()[0]
+            return cursor.lastrowid
 
     def read(self, id):
         query = "{SelectQuery}"

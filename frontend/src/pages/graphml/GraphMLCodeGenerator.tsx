@@ -1,7 +1,7 @@
 // src/App.tsx
 import React from 'react';
 import './GraphMLCodeGenerator.css';
-import {useApi} from "../../hooks/useXMLToGraphml.tsx";
+import {useApi} from "../../hooks/useAPI.tsx";
 import GraphmlOutput from "../../components/textInputOutput/GraphmlOutput.tsx";
 import XmlInput from "../../components/textInputOutput/XMLInput.tsx";
 import GenerateButton from "../../components/buttons/generateButton/GenerateButton.tsx";

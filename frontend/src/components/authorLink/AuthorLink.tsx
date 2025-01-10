@@ -1,4 +1,4 @@
-// src/components/AuthorLink.tsx
+// src/input_elements/AuthorLink.tsx
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUpRightFromSquare} from "@fortawesome/free-solid-svg-icons";

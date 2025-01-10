@@ -57,7 +57,7 @@ class TypeMapper:
         AllowedDBMS.mysql: {
             "type_mapping": {
                 TypeEnum.NUMBER: "INT",
-                TypeEnum.TEXT: "VARCHAR({length})",
+                TypeEnum.TEXT: "VARCHAR(250)",
                 TypeEnum.BOOLEAN: "TINYINT(1)",
                 TypeEnum.FLOAT: "FLOAT",
                 TypeEnum.DOUBLE: "DOUBLE",
@@ -67,7 +67,7 @@ class TypeMapper:
         AllowedDBMS.postgresql: {
             "type_mapping": {
                 TypeEnum.NUMBER: "INTEGER",
-                TypeEnum.TEXT: "CHARACTER VARYING({length})",
+                TypeEnum.TEXT: "VARCHAR(250)",
                 TypeEnum.BOOLEAN: "BOOLEAN",
                 TypeEnum.FLOAT: "REAL",
                 TypeEnum.DOUBLE: "DOUBLE PRECISION",
@@ -87,7 +87,7 @@ class TypeMapper:
         AllowedDBMS.oracle: {
             "type_mapping": {
                 TypeEnum.NUMBER: "NUMBER",
-                TypeEnum.TEXT: "VARCHAR2({length})",
+                TypeEnum.TEXT: "VARCHAR2(250)",
                 TypeEnum.BOOLEAN: "NUMBER",
                 TypeEnum.FLOAT: "REAL",
                 TypeEnum.DOUBLE: "DOUBLE PRECISION",

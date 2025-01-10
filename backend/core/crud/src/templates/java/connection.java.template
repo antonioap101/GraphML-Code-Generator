@@ -6,19 +6,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseConnection {{
-    private static final String URL = "{dbUrl}";
-    private static final String USER = "{dbUser}";
-    private static final String PASSWORD = "{dbPassword}";
+    private String URL = "{dbUrl}";
+    private String USER = "{dbUser}";
+    private String PASSWORD = "{dbPassword}";
 
-    public static Connection getConnection() throws SQLException {{
+    // Default constructor
+    public DatabaseConnection() {{
+    }}
+
+    // Constructor with parameters
+    public DatabaseConnection(String URL, String USER, String PASSWORD) {{
+        this.URL = URL;
+        this.USER = USER;
+        this.PASSWORD = PASSWORD;
+    }}
+
+    public Connection getConnection() throws SQLException {{
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }}
 
-    public static void ensureTableExists() {{
+    public void ensureTableExists() {{
         String createTableQuery = "{CreateTableQuery}";
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement()) {{
-             statement.execute(createTableQuery);
+            statement.execute(createTableQuery);
         }} catch (SQLException e) {{
             e.printStackTrace();
             throw new RuntimeException("Error ensuring table exists", e);

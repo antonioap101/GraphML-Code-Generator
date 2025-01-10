@@ -46,11 +46,22 @@ class PythonDaoGenerator(DaoGenerator):
             for field in table_model.fields if not field.primaryKey
         )
 
+        # Load the DAO template
+        dao_template = TemplateLoader.forLanguage(AllowedLanguages.python).getDao()
+
+        # Determine the indentation level for ValidationCode
+        base_indent = dao_template.split("{ValidationCode}")[0].splitlines()[-1]
+        validation_code_lines = validation_code.splitlines()
+
+        # Apply the calculated indentation to each line of ValidationCode
+        formatted_validation_code = f"{validation_code_lines[0]}\n" + "\n".join(f"{base_indent}{line}" for line in validation_code_lines[1:] if line.strip())
+
+
         # Rellenar la plantilla con los valores generados
-        python_code = TemplateLoader.forLanguage(AllowedLanguages.python).getDao().format(
+        python_code = dao_template.format(
             ClassName=table_model.name.capitalize(),
             FieldParameters=field_parameters,
-            ValidationCode=validation_code,
+            ValidationCode=formatted_validation_code,
             InsertQuery=insert_query,
             SelectQuery=select_query,
             UpdateQuery=update_query,

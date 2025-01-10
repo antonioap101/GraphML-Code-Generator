@@ -1,9 +1,9 @@
-from typing import Dict
 from backend.core.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
-from backend.core.crud.src.parsing.input_elements.field_model import FieldModel
-from backend.core.crud.src.parsing.input_elements.table_model import TableModel
 from backend.core.crud.src.parsing.constants.types.type_enum import TypeEnum
 from backend.core.crud.src.parsing.constants.types.type_mapper import TypeMapper
+from backend.core.crud.src.parsing.input_elements.field_model import FieldModel
+from backend.core.crud.src.parsing.input_elements.table_model import TableModel
+from backend.core.crud.src.templates.template_loader import TemplateLoader, TemplateType
 
 
 class SQLGenerator:
@@ -11,39 +11,16 @@ class SQLGenerator:
     Generador de consultas SQL para distintos DBMS, con configuración centralizada.
     """
 
-    _dbms_config: Dict[AllowedDBMS, Dict] = {
-        AllowedDBMS.mysql: {
-            "placeholder": "%s",
-            "auto_increment_keyword": "AUTO_INCREMENT",
-            "type_mapper": TypeMapper.fromDBMS(AllowedDBMS.mysql),
-        },
-        AllowedDBMS.postgresql: {
-            "placeholder": "%s",
-            "auto_increment_keyword": "SERIAL",
-            "type_mapper": TypeMapper.fromDBMS(AllowedDBMS.postgresql),
-        },
-        AllowedDBMS.sqlite: {
-            "placeholder": "?",
-            "auto_increment_keyword": "AUTOINCREMENT",
-            "type_mapper": TypeMapper.fromDBMS(AllowedDBMS.sqlite),
-        },
-        AllowedDBMS.oracle: {
-            "placeholder": ":{}",
-            "auto_increment_keyword": None,  # Oracle no usa AUTO_INCREMENT
-            "type_mapper": TypeMapper.fromDBMS(AllowedDBMS.oracle),
-        },
-    }
-
     def __init__(self, table: TableModel, dbms: AllowedDBMS):
         self.table = table
         self.dbms = dbms
-        self.config = self._dbms_config[dbms]
-        self.type_mapper = self.config["type_mapper"]
+        self.template_loader = TemplateLoader.forDBMS(dbms)
+        self.placeholder = self.template_loader.getPlaceholder()
+        self.auto_increment_keyword = self.template_loader.getAutoIncrementKeyword()
+        self.type_mapper = TypeMapper.fromDBMS(dbms)
 
     @classmethod
     def fromDBMS(cls, dbms: AllowedDBMS, table: TableModel) -> "SQLGenerator":
-        if dbms not in cls._dbms_config:
-            raise ValueError(f"DBMS no soportado: {dbms}")
         return cls(table, dbms)
 
     def generate_create_table(self) -> str:
@@ -57,11 +34,10 @@ class SQLGenerator:
                 dbms_type = dbms_type.format(length=field.length)
 
             column_def = f"{field.name} {dbms_type}"
+            if field.autoIncrement and self.auto_increment_keyword:
+                column_def += f" {self.auto_increment_keyword}"
             if not field.nullable:
                 column_def += " NOT NULL"
-            if field.autoIncrement:
-                if self.config["auto_increment_keyword"]:
-                    column_def += f" {self.config['auto_increment_keyword']}"
             if field.primaryKey:
                 column_def += " PRIMARY KEY"
             if field.unique:
@@ -69,43 +45,50 @@ class SQLGenerator:
 
             columns.append(column_def)
 
-        return f"CREATE TABLE {self.table.name} (\n  " + ",\n  ".join(columns) + "\n);"
+        columns_str = ", ".join(columns)
+        template = self.template_loader.getSQLTemplate(TemplateType.SQL.CREATE_TABLE)
+        return template.format(table_name=self.table.name, columns=columns_str)
 
     def generate_insert(self) -> str:
         """
         Genera la consulta INSERT para el DBMS actual.
         """
         columns = ", ".join(field.name for field in self.table.fields if not field.autoIncrement)
-        placeholders = ", ".join(
-            self.config["placeholder"].format(i + 1) for i, field in enumerate(self.table.fields) if not field.autoIncrement
-        )
-        return f"INSERT INTO {self.table.name} ({columns}) VALUES ({placeholders});"
+        placeholders = ", ".join(self.placeholder for field in self.table.fields if not field.autoIncrement)
+        template = self.template_loader.getSQLTemplate(TemplateType.SQL.INSERT)
+        return template.format(table_name=self.table.name, columns=columns, placeholders=placeholders)
 
     def generate_select(self) -> str:
         """
         Genera la consulta SELECT para el DBMS actual.
         """
-        return f"SELECT * FROM {self.table.name} WHERE id = {self.config['placeholder'].format(1)};"
+        pkeys = [field.name for field in self.table.fields if field.primaryKey]
+        template = self.template_loader.getSQLTemplate(TemplateType.SQL.SELECT)
+        return template.format(table_name=self.table.name, condition=f"id = {self.placeholder}", primary_key_placeholder=pkeys[0])
 
     def generate_update(self) -> str:
         """
         Genera la consulta UPDATE para el DBMS actual.
         """
+        pkeys = [field.name for field in self.table.fields if field.primaryKey]
         set_clause = ", ".join(
-            f"{field.name} = {self.config['placeholder'].format(i + 1)}"
-            for i, field in enumerate(self.table.fields)
+            f"{field.name} = {self.placeholder}"
+            for field in self.table.fields
             if not field.primaryKey
         )
-        return f"UPDATE {self.table.name} SET {set_clause} WHERE id = {self.config['placeholder'].format(len(self.table.fields))};"
+        template = self.template_loader.getSQLTemplate(TemplateType.SQL.UPDATE)
+        return template.format(table_name=self.table.name, set_clause=set_clause, primary_key_placeholder=pkeys[0])
 
     def generate_delete(self) -> str:
         """
         Genera la consulta DELETE para el DBMS actual.
         """
-        return f"DELETE FROM {self.table.name} WHERE id = {self.config['placeholder'].format(1)};"
+        pkeys = [field.name for field in self.table.fields if field.primaryKey]
+        template = self.template_loader.getSQLTemplate(TemplateType.SQL.DELETE)
+        return template.format(table_name=self.table.name, primary_key_placeholder=pkeys[0])
 
 
-# Ejenmplo de uso
+# Ejemplo de uso
 if __name__ == "__main__":
     table = TableModel(
         name="users",

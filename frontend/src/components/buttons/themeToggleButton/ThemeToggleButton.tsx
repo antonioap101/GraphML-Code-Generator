@@ -1,4 +1,4 @@
-// src/components/ThemeToggleButton.tsx
+// src/input_elements/ThemeToggleButton.tsx
 import React from 'react';
 import styles from './ThemeToggleButton.module.css';
 
