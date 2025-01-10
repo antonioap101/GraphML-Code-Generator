@@ -46,11 +46,17 @@ class PythonDaoGenerator(DaoGenerator):
             for field in table_model.fields if not field.primaryKey
         )
 
+        # Load the DAO template
+        dao_template = TemplateLoader.forLanguage(AllowedLanguages.python).getDao()
+
+        # Format the validation code indentation
+        formatted_validation_code = DaoGenerator.format_validation_code_indent(dao_template, validation_code)
+
         # Rellenar la plantilla con los valores generados
-        python_code = TemplateLoader.forLanguage(AllowedLanguages.python).getDao().format(
+        python_code = dao_template.format(
             ClassName=table_model.name.capitalize(),
             FieldParameters=field_parameters,
-            ValidationCode=validation_code,
+            ValidationCode=formatted_validation_code,
             InsertQuery=insert_query,
             SelectQuery=select_query,
             UpdateQuery=update_query,
@@ -60,3 +66,4 @@ class PythonDaoGenerator(DaoGenerator):
         )
 
         return python_code
+

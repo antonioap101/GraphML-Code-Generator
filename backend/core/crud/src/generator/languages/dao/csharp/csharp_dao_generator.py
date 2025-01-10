@@ -19,6 +19,7 @@ class CSharpDaoGenerator(DaoGenerator):
         Generates the DAO class code for C# based on the table metadata and DBMS.
         """
         # Generar código de validación
+        # Generar código de validación
         validation_code = ValidationCodeGenerator.fromLanguage(AllowedLanguages.csharp).forFields(table_model.fields)
 
         # Get the SQL generator for the DBMS
@@ -46,11 +47,17 @@ class CSharpDaoGenerator(DaoGenerator):
             for field in table_model.fields if not field.primaryKey
         )
 
+        # Load the DAO template
+        dao_template = TemplateLoader.forLanguage(AllowedLanguages.csharp).getDao()
+
+        # Format the validation code indentation
+        formatted_validation_code = DaoGenerator.format_validation_code_indent(dao_template, validation_code)
+
         # Fill the template with the generated values
-        csharp_code = TemplateLoader.forLanguage(AllowedLanguages.csharp).getDao().format(
+        csharp_code = dao_template.format(
             ClassName=table_model.name.capitalize(),
             FieldParameters=field_parameters,
-            ValidationCode=validation_code,
+            ValidationCode=formatted_validation_code,
             InsertQuery=insert_query,
             SelectQuery=select_query,
             UpdateQuery=update_query,

@@ -13,6 +13,18 @@ class DaoGenerator(ABC):
         """
         pass
 
+    @staticmethod
+    def format_validation_code_indent(dao_template, validation_code):
+        if not validation_code or len(validation_code) == 0:
+            return validation_code
+        # Determine the indentation level for ValidationCode
+        base_indent = dao_template.split("{ValidationCode}")[0].splitlines()[-1]
+        validation_code_lines = validation_code.splitlines()
+        # Apply the calculated indentation to each line of ValidationCode
+        formatted_validation_code = f"{validation_code_lines[0]}\n" + "\n".join(
+            f"{base_indent}{line}" for line in validation_code_lines[1:] if line.strip())
+        return formatted_validation_code
+
 
 if __name__ == "__main__":
     from backend.core.crud.src.parsing.constants.types.type_enum import TypeEnum

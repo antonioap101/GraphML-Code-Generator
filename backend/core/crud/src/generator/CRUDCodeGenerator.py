@@ -37,7 +37,6 @@ class CRUDCodeGenerator:
         # Generar el indicador de comentario
         comment_indicator = TypeMapper.fromLanguage(input_data.language).get_comment_indicator()
 
-
         # Combinar todas las partes en un único string de salida
         complete_code = f"""
 {comment_indicator} Database Connection Code
@@ -51,3 +50,34 @@ class CRUDCodeGenerator:
 
 
 # Ejemplo de uso
+if __name__ == "__main__":
+    from backend.core.crud.src.parsing.constants.types.type_enum import TypeEnum
+    from backend.core.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
+    from backend.core.crud.src.parsing.constants.allowed_languages import AllowedLanguages
+    from backend.core.crud.src.parsing.input_elements.field_model import FieldModel
+    from backend.core.crud.src.parsing.input_elements.table_model import TableModel
+    from backend.core.crud.src.parsing.input_elements.validations import Validations
+    from backend.core.crud.src.parsing.input_elements.connection_parameters import ConnectionParameters
+
+    input_data = CRUDCodeGeneratorInput(
+        language=AllowedLanguages.python,
+        dbms=AllowedDBMS.postgresql,
+        table=TableModel(
+            name="users",
+            fields=[
+                FieldModel(name="id", type=TypeEnum.NUMBER, primaryKey=True, autoIncrement=True),
+                FieldModel(name="name", type=TypeEnum.TEXT, validations=Validations(minLength=3, maxLength=50)),
+                FieldModel(name="email", type=TypeEnum.TEXT, unique=True),
+                FieldModel(name="age", type=TypeEnum.NUMBER),
+            ],
+        ),
+        connectionParams=ConnectionParameters(
+            host="localhost",
+            port=5432,
+            database_name="default",
+            username="postgres",
+            password="1234",
+        )
+    )
+
+    print(CRUDCodeGenerator.generate_code(input_data))

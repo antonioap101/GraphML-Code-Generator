@@ -28,3 +28,7 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# All .db files
+*.db
+

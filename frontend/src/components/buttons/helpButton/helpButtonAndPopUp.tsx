@@ -1,4 +1,4 @@
-// src/components/HelpButton.tsx
+// src/input_elements/HelpButton.tsx
 import React, {useState} from 'react';
 
 // import './helpButton.module.css';

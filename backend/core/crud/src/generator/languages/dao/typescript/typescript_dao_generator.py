@@ -35,11 +35,17 @@ class TypeScriptDaoGenerator(DaoGenerator):
         update_values = ", ".join(f"{field.name}" for field in table_model.fields if not field.primaryKey)
         delete_query = sql_generator.generate_delete()
 
+        # Load the DAO template
+        dao_template = TemplateLoader.forLanguage(AllowedLanguages.typescript).getDao()
+
+        # Format the validation code indentation
+        formatted_validation_code = DaoGenerator.format_validation_code_indent(dao_template, validation_code)
+
         # Rellenar plantilla
-        ts_code = TemplateLoader.forLanguage(AllowedLanguages.typescript).getDao().format(
+        ts_code = dao_template.format(
             ClassName=class_name,
             paramName=param_name,
-            ValidationCode=validation_code,
+            ValidationCode=formatted_validation_code,
             InsertQuery=insert_query,
             InsertValues=insert_values,
             SelectQuery=select_query,
@@ -49,4 +55,3 @@ class TypeScriptDaoGenerator(DaoGenerator):
         )
 
         return ts_code
-

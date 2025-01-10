@@ -1,4 +1,4 @@
-// src/components/popUps/ExtraSettingsPopup.tsx
+// src/input_elements/popUps/ExtraSettingsPopup.tsx
 import React from "react";
 import styles from "./ExtraSettingsPopup.module.css";
 import sharedStyles from "../sharedPopUpStyles.module.css";
