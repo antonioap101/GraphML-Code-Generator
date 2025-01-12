@@ -32,13 +32,14 @@ const ValidationsPopUp: React.FC<ValidationsPopupProps> = ({language, field, set
                     <h3>Field Validations ({type})</h3>
                     <div>
                         <button
+                            type="button"
                             className={styles.resetButton}
                             onClick={() => setValidations({})}
                             aria-label="Reset Validations"
                         >
                             <FontAwesomeIcon icon={faArrowRotateLeft} size="sm"/>
                         </button>
-                        <button className={styles.closeButton} onClick={onClose} aria-label="Close">
+                        <button type="button" className={styles.closeButton} onClick={onClose} aria-label="Close">
                             <FontAwesomeIcon icon={faTimes}/>
                         </button>
                     </div>

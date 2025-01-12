@@ -44,10 +44,10 @@ const TableAttributeEditor: React.FC<TableAttributeEditorProps> = ({language, fi
                 <div className={styles.tableCell}>Nullable</div>
                 <div className={styles.tableCell}>Unique</div>
                 <div className={styles.tableCell}>
-                    <button className={styles.fieldButton} onClick={addField}>
+                    <button type="button" className={styles.fieldButton} onClick={addField}>
                         <FontAwesomeIcon icon={faPlus}/>
                     </button>
-                    <button className={styles.fieldButton} onClick={() => setFields([])}>
+                    <button type="button" className={styles.fieldButton} onClick={() => setFields([fields[0]])}>
                         <FontAwesomeIcon icon={faArrowRotateLeft}/>
                     </button>
 
