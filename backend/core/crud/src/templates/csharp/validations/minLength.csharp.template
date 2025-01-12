@@ -1,3 +1,0 @@
-if ({FieldName}.Length < {minLength}) {{
-    throw new ArgumentException("{FieldName} must be at least {minLength} characters long", "{FieldName}");
-}}

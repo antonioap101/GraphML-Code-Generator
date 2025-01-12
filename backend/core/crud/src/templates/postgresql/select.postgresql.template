@@ -1,1 +1,1 @@
-SELECT * FROM {table_name} WHERE id = {primary_key_placeholder};
+SELECT * FROM {table_name} WHERE {condition};

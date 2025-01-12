@@ -22,17 +22,6 @@
         "pattern": "python/validations/pattern.python.template"
       }
     },
-    "csharp": {
-      "connection": "csharp/connection.csharp.template",
-      "dao": "csharp/dao.csharp.template",
-      "validations": {
-        "minValue": "csharp/validations/minValue.csharp.template",
-        "maxValue": "csharp/validations/maxValue.csharp.template",
-        "minLength": "csharp/validations/minLength.csharp.template",
-        "maxLength": "csharp/validations/maxLength.csharp.template",
-        "pattern": "csharp/validations/pattern.csharp.template"
-      }
-    },
     "typescript": {
       "connection": "typescript/connection.typescript.template",
       "dao": "typescript/dao.typescript.template",
@@ -72,15 +61,6 @@
       "delete": "sqlite/delete.sqlite.template",
       "auto_increment": "sqlite/auto_increment.sqlite.template",
       "placeholder": "sqlite/placeholder.sqlite.template"
-    },
-    "oracle": {
-      "create_table": "oracle/create_table.oracle.template",
-      "insert": "oracle/insert.oracle.template",
-      "select": "oracle/select.oracle.template",
-      "update": "oracle/update.oracle.template",
-      "delete": "oracle/delete.oracle.template",
-      "auto_increment": "oracle/auto_increment.oracle.template",
-      "placeholder": "oracle/placeholder.oracle.template"
     }
   }
 }

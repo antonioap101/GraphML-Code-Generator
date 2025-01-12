@@ -1,26 +1,45 @@
-import psycopg2
-from psycopg2 import sql
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager
 
+# Database configuration
 DB_CONFIG = {{
+    'dialect': '{dbDialect}',
+    'driver': '{dbDriver}',
     'host': '{dbHost}',
     'port': {dbPort},
     'database': '{dbName}',
-    'user': '{dbUser}',
+    'username': '{dbUser}',
     'password': '{dbPassword}'
 }}
 
+# Create the connection string
+DATABASE_URL = (
+    "{{dialect}}+{{driver}}://{{username}}:{{password}}@{{host}}:{{port}}/{{database}}".format(**DB_CONFIG)
+    if DB_CONFIG['dialect'] != "sqlite"
+    else "sqlite:///{{database}}".format(**DB_CONFIG)
+)
+
+# Configure the engine and session
+engine = create_engine(DATABASE_URL, echo=False)
+Session = sessionmaker(bind=engine)
+
 @contextmanager
 def get_connection():
-    conn = psycopg2.connect(**DB_CONFIG)
+    """
+    Creates a SQLAlchemy session to interact with the database.
+    """
+    session = Session()
     try:
-        yield conn
+        yield session
     finally:
-        conn.close()
+        session.close()
 
 def ensure_table_exists():
+    """
+    Ensures that a table exists in the database.
+    """
     create_table_query = """{CreateTableQuery}"""
     with get_connection() as conn:
-        with conn.cursor() as cursor:
-            cursor.execute(create_table_query)
-            conn.commit()
+        conn.execute(text(create_table_query))
+        conn.commit()

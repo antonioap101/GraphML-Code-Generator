@@ -5,4 +5,3 @@ class AllowedDBMS(str, Enum):
     mysql = "mysql"
     postgresql = "postgresql"
     sqlite = "sqlite"
-    oracle = "oracle"

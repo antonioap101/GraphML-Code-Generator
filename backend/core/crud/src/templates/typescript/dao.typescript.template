@@ -2,13 +2,14 @@ import {{ getConnection }} from './connection';
 import {{ PoolClient }} from 'pg';
 
 export class {ClassName}Dao {{
-  static async insert({paramName}: any): Promise<void> {{
+  static async insert({FieldParameters}): Promise<any> {{
     {ValidationCode}
     const client: PoolClient = await getConnection();
     const query = `{InsertQuery}`;
     const values = [{InsertValues}];
     try {{
-      await client.query(query, values);
+      const result = await client.query(query, values);
+      return result.rows[0];
     }} catch (error) {{
       console.error('Error inserting record:', error);
       throw error;
@@ -31,13 +32,14 @@ export class {ClassName}Dao {{
     }}
   }}
 
-  static async updateById(id: number, {paramName}: any): Promise<void> {{
+  static async updateById(id: number, {FieldParameters}): Promise<any> {{
     {ValidationCode}
     const client: PoolClient = await getConnection();
     const query = `{UpdateQuery}`;
     const values = [{UpdateValues}, id];
     try {{
-      await client.query(query, values);
+      const result = await client.query(query, values);
+      return result.rows[0];
     }} catch (error) {{
       console.error('Error updating record:', error);
       throw error;

@@ -1,3 +1,0 @@
-if ({FieldName} > {minValue}) {{
-    throw new ArgumentException("{FieldName} must be less than or equal to {minValue}");
-}}

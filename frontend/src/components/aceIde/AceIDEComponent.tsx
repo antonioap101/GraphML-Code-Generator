@@ -4,7 +4,6 @@ import AceEditor from 'react-ace'
 // import mode-<language> , this imports the style and colors for the selected language.
 import 'ace-builds/src-noconflict/mode-java'
 import 'ace-builds/src-noconflict/mode-python'
-import 'ace-builds/src-noconflict/mode-csharp'
 import 'ace-builds/src-noconflict/mode-typescript'
 
 

@@ -13,7 +13,7 @@ Accede a la aplicación en Vercel: [Code Generators en Vercel](https://code-gene
 1. **GraphML Code Generator**: Convierte contenido XML en GraphML de manera eficiente, ideal para proyectos de
    visualización de grafos.
 2. **CRUD Code Generator**: Genera automáticamente código CRUD (Create, Read, Update, Delete) en diferentes lenguajes de
-   programación (`Java`, `C#`, `Python`, `TypeScript`) y bases de datos (`MySQL`,`PostgreSQL`, `SQLite`, `Oracle`),
+   programación (`Java`, `Python`, `TypeScript`) y bases de datos (`MySQL`,`PostgreSQL`, `SQLite`),
    agilizando el desarrollo de aplicaciones basadas en bases de datos.
 
 Ambas herramientas están compuestas por un frontend moderno y un backend escalable para garantizar una experiencia
@@ -31,8 +31,8 @@ fluida y eficiente.
 
 ### CRUD Code Generator
 
-- **Soporte Multilenguaje**: Generación de código en Java, Python, C#, y TypeScript.
-- **Compatibilidad con Bases de Datos**: PostgreSQL, SQLite, Oracle, entre otras.
+- **Soporte Multilenguaje**: Generación de código en Java, Python, y TypeScript.
+- **Compatibilidad con Bases de Datos**: PostgreSQL, MySQL y SQLite.
 - **Personalización de Tablas y Validaciones**: Define estructuras de tablas, tipos de datos y validaciones.
 - **Plantillas Dinámicas**: Gestión centralizada de plantillas para un fácil mantenimiento.
 - **Interfaz Moderna**: Configura y genera código desde un entorno amigable.

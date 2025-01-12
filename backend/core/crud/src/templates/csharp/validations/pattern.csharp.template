@@ -1,3 +1,0 @@
-if (!Regex.IsMatch({FieldName}, "{pattern}")) {{
-    throw new ArgumentException("{FieldName} does not match the pattern {pattern}");
-}}

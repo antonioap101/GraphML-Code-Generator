@@ -16,7 +16,6 @@ class ConnectionParameters(BaseModel):
         return v
 
     @classmethod
-
     @validator('database_name')
     def validate_database_name(cls, v):
         if not v:

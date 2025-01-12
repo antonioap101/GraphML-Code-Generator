@@ -21,16 +21,6 @@ class TypeMapper:
             },
             "comment_indicator": "//",
         },
-        AllowedLanguages.csharp: {
-            "type_mapping": {
-                TypeEnum.NUMBER: "int",
-                TypeEnum.TEXT: "string",
-                TypeEnum.BOOLEAN: "bool",
-                TypeEnum.FLOAT: "float",
-                TypeEnum.DOUBLE: "double",
-            },
-            "comment_indicator": "//",
-        },
         AllowedLanguages.python: {
             "type_mapping": {
                 TypeEnum.NUMBER: "int",
@@ -83,17 +73,7 @@ class TypeMapper:
                 TypeEnum.DOUBLE: "REAL",
             },
             "comment_indicator": "--",
-        },
-        AllowedDBMS.oracle: {
-            "type_mapping": {
-                TypeEnum.NUMBER: "NUMBER",
-                TypeEnum.TEXT: "VARCHAR2(250)",
-                TypeEnum.BOOLEAN: "NUMBER",
-                TypeEnum.FLOAT: "REAL",
-                TypeEnum.DOUBLE: "DOUBLE PRECISION",
-            },
-            "comment_indicator": "--",
-        },
+        }
     }
 
     def __init__(self, type_mapping: Dict[TypeEnum, str], comment_indicator: str):

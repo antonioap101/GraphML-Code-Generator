@@ -1,7 +1,7 @@
 from typing import Tuple
 
-from backend.core.crud.src.generator.languages.connection.connection_generator import ConnectionGenerator
-from backend.core.crud.src.generator.languages.dao.dao_generator import DaoGenerator
+from backend.core.crud.src.generator.connection.connection_generator import ConnectionGenerator
+from backend.core.crud.src.generator.dao.dao_generator import DaoGenerator
 from backend.core.crud.src.generator.languages.language_generator_factory import LanguageGeneratorFactory
 from backend.core.crud.src.parsing.CRUDCodeGeneratorInput import CRUDCodeGeneratorInput
 from backend.core.crud.src.parsing.constants.types.type_mapper import TypeMapper
@@ -60,7 +60,7 @@ if __name__ == "__main__":
     from backend.core.crud.src.parsing.input_elements.connection_parameters import ConnectionParameters
 
     input_data = CRUDCodeGeneratorInput(
-        language=AllowedLanguages.python,
+        language=AllowedLanguages.typescript,
         dbms=AllowedDBMS.postgresql,
         table=TableModel(
             name="users",
@@ -74,7 +74,7 @@ if __name__ == "__main__":
         connectionParams=ConnectionParameters(
             host="localhost",
             port=5432,
-            database_name="default",
+            database_name="default.db",
             username="postgres",
             password="1234",
         )

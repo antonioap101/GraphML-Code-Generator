@@ -1,5 +1,4 @@
 import {DropDownOption} from "../components/dropDown/DropDownComponent.tsx";
-import CSharpIcon from "../assets/icons/devicon_csharp.svg";
 import JavaIcon from "../assets/icons/devicon_java.svg";
 import TypeScriptIcon from "../assets/icons/devicon_typescript.svg";
 import PythonIcon from "../assets/icons/logos_python.svg";
@@ -8,7 +7,6 @@ import PythonIcon from "../assets/icons/logos_python.svg";
 export enum AllowedLanguages {
     TypeScript = "Typescript",
     Java = "Java",
-    CSharp = "CSharp",
     Python = "Python",
 }
 
@@ -16,7 +14,6 @@ export enum AllowedLanguages {
 const languageIcons = {
     [AllowedLanguages.Java]: JavaIcon,
     [AllowedLanguages.TypeScript]: TypeScriptIcon,
-    [AllowedLanguages.CSharp]: CSharpIcon,
     [AllowedLanguages.Python]: PythonIcon,
 };
 
@@ -36,13 +33,9 @@ public class Main {
         System.out.println("Hello, World!");
     }
 }`,
-    [AllowedLanguages.CSharp.toLowerCase()]: `// C# Example
-using System;
+    [AllowedLanguages.Python.toLowerCase()]: `# Python Example
+print("Hello, World!")`,
 
-class Program {
-    static void Main() {
-        Console.WriteLine("Hello, World!");
-    }
-}`,
+
 };
 
