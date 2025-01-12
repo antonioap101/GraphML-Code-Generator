@@ -4,6 +4,7 @@ from backend.core.crud.src.generator.dao.dao_generator import DaoGenerator
 from backend.core.crud.src.generator.validation.validation_code_generator import ValidationCodeGenerator
 from backend.core.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
 from backend.core.crud.src.parsing.constants.allowed_languages import AllowedLanguages
+from backend.core.crud.src.parsing.constants.types.type_enum import TypeEnum
 from backend.core.crud.src.parsing.input_elements.table_model import TableModel
 from backend.core.crud.src.templates.template_loader import TemplateLoader
 
@@ -62,3 +63,24 @@ class TypeScriptDaoGenerator(DaoGenerator):
         )
 
         return ts_code
+
+
+if __name__ == '__main__':
+    from backend.core.crud.src.parsing.input_elements.field_model import FieldModel
+    from backend.core.crud.src.parsing.input_elements.table_model import TableModel
+
+    table = TableModel(
+        name="users",
+        fields=[
+            FieldModel(name="id", type=TypeEnum.NUMBER, primaryKey=True, autoIncrement=True, nullable=False),
+            FieldModel(name="name", type=TypeEnum.TEXT, nullable=False),
+            FieldModel(name="email", type=TypeEnum.TEXT, nullable=False, unique=True),
+            FieldModel(name="age", type=TypeEnum.NUMBER, nullable=True)
+        ]
+    )
+
+    ts_code = TypeScriptDaoGenerator.generate(
+        dbms=AllowedDBMS.postgresql,
+        table_model=table
+    )
+    print(ts_code)

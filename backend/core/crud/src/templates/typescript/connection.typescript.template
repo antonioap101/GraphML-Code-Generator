@@ -1,26 +1,22 @@
-import {{ Pool, PoolClient }} from 'pg';
+import {{ Sequelize }} from 'sequelize';
 
-const pool = new Pool({{
+const sequelize = new Sequelize('{dbName}', '{dbUser}', '{dbPassword}', {{
   host: '{dbHost}',
   port: {dbPort},
-  database: '{dbName}',
-  user: '{dbUser}',
-  password: '{dbPassword}',
+  dialect: '{dbDialect}',
+  logging: false, // Opcional: desactiva el logging de Sequelize
 }});
 
-export async function getConnection(): Promise<PoolClient> {{
-  return await pool.connect();
-}}
-
 export async function ensureTableExists(): Promise<void> {{
-  const createTableQuery = `{CreateTableQuery}`;
-  const client = await getConnection();
+  const createTableQuery = `
+    {CreateTableQuery}
+  `;
   try {{
-    await client.query(createTableQuery);
+    await sequelize.query(createTableQuery);
   }} catch (error) {{
     console.error('Error ensuring table exists:', error);
     throw error;
-  }} finally {{
-    client.release();
   }}
 }}
+
+export {{ sequelize }};

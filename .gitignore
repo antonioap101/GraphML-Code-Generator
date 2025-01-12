@@ -32,3 +32,10 @@ dist-ssr
 # All .db files
 *.db
 
+/tmp
+/out-tsc
+
+node_modules
+/.pnp
+.pnp.js
+

@@ -1,30 +1,27 @@
 // Database Connection Code
-import { Pool, PoolClient } from 'pg';
+import { Sequelize } from 'sequelize';
 
-const pool = new Pool({
+const sequelize = new Sequelize('default', 'root', '1234', {
     host: 'localhost',
-    port: 5432,
-    database: 'default',
-    user: 'postgres',
-    password: '1234',
+    port: 3306,
+    dialect: 'mysql',
+    logging: false, // Opcional: desactiva el logging de Sequelize
 });
 
-export async function getConnection(): Promise<PoolClient> {
-    return await pool.connect();
-}
-
 export async function ensureTableExists(): Promise<void> {
-    const createTableQuery = `CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY SERIAL, name VARCHAR(250), email VARCHAR(250) UNIQUE, age INTEGER);`;
-    const client = await getConnection();
+    const createTableQuery = `
+    CREATE TABLE IF NOT EXISTS users (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(250), email VARCHAR(250) UNIQUE, age INT);
+  `;
     try {
-        await client.query(createTableQuery);
+        await sequelize.query(createTableQuery);
     } catch (error) {
         console.error('Error ensuring table exists:', error);
         throw error;
-    } finally {
-        client.release();
     }
 }
+
+export { sequelize };
+
 
 // DAO Code
 export class UsersDao {
@@ -35,31 +32,29 @@ export class UsersDao {
         if (name.length > 50) {
             throw new Error("name must be less than 50 characters");
         }
-        const client: PoolClient = await getConnection();
-        const query = `INSERT INTO users (name, email, age) VALUES ($1, $2, $3, $4) RETURNING *;`;
+        const query = `
+      INSERT INTO users (name, email, age) VALUES (?, ?, ?);
+    `;
         const values = [name, email, age];
         try {
-            const result = await client.query(query, values);
-            return result.rows[0];
+            const [result] = await sequelize.query(query, { replacements: values });
+            return result[0];
         } catch (error) {
             console.error('Error inserting record:', error);
             throw error;
-        } finally {
-            client.release();
         }
     }
 
     static async selectById(id: number): Promise<any> {
-        const client: PoolClient = await getConnection();
-        const query = `SELECT * FROM users WHERE id = $1;`;
+        const query = `
+      SELECT * FROM users WHERE id = ?;
+    `;
         try {
-            const result = await client.query(query, [id]);
-            return result.rows[0];
+            const [result] = await sequelize.query(query, { replacements: [id] });
+            return result[0];
         } catch (error) {
             console.error('Error selecting record:', error);
             throw error;
-        } finally {
-            client.release();
         }
     }
 
@@ -70,30 +65,28 @@ export class UsersDao {
         if (name.length > 50) {
             throw new Error("name must be less than 50 characters");
         }
-        const client: PoolClient = await getConnection();
-        const query = `UPDATE users SET name = $1, email = $2, age = $3 WHERE id = $1 RETURNING *;`;
+        const query = `
+      UPDATE users SET name = ?, email = ?, age = ? WHERE id = ?;
+    `;
         const values = [name, email, age, id];
         try {
-            const result = await client.query(query, values);
-            return result.rows[0];
+            const [result] = await sequelize.query(query, { replacements: values });
+            return result[0];
         } catch (error) {
             console.error('Error updating record:', error);
             throw error;
-        } finally {
-            client.release();
         }
     }
 
     static async deleteById(id: number): Promise<void> {
-        const client: PoolClient = await getConnection();
-        const query = `DELETE FROM users WHERE id = $1;`;
+        const query = `
+      DELETE FROM users WHERE id = ?;
+    `;
         try {
-            await client.query(query, [id]);
+            await sequelize.query(query, { replacements: [id] });
         } catch (error) {
             console.error('Error deleting record:', error);
             throw error;
-        } finally {
-            client.release();
         }
     }
 }

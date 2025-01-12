@@ -2,6 +2,7 @@ from backend.core.crud.src.generator.SQL.SQL_generator import SQLGenerator
 from backend.core.crud.src.generator.connection.connection_generator import ConnectionGenerator
 from backend.core.crud.src.parsing.constants.allowed_dbms import AllowedDBMS
 from backend.core.crud.src.parsing.constants.allowed_languages import AllowedLanguages
+from backend.core.crud.src.parsing.constants.types.type_enum import TypeEnum
 from backend.core.crud.src.parsing.input_elements.connection_parameters import ConnectionParameters
 from backend.core.crud.src.parsing.input_elements.field_model import FieldModel
 from backend.core.crud.src.parsing.input_elements.table_model import TableModel
@@ -37,10 +38,10 @@ if __name__ == '__main__':
     table = TableModel(
         name="users",
         fields=[
-            FieldModel(name="id", type="number", primaryKey=True, autoIncrement=True, nullable=False),
-            FieldModel(name="name", type="string", nullable=False, unique=False),
-            FieldModel(name="email", type="string", nullable=False, unique=True),
-            FieldModel(name="age", type="number", nullable=True)
+            FieldModel(name="id", type=TypeEnum.NUMBER, primaryKey=True, autoIncrement=True, nullable=False),
+            FieldModel(name="name", type=TypeEnum.TEXT, nullable=False, unique=False),
+            FieldModel(name="email", type=TypeEnum.TEXT, nullable=False, unique=True),
+            FieldModel(name="age", type=TypeEnum.NUMBER, nullable=True)
         ]
     )
 

@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
     input_data = CRUDCodeGeneratorInput(
         language=AllowedLanguages.typescript,
-        dbms=AllowedDBMS.postgresql,
+        dbms=AllowedDBMS.sqlite,
         table=TableModel(
             name="users",
             fields=[
@@ -74,8 +74,8 @@ if __name__ == "__main__":
         connectionParams=ConnectionParameters(
             host="localhost",
             port=5432,
-            database_name="default.db",
-            username="postgres",
+            database_name="default",
+            username="root",
             password="1234",
         )
     )

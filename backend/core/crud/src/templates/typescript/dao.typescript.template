@@ -1,63 +1,58 @@
-import {{ getConnection }} from './connection';
-import {{ PoolClient }} from 'pg';
+import {{ sequelize }} from './connection';
 
 export class {ClassName}Dao {{
   static async insert({FieldParameters}): Promise<any> {{
     {ValidationCode}
-    const client: PoolClient = await getConnection();
-    const query = `{InsertQuery}`;
+    const query = `
+      {InsertQuery}
+    `;
     const values = [{InsertValues}];
     try {{
-      const result = await client.query(query, values);
-      return result.rows[0];
+      const [result] = await sequelize.query(query, {{ replacements: values }});
+      return result[0];
     }} catch (error) {{
       console.error('Error inserting record:', error);
       throw error;
-    }} finally {{
-      client.release();
     }}
   }}
 
   static async selectById(id: number): Promise<any> {{
-    const client: PoolClient = await getConnection();
-    const query = `{SelectQuery}`;
+    const query = `
+      {SelectQuery}
+    `;
     try {{
-      const result = await client.query(query, [id]);
-      return result.rows[0];
+      const [result] = await sequelize.query(query, {{ replacements: [id] }});
+      return result[0];
     }} catch (error) {{
       console.error('Error selecting record:', error);
       throw error;
-    }} finally {{
-      client.release();
     }}
   }}
 
   static async updateById(id: number, {FieldParameters}): Promise<any> {{
     {ValidationCode}
-    const client: PoolClient = await getConnection();
-    const query = `{UpdateQuery}`;
+    const query = `
+      {UpdateQuery}
+    `;
     const values = [{UpdateValues}, id];
     try {{
-      const result = await client.query(query, values);
-      return result.rows[0];
+      const [result] = await sequelize.query(query, {{ replacements: values }});
+      return result[0];
     }} catch (error) {{
       console.error('Error updating record:', error);
       throw error;
-    }} finally {{
-      client.release();
     }}
   }}
 
   static async deleteById(id: number): Promise<void> {{
-    const client: PoolClient = await getConnection();
-    const query = `{DeleteQuery}`;
+    const query = `
+      {DeleteQuery}
+    `;
     try {{
-      await client.query(query, [id]);
+      await sequelize.query(query, {{ replacements: [id] }});
     }} catch (error) {{
       console.error('Error deleting record:', error);
       throw error;
-    }} finally {{
-      client.release();
     }}
   }}
 }}
