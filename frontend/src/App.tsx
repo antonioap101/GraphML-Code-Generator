@@ -10,11 +10,14 @@ import HomePage from "./pages/homePage/HomePage.tsx";
 import NotFoundPage from "./pages/notFound/NotFoundPage.tsx";
 import HomeButton from "./components/buttons/homeButton/HomeButton.tsx";
 import CRUDCodeGenerator from "./pages/crud/CRUDCodeGenerator.tsx";
+import ErrorPopUp from "./components/popUps/errorPopUp/ErrorPopUp.tsx";
+import {useError} from "./hooks/useError.tsx";
 
 
 const App: React.FC = () => {
 
     const location = useLocation();
+    const {errorMessage} = useError();
 
     // Dynamic titles based on the current route
     const getPageTitle = () => {
@@ -50,6 +53,7 @@ const App: React.FC = () => {
 
             {/* Main content with routes */}
             <main className="app-content">
+                {errorMessage && <ErrorPopUp/>}
                 <Routes>
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/graphml-code-generator" element={<GraphMLCodeGenerator/>}/>

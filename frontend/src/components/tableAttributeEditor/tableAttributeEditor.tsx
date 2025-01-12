@@ -5,14 +5,15 @@ import {TypeEnum} from "../../constants/TypeEnum";
 import {FieldModel} from "../../constants/CRUDCodeGeneratorInput.ts";
 import TableRow from "./rows/TableRow.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faArrowRotateLeft, faPlus} from "@fortawesome/free-solid-svg-icons";
 
 interface TableAttributeEditorProps {
+    language: string;
     fields: FieldModel[];
     setFields: (fields: FieldModel[]) => void;
 }
 
-const TableAttributeEditor: React.FC<TableAttributeEditorProps> = ({fields, setFields}) => {
+const TableAttributeEditor: React.FC<TableAttributeEditorProps> = ({language, fields, setFields}) => {
     const handleFieldChange = <K extends keyof FieldModel>(
         index: number,
         key: K,
@@ -46,12 +47,17 @@ const TableAttributeEditor: React.FC<TableAttributeEditorProps> = ({fields, setF
                     <button className={styles.fieldButton} onClick={addField}>
                         <FontAwesomeIcon icon={faPlus}/>
                     </button>
+                    <button className={styles.fieldButton} onClick={() => setFields([])}>
+                        <FontAwesomeIcon icon={faArrowRotateLeft}/>
+                    </button>
+
                 </div>
             </header>
             {fields.map((field, index) => (
                 <TableRow
                     key={index}
                     field={field}
+                    language={language}
                     index={index}
                     onFieldChange={handleFieldChange}
                     onRemove={index > 0 ? () => removeField(index) : undefined}

@@ -1,0 +1,66 @@
+{
+  "languages": {
+    "java": {
+      "connection": "java/connection.java.template",
+      "dao": "java/dao.java.template",
+      "validations": {
+        "minValue": "java/validations/minValue.java.template",
+        "maxValue": "java/validations/maxValue.java.template",
+        "minLength": "java/validations/minLength.java.template",
+        "maxLength": "java/validations/maxLength.java.template",
+        "pattern": "java/validations/pattern.java.template"
+      }
+    },
+    "python": {
+      "connection": "python/connection.python.template",
+      "dao": "python/dao.python.template",
+      "validations": {
+        "minValue": "python/validations/minValue.python.template",
+        "maxValue": "python/validations/maxValue.python.template",
+        "minLength": "python/validations/minLength.python.template",
+        "maxLength": "python/validations/maxLength.python.template",
+        "pattern": "python/validations/pattern.python.template"
+      }
+    },
+    "typescript": {
+      "connection": "typescript/connection.typescript.template",
+      "dao": "typescript/dao.typescript.template",
+      "validations": {
+        "minValue": "typescript/validations/minValue.typescript.template",
+        "maxValue": "typescript/validations/maxValue.typescript.template",
+        "minLength": "typescript/validations/minLength.typescript.template",
+        "maxLength": "typescript/validations/maxLength.typescript.template",
+        "pattern": "typescript/validations/pattern.typescript.template"
+      }
+    }
+  },
+  "sql": {
+    "mysql": {
+      "create_table": "mysql/create_table.mysql.template",
+      "insert": "mysql/insert.mysql.template",
+      "select": "mysql/select.mysql.template",
+      "update": "mysql/update.mysql.template",
+      "delete": "mysql/delete.mysql.template",
+      "auto_increment": "mysql/auto_increment.mysql.template",
+      "placeholder": "mysql/placeholder.mysql.template"
+    },
+    "postgresql": {
+      "create_table": "postgresql/create_table.postgresql.template",
+      "insert": "postgresql/insert.postgresql.template",
+      "select": "postgresql/select.postgresql.template",
+      "update": "postgresql/update.postgresql.template",
+      "delete": "postgresql/delete.postgresql.template",
+      "auto_increment": "postgresql/auto_increment.postgresql.template",
+      "placeholder": "postgresql/placeholder.postgresql.template"
+    },
+    "sqlite": {
+      "create_table": "sqlite/create_table.sqlite.template",
+      "insert": "sqlite/insert.sqlite.template",
+      "select": "sqlite/select.sqlite.template",
+      "update": "sqlite/update.sqlite.template",
+      "delete": "sqlite/delete.sqlite.template",
+      "auto_increment": "sqlite/auto_increment.sqlite.template",
+      "placeholder": "sqlite/placeholder.sqlite.template"
+    }
+  }
+}

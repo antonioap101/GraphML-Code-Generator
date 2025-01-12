@@ -16,6 +16,10 @@ dist-ssr
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# All folders named .idea
+**/.idea
+
 .DS_Store
 *.suo
 *.ntvs*
@@ -23,7 +27,15 @@ dist-ssr
 *.sln
 *.sw?
 
-
-
-
 .vercel
+
+# All .db files
+*.db
+
+/tmp
+/out-tsc
+
+node_modules
+/.pnp
+.pnp.js
+

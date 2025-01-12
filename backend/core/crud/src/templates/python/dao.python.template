@@ -1,0 +1,46 @@
+from sqlalchemy import text
+
+class {ClassName}DAO:
+    def __init__(self, session):
+        # Initialize the DAO with a SQLAlchemy session
+        self.session = session
+
+    def create(self, {FieldParameters}):
+        {ValidationCode}
+        query = "{InsertQuery}"
+        parameters = ({SetInsertParameters})
+
+        # Keep the connection open during the operation
+        conn = self.session.connection()
+        cursor = conn.connection.cursor()
+        cursor.execute(query, parameters)
+        conn.connection.commit()
+        return cursor.lastrowid
+
+    def read(self, id: int):
+        query = "{SelectQuery}"
+        parameters = (id,)
+
+        conn = self.session.connection()
+        cursor = conn.connection.cursor()
+        cursor.execute(query, parameters)
+        return cursor.fetchone()
+
+    def update(self, id: int, {FieldParameters}):
+        {ValidationCode}
+        query = "{UpdateQuery}"
+        parameters = ({SetUpdateParameters}, id)
+
+        conn = self.session.connection()
+        cursor = conn.connection.cursor()
+        cursor.execute(query, parameters)
+        conn.connection.commit()
+
+    def delete(self, id: int):
+        query = "{DeleteQuery}"
+        parameters = (id,)
+
+        conn = self.session.connection()
+        cursor = conn.connection.cursor()
+        cursor.execute(query, parameters)
+        conn.connection.commit()

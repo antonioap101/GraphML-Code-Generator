@@ -1,0 +1,3 @@
+import re
+if not re.match(r"{pattern}", {FieldName}):
+    raise ValueError(f"{FieldName} does not match the pattern {pattern}")

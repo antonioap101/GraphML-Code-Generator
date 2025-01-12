@@ -11,13 +11,14 @@ import {
     FieldModel,
 } from "../../constants/CRUDCodeGeneratorInput.ts";
 import styles from "./CRUDCodeGenerator.module.css";
-import {useApi} from "../../hooks/useXMLToGraphml.tsx";
+import {useApi} from "../../hooks/useAPI.tsx";
 import CopyButton from "../../components/buttons/copyButton/CopyButton.tsx";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCode, faGear, faLayerGroup, faSignal, faTableList} from "@fortawesome/free-solid-svg-icons";
+import {faCode, faFont, faGear, faLayerGroup, faSignal, faTableList} from "@fortawesome/free-solid-svg-icons";
 import ConnectionParametersPopup from "../../components/popUps/conectionParametersPopup/ConnectionParametersPopUp.tsx";
 import {TypeEnum} from "../../constants/TypeEnum.ts";
+import {useError} from "../../hooks/useError.tsx";
 
 const CRUDCodeGenerator: React.FC = () => {
     const [code, setCode] = useState(languageExamples[AllowedLanguages.Java]);
@@ -30,8 +31,10 @@ const CRUDCodeGenerator: React.FC = () => {
     });
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [activeTab, setActiveTab] = useState("schema"); // Estado para controlar la pestaña activa
+    const [tableName, setTableName] = useState(""); // Estado para el nombre de la tabla
 
-    const {loading, error, crudOutput, generateCrud} = useApi();
+    const {errorMessage, setError, clearError} = useError();
+    const {loading, apiError, crudOutput, generateCrud} = useApi();
 
     const [fields, setFields] = useState<FieldModel[]>([
         {
@@ -43,6 +46,16 @@ const CRUDCodeGenerator: React.FC = () => {
             unique: true,
         },
     ]);
+
+
+    useEffect(() => {
+        if (!apiError || apiError === "") clearError();
+        if (apiError) {
+            const errMsg = (errorMessage ? errorMessage + "\n" : "") + apiError;
+            setError(errMsg);
+        }
+    }, [apiError]);
+
 
     useEffect(() => {
         if (crudOutput && crudOutput.length > 0) {
@@ -61,18 +74,26 @@ const CRUDCodeGenerator: React.FC = () => {
 
     const handleConvert = async () => {
         try {
-            console.log("Convert button clicked");
-            console.log("Fields:", fields);
-            console.log("Params:", connectionParams);
+
+            if (!tableName || tableName.length === 0) {
+                throw new Error("Table name is required");
+            }
+
+            if (tableName.toLowerCase() == "table") {
+                throw new Error(`Table name cannot be ${tableName}`);
+            }
 
             await generateCrud(createCRUDCodeGeneratorInput(
-                {name: "table", fields},
+                {name: tableName, fields: fields},
                 selectedLanguage.value as AllowedLanguages,
                 selectedDBMS.value as AllowedDBMS,
                 connectionParams
             ));
-        } catch (e) {
-            console.error("Error generating CRUD code:", e);
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                setError(e.message);
+                console.error("Error generating CRUD code:", e);
+            }
         }
     };
 
@@ -90,26 +111,38 @@ const CRUDCodeGenerator: React.FC = () => {
                     </header>
 
                     <div className={styles.tabs}>
-                        <button
-                            className={`${styles.sectionSelectionButton} ${activeTab === "schema" ? styles.activeTab : ""}`}
-                            onClick={() => setActiveTab("schema")}
-                        >
-                            <FontAwesomeIcon icon={faTableList}/>
-                            Schema
-                        </button>
-                        <button
-                            className={`${styles.sectionSelectionButton} ${activeTab === "config" ? styles.activeTab : ""}`}
-                            onClick={() => setActiveTab("config")}
-                        >
-                            <FontAwesomeIcon icon={faGear}/>
-                            Config
-                        </button>
+                        <div className={styles.tabTableName}>
+                            <FontAwesomeIcon icon={faFont}/>
+                            <input
+                                type="text"
+                                value={tableName}
+                                onChange={(e) => setTableName(e.target.value)}
+                                className={styles.tableNameInput}
+                                placeholder="Enter table name"
+                            />
+                        </div>
+                        <div className={styles.tabButtons}>
+                            <button
+                                className={`${styles.sectionSelectionButton} ${activeTab === "schema" ? styles.activeTab : ""}`}
+                                onClick={() => setActiveTab("schema")}
+                            >
+                                <FontAwesomeIcon icon={faTableList}/>
+                                Schema
+                            </button>
+                            <button
+                                className={`${styles.sectionSelectionButton} ${activeTab === "config" ? styles.activeTab : ""}`}
+                                onClick={() => setActiveTab("config")}
+                            >
+                                <FontAwesomeIcon icon={faGear}/>
+                                Config
+                            </button>
+                        </div>
                     </div>
 
                     <form className={styles.content}>
                         {activeTab === "schema" && (
                             <section className={styles.tableSection}>
-                                <TableAttributeEditor fields={fields} setFields={setFields}/>
+                                <TableAttributeEditor language={selectedLanguage.value} fields={fields} setFields={setFields}/>
                             </section>
                         )}
 
@@ -151,7 +184,6 @@ const CRUDCodeGenerator: React.FC = () => {
                         </a>
                         <CopyButton content={code}/>
                     </header>
-                    {error && <p className="error">{error}</p>}
                     <AceIDEComponent code={code} setCode={setCode} language={selectedLanguage.value}/>
                 </aside>
             </section>

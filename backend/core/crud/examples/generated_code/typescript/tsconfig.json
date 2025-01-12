@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "inlineSources": true,    // Incluye el contenido del código fuente en el mapa
+    "inlineSourceMap": false, // Usa archivos separados .map en lugar de incluirlos en el JS
+  },
+  "include": ["src"]
+}

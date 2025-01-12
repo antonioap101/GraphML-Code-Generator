@@ -8,6 +8,7 @@ export interface Validation {
     pattern?: string;
     min?: number;
     max?: number;
+    customCode?: string;
 }
 
 

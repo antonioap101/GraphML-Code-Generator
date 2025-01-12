@@ -1,0 +1,3 @@
+if (!/{pattern}/.test({FieldName})) {{
+    throw new Error("{FieldName} must match the pattern {pattern}");
+}}

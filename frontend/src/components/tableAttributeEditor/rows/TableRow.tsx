@@ -5,22 +5,24 @@ import {faCog, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import styles from "../tableAttributeEditor.module.css";
 import "./TableRow.css";
-import ExtraSettingsPopup from "../../popUps/extraSettingsPopUp/extraSettingsPopUp.tsx"; // Importamos los estilos específicos
+import ValidationsPopUp from "../../popUps/validationsPopUp/validationsPopUp.tsx";
 
 interface TableRowProps {
+    language: string;
     field: FieldModel;
     index: number;
     onFieldChange: (index: number, key: keyof FieldModel, value: FieldModel[keyof FieldModel]) => void;
     onRemove?: () => void; // Optional, only for rows that can be removed
 }
 
-const TableRow: React.FC<TableRowProps> = ({field, index, onFieldChange, onRemove}) => {
+const TableRow: React.FC<TableRowProps> = ({language, field, index, onFieldChange, onRemove}) => {
     const [isExtraSettingsPopUpOpen, setIsExtraSettingsPopUpOpen] = useState(false);
     return (
         <div className={styles.tableRow}>
             <div className={styles.tableCell}>
                 <input
                     type="text"
+                    disabled={index === 0} // Deshabilitar para la primera fila
                     value={field.name}
                     onChange={(e) => onFieldChange(index, "name", e.target.value)}
                     required
@@ -29,6 +31,7 @@ const TableRow: React.FC<TableRowProps> = ({field, index, onFieldChange, onRemov
             <div className={styles.tableCell}>
                 <select
                     value={field.type}
+                    disabled={index === 0} // Deshabilitar para la primera fila
                     onChange={(e) => onFieldChange(index, "type", e.target.value as TypeEnum)}
                 >
                     {Object.values(TypeEnum).map((type) => (
@@ -41,6 +44,7 @@ const TableRow: React.FC<TableRowProps> = ({field, index, onFieldChange, onRemov
             <div className={styles.tableCell}>
                 <input
                     type="checkbox"
+                    disabled={index === 0} // Deshabilitar para la primera fila
                     className={styles.checkbox} // Aplicamos la clase personalizada
                     checked={field.nullable}
                     onChange={(e) => onFieldChange(index, "nullable", e.target.checked)}
@@ -49,12 +53,13 @@ const TableRow: React.FC<TableRowProps> = ({field, index, onFieldChange, onRemov
             <div className={styles.tableCell}>
                 <input
                     type="checkbox"
+                    disabled={field.primaryKey || field.autoIncrement} // Deshabilitar si es clave primaria o autoincremental
                     className={styles.checkbox} // Aplicamos la clase personalizada
                     checked={field.unique}
                     onChange={(e) => onFieldChange(index, "unique", e.target.checked)}
                 />
             </div>
-            <div className={styles.tableCell} style={{gap: 5}}>
+            <div className={styles.tableCell}>
                 {/* Ajustes adicionales */}
                 <button
                     type={"button"}
@@ -67,7 +72,7 @@ const TableRow: React.FC<TableRowProps> = ({field, index, onFieldChange, onRemov
                 {/* Eliminar fila */}
                 <button
                     className={styles.fieldButton}
-                    disabled={onRemove === undefined}
+                    disabled={index === 0} // Deshabilitar para la primera fila
                     onClick={onRemove}
                 >
                     <FontAwesomeIcon icon={faTrashAlt}/>
@@ -75,8 +80,9 @@ const TableRow: React.FC<TableRowProps> = ({field, index, onFieldChange, onRemov
             </div>
             {/* Mostrar el popup si está abierto */}
             {isExtraSettingsPopUpOpen && (
-                <ExtraSettingsPopup
+                <ValidationsPopUp
                     field={field}
+                    language={language}
                     setValidations={(validations) => onFieldChange(index, "validations", validations)}
                     onClose={() => setIsExtraSettingsPopUpOpen(false)}
                 />
