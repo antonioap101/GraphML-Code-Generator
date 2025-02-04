@@ -23,7 +23,7 @@
     },
     {
       "source": "/assets/(.*)?",
-      "destination": "frontend/assets/:path*"
+      "destination": "frontend/assets/$1"
     },
     {
       "source": "/favicon.ico",
