@@ -12,6 +12,9 @@ const HomePage: React.FC = () => {
                 <Link to="/crud-code-generator">
                     <button>Generador de Código CRUD</button>
                 </Link>
+                <Link to="/regex-generator">
+                    <button>Generador de Expresiones Regulares</button>
+                </Link>
             </div>
         </div>
     );

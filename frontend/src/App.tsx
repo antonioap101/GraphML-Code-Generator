@@ -26,6 +26,8 @@ const App: React.FC = () => {
                 return "GraphML Code Generator";
             case "/crud-code-generator":
                 return "CRUD Code Generator";
+            case "/regex-generator":
+                return "Regex Generator";
             case "/":
                 return "Code Generators";
             default:
@@ -58,6 +60,7 @@ const App: React.FC = () => {
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/graphml-code-generator" element={<GraphMLCodeGenerator/>}/>
                     <Route path="/crud-code-generator" element={<CRUDCodeGenerator/>}/>
+                    <Route path="/regex-generator" element={<div>Regex Generator</div>}/>
                     <Route path="*" element={<NotFoundPage/>}/>
                 </Routes>
             </main>
