@@ -23,11 +23,11 @@
     },
     {
       "source": "/assets/(.*)?",
-      "destination": "frontend/assets/:path*"
+      "destination": "frontend/assets/$1"
     },
     {
-      "source": "/favicon.ico",
-      "destination": "frontend/favicon.ico"
+      "source": "/favicon.svg",
+      "destination": "frontend/favicon.svg"
     },
     {
       "source": "/(.*)?",
