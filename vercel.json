@@ -16,14 +16,22 @@
       }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)?",
-      "dest": "backend/app.py"
+      "source": "/api/(.*)?",
+      "destination": "backend/app.py"
     },
     {
-      "src": "/(.*)",
-      "dest": "frontend/$1"
+      "source": "/assets/(.*)?",
+      "destination": "frontend/assets/:path*"
+    },
+    {
+      "source": "/favicon.ico",
+      "destination": "frontend/favicon.ico"
+    },
+    {
+      "source": "/(.*)?",
+      "destination": "frontend/index.html"
     }
   ]
 }
