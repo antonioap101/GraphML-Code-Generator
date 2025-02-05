@@ -20,7 +20,7 @@
 
 /* Hover (solo si no está deshabilitado) */
 .generate-button:hover:not(:disabled) {
-    background-color: var(--color-button-hover);
+    background-color: var(--theme-color-button-hover);
 }
 
 /* Modo horizontal (por defecto) */

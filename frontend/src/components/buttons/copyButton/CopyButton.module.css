@@ -7,7 +7,7 @@
     background-color: transparent;
     cursor: pointer;
     padding: 10px;
-    border: 1px solid var(--color-border, #dfdfdf);
+    border: 1px solid var(--theme-color-border, #dfdfdf);
     border-radius: 4px;
     font-size: 1.2rem;
     transition: transform 0.2s ease, color 0.2s ease;
@@ -15,7 +15,7 @@
 
 .copyButton:hover {
     transform: scale(1.1);
-    color: var(--color-button-hover);
+    color: var(--theme-color-button-hover);
     background-color: transparent;
 }
 

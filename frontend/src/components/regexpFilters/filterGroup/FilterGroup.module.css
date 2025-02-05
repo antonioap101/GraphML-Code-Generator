@@ -1,0 +1,52 @@
+.filterGroup {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    background-color: #f9f9f9;
+}
+
+.combinatorRow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.combinatorLabel {
+    margin-right: 8px;
+    font-weight: 600;
+}
+
+.combinatorSelect {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.conditionsContainer {
+    display:flex;
+    flex-direction: column;
+    padding-left: 16px;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 8px;
+}
+
+.groupButton {
+    display: flex;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: transparent;
+    color: var(--theme-color-button);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.groupButton:hover {
+    background-color: var(--theme-color-OnBackground);
+}
+

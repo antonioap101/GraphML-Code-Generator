@@ -9,12 +9,12 @@
     display: flex;
     gap: 10px;
     padding: 10px 10px;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--theme-color-border);
 }
 
 header.tableHeader {
-    background-color: var(--color-header);
-    border-bottom: 1px solid var(--color-border);
+    background-color: var(--theme-color-header);
+    border-bottom: 1px solid var(--theme-color-border);
 }
 
 .tableHeader .tableCell {

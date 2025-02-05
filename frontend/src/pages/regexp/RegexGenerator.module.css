@@ -1,13 +1,5 @@
 .container {
     display: flex;
-    flex-direction: column;
-    flex: 1;
-    width: 100%;
-    height: 100%;
-}
-
-.mainSection {
-    display: flex;
     flex: 1;
     width: 100%;
     height: 100%;
@@ -18,8 +10,8 @@
 }
 
 
-.inputSection,
-.codeSection {
+.conditionsSection,
+.textSection {
     display: flex;
     flex: 1;
     width: 50%;
@@ -29,18 +21,18 @@
     overflow-x: auto;
 }
 
-.inputSection {
+.conditionsSection {
     border-radius: 0 10px 0 0;
 }
 
 
-.codeSection {
+.textSection {
     border-radius: 10px 0 0 0; /* Top left, Top right, Bottom right, Bottom left */
 }
 
 
-.codeSection .content,
-.inputSection .content {
+.textSection .content,
+.conditionsSection .content {
     flex: 1 1 auto; /* Ajusta el tamaño automáticamente según el contenido */
     background-color: var(--theme-color-background);
     padding: 0;
@@ -48,8 +40,8 @@
 }
 
 
-.inputSection h3,
-.codeSection h3 {
+.conditionsSection h3,
+.textSection h3 {
     margin: 10px;
     font-size: var(--font-size-medium);
     text-align: center;
@@ -153,12 +145,12 @@
 
 
 @media (max-width: 1024px) {
-    .mainSection {
+    .container {
         flex-direction: column;
     }
 
-    .inputSection,
-    .codeSection {
+    .conditionsSection,
+    .textSection {
         width: 100%;
     }
 }

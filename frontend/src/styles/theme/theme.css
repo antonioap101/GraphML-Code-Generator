@@ -97,26 +97,26 @@
 
 /* Tema claro */
 .lightTheme {
-    --color-background: var(--color-background-light);
-    --color-background-secondary: var(--color-onBackground-light);
-    --color-text: var(--color-text-dark);
-    --color-header: var(--color-header-light);
-    --color-border: var(--color-border-light);
-    --color-input: var(--color-input-light);
-    --color-button: var(--color-primary);
-    --color-button-text: var(--color-text-light);
-    --color-button-hover: var(--color-primary-light);
+    --theme-color-background: var(--color-background-light);
+    --theme-color-OnBackground: var(--color-onBackground-light);
+    --theme-color-text: var(--color-text-dark);
+    --theme-color-header: var(--color-header-light);
+    --theme-color-border: var(--color-border-light);
+    --theme-color-input: var(--color-input-light);
+    --theme-color-button: var(--color-primary);
+    --theme-color-button-text: var(--color-text-light);
+    --theme-color-button-hover: var(--color-primary-light);
 }
 
 /* Tema oscuro */
 .darkTheme {
-    --color-background: var(--color-background-dark);
-    --color-background-secondary: var(--color-onBackground-dark);
-    --color-text: var(--color-text-light);
-    --color-header: var(--color-header-dark);
-    --color-border: var(--color-border-dark);
-    --color-input: var(--color-input-dark);
-    --color-button: var(--color-primary);
-    --color-button-text: var(--color-text-light);
-    --color-button-hover: var(--color-primary-dark);
+    --theme-color-background: var(--color-background-dark);
+    --theme-color-OnBackground: var(--color-onBackground-dark);
+    --theme-color-text: var(--color-text-light);
+    --theme-color-header: var(--color-header-dark);
+    --theme-color-border: var(--color-border-dark);
+    --theme-color-input: var(--color-input-dark);
+    --theme-color-button: var(--color-primary);
+    --theme-color-button-text: var(--color-text-light);
+    --theme-color-button-hover: var(--color-primary-dark);
 }

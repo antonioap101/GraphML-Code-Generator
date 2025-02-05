@@ -2,6 +2,7 @@
 @import url('@/styles/theme/theme.css');
 @import url('@/styles/baseStyles.css');
 
+
 .app-container {
     display: flex;
     flex-direction: column;
@@ -18,7 +19,7 @@
     align-content: center;
     align-items: center;
     padding: 10px 20px;
-    background-color: var(--color-background);
+    background-color: var(--theme-color-background);
     z-index: 1000; /* Ensure it's above the content but below other fixed elements */
 }
 

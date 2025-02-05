@@ -30,11 +30,11 @@
 }
 
 .popupContent pre {
-    background-color: var(--color-background-secondary);
+    background-color: var(--theme-color-OnBackground);
     padding: 16px;
     border-radius: 8px;
     font-size: var(--font-size-small);
-    color: var(--color-text);
+    color: var(--theme-color-text);
     overflow-x: auto;
 }
 
