@@ -4,7 +4,7 @@ import './GraphMLCodeGenerator.css';
 import {useApi} from "../../hooks/useAPI.tsx";
 import GraphmlOutput from "../../components/textInputOutput/GraphmlOutput.tsx";
 import XmlInput from "../../components/textInputOutput/XMLInput.tsx";
-import GenerateButton from "../../components/buttons/generateButton/GenerateButton.tsx";
+import ActionButton from "../../components/buttons/actionButton/ActionButton.tsx";
 
 
 const GraphMLCodeGenerator: React.FC = () => {
@@ -47,7 +47,8 @@ const GraphMLCodeGenerator: React.FC = () => {
                     alignItems: 'center',
                     gap: '20px'
                 }}>
-                    <GenerateButton
+                    <ActionButton
+                        placeholders={{loading: 'Converting...', default: 'Convert'}}
                         onClick={handleConvert}
                         disabled={loading || !xmlContent}
                         loading={loading}

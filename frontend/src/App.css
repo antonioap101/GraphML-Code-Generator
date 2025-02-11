@@ -1,7 +1,7 @@
+
 @import url('@/styles/formalizer.css');
 @import url('@/styles/theme/theme.css');
 @import url('@/styles/baseStyles.css');
-
 
 .app-container {
     display: flex;
@@ -32,7 +32,6 @@
 /* Main content styles */
 .app-content {
     flex: 1;
-
     overflow-y: auto; /* Ensure scrollable content if necessary */
 }
 

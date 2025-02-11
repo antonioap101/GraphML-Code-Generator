@@ -59,8 +59,9 @@
 
 .codeHeader {
     display: flex;
+    flex: 0.08;
     justify-content: space-between;
-    padding: 5px 15px;
+    padding: 5px 0;
 }
 
 .codeLink {

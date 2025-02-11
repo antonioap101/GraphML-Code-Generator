@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import DropDownComponent, {DropDownOption} from "../../components/dropDown/DropDownComponent.tsx";
 import {AllowedDBMS, dbmsOptions} from "../../constants/AllowedDBMS.tsx";
 import {AllowedLanguages, languageExamples, languageOptions} from "../../constants/AllowedLanguages.tsx";
-import GenerateButton from "../../components/buttons/generateButton/GenerateButton.tsx";
+import ActionButton from "../../components/buttons/actionButton/ActionButton.tsx";
 import AceIDEComponent from "../../components/aceIde/AceIDEComponent.tsx";
 import TableAttributeEditor from "../../components/tableAttributeEditor/tableAttributeEditor.tsx";
 import {
@@ -107,7 +107,12 @@ const CRUDCodeGenerator: React.FC = () => {
                             <FontAwesomeIcon icon={faLayerGroup}/>
                             <h2>Data Model</h2>
                         </a>
-                        <GenerateButton onClick={handleConvert} disabled={false} loading={loading} horizontal={true}/>
+                        <ActionButton
+                            onClick={handleConvert}
+                            disabled={false}
+                            loading={loading}
+                            placeholders={{loading: "Generating...", default: "Generate"}}
+                            horizontal={true}/>
                     </header>
 
                     <div className={styles.tabs}>

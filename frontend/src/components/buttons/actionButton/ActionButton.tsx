@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./GenerateButton.css";
+import "./ActionButton.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlay} from "@fortawesome/free-solid-svg-icons";
 
@@ -8,13 +8,17 @@ interface GenerateButtonProps {
     onClick: () => void;
     disabled: boolean;
     loading: boolean;
+    placeholders: {default: string, loading: string};
+    icon?: any;
     horizontal?: boolean; // Nuevo prop opcional
 }
 
-const GenerateButton: React.FC<GenerateButtonProps> = ({
+const ActionButton: React.FC<GenerateButtonProps> = ({
                                                            onClick,
                                                            disabled,
                                                            loading,
+                                                           placeholders,
+                                                           icon=faPlay,
                                                            horizontal = true, // Por defecto es horizontal
                                                        }) => {
     return (
@@ -23,10 +27,10 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({
             disabled={disabled}
             className={`generate-button ${horizontal ? "horizontal" : "vertical"}`}
         >
-            <FontAwesomeIcon icon={faPlay} size="lg"/>
-            <span>{loading ? "Generating..." : "Generate"}</span>
+            <FontAwesomeIcon icon={icon} size="lg"/>
+            <span>{loading ? `${placeholders.loading}...` : `${placeholders.default}`}</span>
         </button>
     );
 };
 
-export default GenerateButton;
+export default ActionButton;

@@ -1,11 +1,6 @@
 import React from "react";
 import styles from "./FilterGroup.module.css";
-import {
-    Condition,
-    ConditionOperator,
-    FilterConditionType,
-    GroupCondition
-} from "../../../hooks/useFilter.tsx";
+import {Condition, ConditionOperator, FilterConditionType, GroupCondition} from "../../../hooks/useFilter.tsx";
 import DropdownComponent, {DropDownOption} from "../../dropDown/DropDownComponent";
 import FilterCondition from "../filterCondition/FilterCondition";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -20,7 +15,6 @@ type FilterGroupProps = {
 };
 
 const FilterGroup: React.FC<FilterGroupProps> = ({parentGroup, thisGroup, onAddition, onUpdate, onDelete}) => {
-    console.warn("Rendering FilterGroup", parentGroup);
     const combinatorOptions: DropDownOption[] = [
         {value: "AND", label: "AND", icon: <FontAwesomeIcon icon={faPlus}/>},
         {value: "OR", label: "OR", icon: <FontAwesomeIcon icon={faFolder}/>},
@@ -86,11 +80,13 @@ const FilterGroup: React.FC<FilterGroupProps> = ({parentGroup, thisGroup, onAddi
                     className={styles.groupButton}>
                     <FontAwesomeIcon icon={faFolder}/> Add Group
                 </button>
-                <button
-                    onClick={() => handleDelete(thisGroup)}
-                    className={styles.groupButton}>
-                    <FontAwesomeIcon icon={faTrash}/> Delete Group
-                </button>
+                {(thisGroup !== parentGroup) &&
+                    (<button
+                        onClick={() => handleDelete(thisGroup)}
+                        className={styles.groupButton}>
+                        <FontAwesomeIcon icon={faTrash}/> Delete Group
+                    </button>)
+                }
             </div>
         </div>
     );

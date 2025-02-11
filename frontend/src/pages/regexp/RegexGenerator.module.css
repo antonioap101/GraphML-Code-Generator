@@ -9,7 +9,6 @@
     justify-content: center;
 }
 
-
 .conditionsSection,
 .textSection {
     display: flex;
@@ -17,133 +16,63 @@
     width: 50%;
     height: 90vh;
     flex-direction: column;
-    padding: 0;
+    padding: 10px;
     overflow-x: auto;
 }
 
 .conditionsSection {
-    border-radius: 0 10px 0 0;
+    border-radius: 0 20px 0 0;
 }
-
 
 .textSection {
-    border-radius: 10px 0 0 0; /* Top left, Top right, Bottom right, Bottom left */
+    border-radius: 20px 0 0 0;
 }
 
-
-.textSection .content,
-.conditionsSection .content {
-    flex: 1 1 auto; /* Ajusta el tamaño automáticamente según el contenido */
+/* Bloque contenedor del área de texto y resultados */
+.textAnalysisBlock {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     background-color: var(--theme-color-background);
-    padding: 0;
-    overflow-y: auto;
-}
-
-
-.conditionsSection h3,
-.textSection h3 {
-    margin: 10px;
-    font-size: var(--font-size-medium);
-    text-align: center;
-    color: var(--theme-color-text);
-}
-
-
-.codeHeader {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 15px;
-}
-
-.codeLink {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.connectionButton {
-    display: inline-block;
     border-radius: 10px;
     padding: 10px;
-    font-size: var(--font-size-xlarge);
-    background-color: transparent;
-    color: var(--color-primary);
-    border: 1px solid var(--color-border-light);
-    transition: all 0.3s ease;
 }
 
-/* Set tabs all to the right */
-
-.connectionButton:hover {
-    transform: scale(1.1);
-    background-color: transparent;
-}
-
-.tabs {
+/* Estilo del textarea */
+.textArea {
     display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--color-border-light);
-}
-
-.tabTableName {
-    display: flex;
-    align-items: center;
-    background-color: var(--theme-color-border) !important;
-    gap: 10px;
-    padding: 0 10px;
-    border-bottom: 2px solid var(--theme-color-text);
-
-}
-
-.tableNameInput {
     flex: 1;
-    margin: 0;
-    padding: 8px 12px !important; /* Ajusta el espaciado interno */
-    border: none !important; /* Elimina todos los bordes */
-    border-radius: 0 !important;
-    text-align: left !important;
+    padding: 10px;
     font-size: var(--font-size-medium);
     color: var(--theme-color-text);
-    background-color: transparent;
-}
-.tableNameInput::placeholder {
-    color: var(--theme-color-text);
-}
-
-.tabButtons {
-    display: flex;
-    gap: 0;
-}
-
-/* Estilos para el botón de selección de sección */
-.sectionSelectionButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    padding: 8px 16px;
-    font-size: var(--font-size-medium);
-    font-weight: var(--font-weight-light);
-    color: var(--color-primary);
-    border-radius: 0;
     background-color: var(--theme-color-background);
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    border: 1px solid var(--color-border-light);
+    border-radius: 5px;
+    resize: none; /* permite redimensionar verticalmente */
+    overflow-y: auto; /* muestra barra de scroll vertical */
+    white-space: pre-wrap; /* Respeta los saltos de línea */
+
 }
 
-.sectionSelectionButton:hover {
+.analyzeButton {
+    align-self: flex-start;
+    padding: 10px 20px;
+    font-size: var(--font-size-medium);
+    color: var(--color-primary);
     background-color: transparent;
-    color: var(--color-primary);
-    border-bottom: 2px solid var(--color-primary);
+    border: 1px solid var(--color-border-light);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.sectionSelectionButton.activeTab {
-    color: var(--color-primary);
-    border-bottom: 2px solid var(--color-primary);
-    font-weight: var(--font-weight-bold);
+.analyzeButton:hover {
+    background-color: var(--color-border-light);
+    transform: scale(1.03);
 }
+/* Contenedor para el texto resaltado */
 
-
+/* Media query para adaptar a pantallas pequeñas */
 @media (max-width: 1024px) {
     .container {
         flex-direction: column;
