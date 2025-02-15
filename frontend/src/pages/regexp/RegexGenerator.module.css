@@ -70,7 +70,8 @@
     background-color: var(--color-border-light);
     transform: scale(1.03);
 }
-/* Contenedor para el texto resaltado */
+
+
 
 /* Media query para adaptar a pantallas pequeñas */
 @media (max-width: 1024px) {

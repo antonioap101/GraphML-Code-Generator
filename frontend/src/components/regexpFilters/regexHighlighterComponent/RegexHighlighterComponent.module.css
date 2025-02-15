@@ -1,5 +1,4 @@
 .inputGroup {
-    margin-bottom: 16px;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -7,7 +6,7 @@
 
 .inputGroup input {
     width: auto;
-    flex:1;
+    flex: 1;
     padding: 8px;
     border: 1px solid var(--theme-color-border);
     border-radius: 4px;
@@ -22,7 +21,7 @@
     margin-bottom: 8px;
 }
 
-.regexInputWrapper{
+.regexInputWrapper {
     display: flex;
     flex: 1;
     gap: 8px;
@@ -32,7 +31,7 @@
     flex: 0.05;
 }
 
-.textInput{
+.textInput {
     flex: 0.95;
 }
 
@@ -42,7 +41,7 @@
 
 .textArea {
     width: auto;
-    flex:1;
+    flex: 1;
     padding: 8px;
     border-radius: 4px;
     min-height: 100px;
@@ -83,8 +82,22 @@
     /*background-color: red;*/
     top: 0;
     left: 0;
-    pointer-events: none;  /* El canvas no intercepta los clics del usuario */
+    pointer-events: none; /* El canvas no intercepta los clics del usuario */
     z-index: 1;
 }
 
+
+/* RegexGenerator.module.css */
+.textAreaDisplay {
+    display: flex;
+    flex: 1;
+    position: relative;
+}
+
+.textAreaDisplay button {
+    position: absolute;
+    bottom: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    z-index: 10;
+}
 

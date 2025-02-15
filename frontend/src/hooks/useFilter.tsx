@@ -1,4 +1,6 @@
 import {createContext, ReactNode, useContext, useState} from "react";
+import {v4 as uuidv4} from 'uuid';
+
 // Enums
 export enum FilterConditionType {
     TEXT = "TEXT",
@@ -32,7 +34,7 @@ export class Condition implements Serializable {
         public value: string | number | Date,
         public type: FilterConditionType
     ) {
-        this.id = crypto.randomUUID();
+        this.id = uuidv4();
     }
 
 
@@ -112,7 +114,7 @@ export class GroupCondition implements Serializable {
     private _combinator: "AND" | "OR";
 
     constructor(combinator: "AND" | "OR") {
-        this.id = crypto.randomUUID();
+        this.id = uuidv4();
         this._combinator = combinator;
         this.conditions = [];
     }

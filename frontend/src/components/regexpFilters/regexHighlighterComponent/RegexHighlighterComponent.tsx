@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import styles from './RegexHighlighterComponent.module.css';
 import CopyButton from "../../buttons/copyButton/CopyButton.tsx";
 import {Card, CardContent} from "../../card/Card.tsx";
+import UploadOrDownloadButton from "../../buttons/uploadOrDownloadButton/uploadOrDownloadButton.tsx";
 
 type RegexHighlighterProps = {
     onInputChange: (text: string) => void;
@@ -86,15 +87,20 @@ const RegexHighlighter: React.FC<RegexHighlighterProps> = ({onInputChange, regex
     return (
         <Card>
             <CardContent>
-                <div className={styles.inputGroup + " " + styles.highlightContainer}>
-                    <canvas ref={canvasRef} className={styles.highlightCanvas}/>
-                    <textarea
-                        ref={textareaRef}
-                        className={styles.textArea}
-                        value={text}
-                        onChange={handleInputChange}
-                        placeholder="Type your text here..."
-                    />
+                <div className={styles.textAreaDisplay}>
+                    <div className={styles.inputGroup + " " + styles.highlightContainer}>
+                        <canvas ref={canvasRef} className={styles.highlightCanvas}/>
+                        <textarea
+                            ref={textareaRef}
+                            className={styles.textArea}
+                            value={text}
+                            onChange={handleInputChange}
+                            placeholder="Type your text here..."
+                        />
+                    </div>
+                    <UploadOrDownloadButton action="download" onClick={() => {
+                        console.log("Download clicked")
+                    }} tooltip="Download the highlighted text"/>
                 </div>
                 <div className={`${styles.inputGroup} ${styles.regexInput}`}>
                     <label className={styles.label}>Used Regular Expression:</label>

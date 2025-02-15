@@ -5,6 +5,7 @@ import {useApi} from "../../hooks/useAPI.tsx";
 import GraphmlOutput from "../../components/textInputOutput/GraphmlOutput.tsx";
 import XmlInput from "../../components/textInputOutput/XMLInput.tsx";
 import ActionButton from "../../components/buttons/actionButton/ActionButton.tsx";
+import FileDownloader from "../../services/fileDownloader.ts";
 
 
 const GraphMLCodeGenerator: React.FC = () => {
@@ -24,12 +25,7 @@ const GraphMLCodeGenerator: React.FC = () => {
     };
 
     const handleDownload = () => {
-        const blob = new Blob([graphmlOutput], {type: 'application/xml'});
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'output.graphml';
-        link.click();
+        FileDownloader.download(graphmlOutput, 'output.graphml', 'application/xml');
     };
 
     return (
